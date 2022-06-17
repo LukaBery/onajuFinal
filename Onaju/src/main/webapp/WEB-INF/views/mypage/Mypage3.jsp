@@ -364,7 +364,7 @@ function readURL(input) {
 							<img id="preview"
 							style="width: 100%; height: 100%; overflow: hidden; z-index: 9999; border-radius: 70%; border: 0px;"
 							onclick="onclick=document.all.u_imageName.click()"
-							src="${contextPath}/profileShow.do?u_id=${memberInfo.u_id}&fileName=${memberInfo.u_imageName}">
+							src="${contextPath}/profileShow.do?u_id=${memberInfo.u_id}&fileName=${memberInfo.u_imageName}" onerror="this.onerror=null; this.src='${contextPath}/resources/image/noImage.svg';">
 
 						</a><input type="hidden" name="u_id" value="${memberInfo.u_id }">
 						<div style="width: 80%; height: 30px; margin-top: 8px;">

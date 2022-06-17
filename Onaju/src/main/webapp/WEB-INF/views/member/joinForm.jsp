@@ -249,8 +249,9 @@ var SetTime = 180;
 var input_id = document.getElementById("input_id");
 		var u_email1 = document.getElementById("u_email1");
 		var agreebox = document.getElementsByClassName("agree_box");
-		var zipCode = document.getElementsByClassName("zipcode");
+		var zipcode = document.getElementById("zipcode");
 		var agreebox_0 = true;
+		
 		for (var i = 0; i <= agreebox.length; i++) {
 			agree0 = agreebox[0].checked;
 			agree1 = agreebox[1].checked;
@@ -322,9 +323,11 @@ var input_id = document.getElementById("input_id");
 			return false;
 		}
 		;
-		if (!reg.test(zipCode.value)) {
+		var reg = /^[0-9]+/g; //숫자만 입력하는 정규식
+		if (!reg.test(zipcode.value)) {
 			alert("우편번호는 숫자만 입력 가능합니다.");
-			zipCode.focus();
+			
+			zipcode.focus();
 			return false;
 		}
 		;
@@ -1037,7 +1040,7 @@ var input_id = document.getElementById("input_id");
 								</tr>
 								<tr>
 									<th><span class="none_important">주소</span></th>
-									<td><input type="text" id="zipcode" name="zipcode" onclick="execDaumPostcode()"><input
+									<td><input type="text" id="zipcode" class="zipcode"name="zipcode" onclick="execDaumPostcode()"><input
 										type="button" class="zipcode_search" value="우편번호검색"
 										onclick="execDaumPostcode()"><br> <br>
 										<div>

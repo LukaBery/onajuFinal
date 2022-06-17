@@ -227,6 +227,14 @@ function  calcPeriod(search_period){
 	//alert(beginDate+","+endDate);
 	return beginDate+","+endDate;
 }
+function moveModifyProfile(){
+	
+	  if (!confirm("프로필 변경 페이지로 이동합니다")) {
+          return false;
+      } else {
+    	  location.href='${contextPath}/mypage/Mypage3.do';
+      }
+  }
 
 </script>
 <style>
@@ -264,7 +272,8 @@ function  calcPeriod(search_period){
 			<div class="mypage_member_profile_box">
 				<div class="mypage_profile_center_line">
 					<a class="mypage_profile_image_a">
-						<img class="mypage_profile_image"src="${contextPath}/profileShow.do?u_id=${memberInfo.u_id}&fileName=${memberInfo.u_imageName}">
+						<img class="mypage_profile_image"src="${contextPath}/profileShow.do?u_id=${memberInfo.u_id}&fileName=${memberInfo.u_imageName}" onerror="this.onerror=null; this.src='${contextPath}/resources/image/noImage.svg';"
+						onclick="moveModifyProfile();">
 					</a><input type="hidden" name="u_id" value="${memberInfo.u_id }">
 					<div class="mypage_profile_nameBox">
 						<strong style="font-size: 14px;">${memberInfo.u_name}</strong>님

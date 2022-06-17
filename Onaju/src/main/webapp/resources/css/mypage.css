@@ -884,6 +884,7 @@ width: 20%;
 	z-index: 9999;
 	border-radius: 70%;
 	border: 0px;
+	    cursor: pointer;
 }
 
 .mypage_profile_nameBox {

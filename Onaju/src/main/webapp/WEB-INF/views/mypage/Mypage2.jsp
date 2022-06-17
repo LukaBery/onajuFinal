@@ -215,6 +215,15 @@ request.setCharacterEncoding("UTF-8");
  	//alert(beginDate+","+endDate);
  	return beginDate+","+endDate;
  }
+
+ function moveModifyProfile(){
+ 	
+ 	  if (!confirm("프로필 변경 페이지로 이동합니다")) {
+           return false;
+       } else {
+     	  location.href='${contextPath}/mypage/Mypage3.do';
+       }
+   }
 </script>
 
 
@@ -263,57 +272,44 @@ request.setCharacterEncoding("UTF-8");
 </c:choose>
 
 		<section class="hb_section_mypagemain">
-			<c:if test="${memberInfo != null }"><div
-				style="width: 100%; height: 140px; border: 1px solid #CCCCCC; border-radius: 12px; float: right;">
-
-				<div
-					style="width: 20%; border-right: 1px solid #CCCCCC; height: 138px; float: left;">
-					<a 
-						style="width: 80px; margin-top: 10px; height: 80px;  border-radius: 70%; display: block;">
-						<img
-						style="width: 100%; height: 100%; overflow: hidden; z-index: 9999; border-radius: 70%; border: 0px;"
-						src="${contextPath}/profileShow.do?u_id=${memberInfo.u_id}&fileName=${memberInfo.u_imageName}">
-
+			<c:if test="${memberInfo != null }">
+					<div class="mypage_member_profile_box">
+				<div class="mypage_profile_center_line">
+					<a class="mypage_profile_image_a">
+						<img class="mypage_profile_image"src="${contextPath}/profileShow.do?u_id=${memberInfo.u_id}&fileName=${memberInfo.u_imageName}" onerror="this.onerror=null; this.src='${contextPath}/resources/image/noImage.svg';"
+						onclick="moveModifyProfile();">
 					</a><input type="hidden" name="u_id" value="${memberInfo.u_id }">
-
-
-					<div
-						style="width: 100%; margin-top: 10px; font-size: 12px; border-radius: 10px; padding: 3px 10px; display: inline-block;">
+					<div class="mypage_profile_nameBox">
 						<strong style="font-size: 14px;">${memberInfo.u_name}</strong>님
 					</div>
 				</div>
-							<div class="mypage_user_info_grade">
-				<div class="mypage_user_info_grade_2">
-						
+				<div class="mypage_user_info_grade">
+					<div class="mypage_user_info_grade_2">
 						<c:choose>
-						<c:when test="${memberInfo.u_grade.equals('vip') }">
-				<img src="${contextPath}/resources/image/icons/user_grade_vip.svg">
-				
-				<div class="mypage_user_info_grade_logo"><strong style="font-size: 12px; color:rgb(238,50,86);">VIP 등급</strong></div>
-				</c:when>
-				
-				
-				<c:when test="${memberInfo.u_grade.equals('gold')}">
-				
-				<img src="${contextPath}/resources/image/icons/user_grade_gold.svg">
-				<div class="mypage_user_info_grade_logo"><strong style="font-size: 12px; color:rgb(255,187,5);">GOLD </strong>등급</div>
-				</c:when>
-				
-					<c:when test="${memberInfo.u_grade.equals('silver') }">
-				
-				<img src="${contextPath}/resources/image/icons/user_grade_silver.svg">
-				<div class="mypage_user_info_grade_logo"><strong style="font-size: 12px;color:rgb(113,203,211);">SILVER 등급</strong></div>
-				</c:when>
-				
-				</c:choose>
-				
-				
-				
-				</div>	
+							<c:when test="${memberInfo.u_grade.equals('vip') }">
+								<img src="${contextPath}/resources/image/icons/user_grade_vip.svg">
+
+								<div class="mypage_user_info_grade_logo">
+									<strong style="font-size: 12px; color: rgb(238, 50, 86);">VIP 등급</strong>
+								</div>
+							</c:when>
+							<c:when test="${memberInfo.u_grade.equals('gold')}">
+								<img src="${contextPath}/resources/image/icons/user_grade_gold.svg">
+								<div class="mypage_user_info_grade_logo">
+									<strong style="font-size: 12px; color: rgb(255, 187, 5);">GOLD 등급</strong>
+								</div>
+							</c:when>
+							<c:when test="${memberInfo.u_grade.equals('silver') }">
+								<img src="${contextPath}/resources/image/icons/user_grade_silver.svg">
+								<div class="mypage_user_info_grade_logo">
+									<strong style="font-size: 12px; color: rgb(113, 203, 211);">SILVER 등급</strong>
+								</div>
+							</c:when>
+						</c:choose>
+					</div>
 				</div>
-				
-				
 			</div>
+
 			</c:if>
 
 

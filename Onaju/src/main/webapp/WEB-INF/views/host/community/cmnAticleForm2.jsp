@@ -251,10 +251,10 @@ ul {
 }
 
 .introduce_image {
-	width: 100%;
-	padding:20px 10px 0px 10px;
-	height:250px;
-	bottom: 750px;
+    width: 100%;
+    padding: 30px 250px 30px 250px;
+    height: 250px;
+    bottom: 750px;
 }
 
 .introduce_text {
@@ -289,7 +289,7 @@ ul {
 	margin: 25px 0px 0px 20px;
 }
 
-#smallTitle {
+#bigTitle {
 background-color: rgb(225,245,196);
 	width: 100%;
 	padding:10px 20px;
@@ -300,7 +300,20 @@ background-color: rgb(225,245,196);
 	border-radius:10px;
 }
 
+
+#smallTitle {
+background-color: rgb(225,245,196);
+	width: 100%;
+	padding:7px 20px;
+	height: 35px;
+	font-size: 14px;
+	font-weight: bold;
+	border:1px solid #CCCCCC;
+	border-radius:10px;
+}
+
 #thumbnailImg {
+border-radius:15px;
 	width: 100%;
 	height: 100%;
 }
@@ -349,14 +362,54 @@ width: 70%;
 .commu_text_bold{font-weight: bold; width:30%;float:left;
 }
 </style>
+<script>
+function addArticleForm() {
+	//변수에 담아주기
+	var _bigTitle = document.getElementById("bigTitle");
+	var _smallTitle = document.getElementById("smallTitle");
+	var _upImgFile = document.getElementById("upImgFile");
+	var _content = document.getElementById("content");
 
+	if (_bigTitle.value == "") { 
+		alert("제목을 입력해주세요.");
+		_bigTitle.focus(); 
+		return false; 
+	}
+	;
+	
+
+	if (_smallTitle.value == "") { 
+		alert("소제목을 입력해주세요.");
+		_smallTitle.focus(); 
+		return false; 
+	}
+	;
+
+	if (_upImgFile.value == "") { 
+		alert("이미지를 등록해주세요");
+		_upImgFile.focus(); 
+		return false; 
+	}
+	;
+
+	if (_content.value == "") { 
+		alert("소개글 내용을 입력해주세요.");
+		_content.focus(); 
+		return false; 
+	}
+	;
+	document.addArticle.submit(); 
+
+}
+
+</script>
 </head>
 
 <body>
 	
 <!-- 바디 시작 -->
 				<section class="host_notice">
-				<form id="introduce" action="${contextPath}/host/community/addNewCommunity.do?room_code=${goods.room_code}" method="post"  enctype="multipart/form-data">
+				<form id="introduce" name="addArticle" action="${contextPath}/host/community/addNewCommunity.do?room_code=${goods.room_code}" method="post"  enctype="multipart/form-data">
 					<div class="host-title">
 						<div class="host_contai">
 							<h3>Life Style 글쓰기</h3>
@@ -383,12 +436,15 @@ width: 70%;
 					<div style="width:100%; height: 100%; border:1px solid #CCCCCC; border-radius:12px;cursor:pointer;background-color:#7f9b75;">
 						
 							<div class="introduce">
+							<div class="introduce_title">
+									<textarea id="bigTitle" name="bigTitle" placeholder="객실 제목을 작성해 주세요."></textarea>
+								</div>	
 								<div class="introduce_title">
 									<textarea id="smallTitle" name="smallTitle" placeholder="객실 소제목을 작성해 주세요."></textarea>
 								</div>	
 								<div class="introduce_image">
-									 <input type="file" style="display:none;"id="upImgFile" name="room_image" style="width:100%; height:100%;"onChange="uploadImgPreview();" accept="image/*">
-									 <img id="thumbnailImg" src="" onclick="document.all.room_image.click()" onerror="this.onerror=null; this.src='${contextPath}/resources/image/addImage.svg';">
+									 <input type="file" style="display:none;"id="upImgFile" name="cmnImage" style="width:100%;height:100%;"onChange="uploadImgPreview();" accept="image/*">
+									 <img id="thumbnailImg" src="" onclick="document.all.cmnImage.click()" onerror="this.onerror=null; this.src='${contextPath}/resources/image/addImage.svg';">
 								</div>	
 								<div class="introduce_text">
 									<textarea name="content" id="content" name="content" placeholder="객실 소개글을 작성해 주세요"></textarea> 
@@ -400,7 +456,7 @@ width: 70%;
 							</div>
 							
 							
-									<button type="submit" class="noticeBtn2 btn-dark2">등록</button>
+									<button type="button" class="noticeBtn2 btn-dark2" onClick="addArticleForm()">등록</button>
 						
 						
 					</form>
