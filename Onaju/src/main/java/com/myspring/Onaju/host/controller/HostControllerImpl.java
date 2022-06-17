@@ -104,7 +104,7 @@ public class HostControllerImpl extends BaseController implements HostController
 				
 				HttpSession session = request.getSession();
 				session = request.getSession();
-				session.setAttribute("isLogOn", true);
+				session.setAttribute("isLogOn", "host");
 				session.setAttribute("hostInfo", hostVO);
 				
 				String h_id = hostVO.getH_id();
@@ -212,7 +212,7 @@ public class HostControllerImpl extends BaseController implements HostController
 				} else if (action != null && action.equals("#")) {
 					mav.setViewName("forward:" + action);
 				} else {
-					session.setAttribute("isLogOn", false);
+					session.removeAttribute("isLogOn");
 
 					mav.setViewName("redirect:/host/h_idFindResult.do");
 				}
@@ -228,7 +228,7 @@ public class HostControllerImpl extends BaseController implements HostController
 			System.out.println(message);
 			HttpSession session = request.getSession();
 			session = request.getSession();
-			session.setAttribute("isLogOn", false);
+			session.removeAttribute("isLogOn");
 			session.removeAttribute("hostInfo");
 			mav.setViewName("redirect:/host/h_idFindForm.do");
 		}
@@ -254,7 +254,7 @@ public class HostControllerImpl extends BaseController implements HostController
 
 				String action = (String) session.getAttribute("action");
 
-				session.setAttribute("isLogOn", false);
+				session.removeAttribute("isLogOn");
 
 				mav.setViewName("redirect:/host/h_pwdFind2Form.do");
 
@@ -269,7 +269,7 @@ public class HostControllerImpl extends BaseController implements HostController
 			System.out.println(message);
 			HttpSession session = request.getSession();
 			session = request.getSession();
-			session.setAttribute("isLogOn", false);
+			session.removeAttribute("isLogOn");
 			session.removeAttribute("hostInfo");
 			mav.setViewName("redirect:/host/h_idFindForm.do");
 		}
