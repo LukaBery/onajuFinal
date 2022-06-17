@@ -261,7 +261,7 @@ color:black;
 							class="nav-link" id="navbarDropdown" href="#"
 							role="button" data-bs-toggle="dropdown" aria-expanded="false"> <c:choose>
 									<c:when test="${not empty isLogOn and not empty memberInfo }">
-										<img src="${contextPath}/profileShow.do?u_id=${memberInfo.u_id}&fileName=${memberInfo.u_imageName}" onerror="this.onerror=null; this.src='${contextPath}/resources/image/onajulogo.png';"
+										<img src="${contextPath}/profileShow.do?u_id=${memberInfo.u_id}&fileName=${memberInfo.u_imageName}" onerror="this.onerror=null; this.src='${contextPath}/resources/image/noImage.svg';"
 										style="border-radius:70%; border:1px solid #CCCCCC;width:30px;height:30px;float: left;margin: 3px 5px 3px 6px;">
 									</c:when>
 									<c:otherwise>
