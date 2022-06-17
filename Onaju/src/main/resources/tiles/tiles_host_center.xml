@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="/host/center/noticeBoard" extends="hostLayout">
+		<put-attribute name="title" value="호스트 공지사항" />
+		<put-attribute name="body" value="/WEB-INF/views/host/center/noticeBoard.jsp" />
+	</definition>
+	
+	<definition name="/host/center/noticeDetail" extends="hostLayout">
+		<put-attribute name="title" value="호스트 공지사항 상세" />
+		<put-attribute name="body" value="/WEB-INF/views/host/center/noticeDetail.jsp" />
+	</definition>
+	
+	<definition name="/host/center/qnaList" extends="hostLayout">
+		<put-attribute name="title" value="호스트 문의내역" />
+		<put-attribute name="body" value="/WEB-INF/views/host/center/qnaList.jsp" />
+	</definition>
+	
+	<definition name="/host/center/qnaForm" extends="hostLayout">
+		<put-attribute name="title" value="호스트 문의작성" />
+		<put-attribute name="body" value="/WEB-INF/views/host/center/qnaForm.jsp" />
+	</definition>
+	
+	<definition name="/host/center/qnaDetail" extends="hostLayout">
+		<put-attribute name="title" value="호스트 문의상세" />
+		<put-attribute name="body" value="/WEB-INF/views/host/center/qnaDetail.jsp" />
+	</definition>
+	
+	<definition name="/host/center/markRequest" extends="hostLayout">
+		<put-attribute name="title" value="호스트 인증마크신청" />
+		<put-attribute name="body" value="/WEB-INF/views/host/center/markRequest.jsp" />
+	</definition>
+	
+	<definition name="/host/center/dropOut" extends="hostLayout">
+		<put-attribute name="title" value="호스트탈퇴" />
+		<put-attribute name="body" value="/WEB-INF/views/host/center/dropOut.jsp" />
+	</definition>
+	<definition name="/host/center/dropOutResult" extends="hostLayout">
+		<put-attribute name="title" value="호스트탈퇴결과" />
+		<put-attribute name="body" value="/WEB-INF/views/host/center/dropOutResult.jsp" />
+	</definition>
+	
+</tiles-definitions>
+

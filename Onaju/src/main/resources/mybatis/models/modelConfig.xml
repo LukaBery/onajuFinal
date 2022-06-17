@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration 	PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="com.myspring.Onaju.member.vo.MemberVO" alias="memberVO" />
+    	<typeAlias type="com.myspring.Onaju.mypage.vo.MyPageVO" alias="mypageVO" />
+    	<typeAlias type="com.myspring.Onaju.host.vo.HostVO" alias="hostVO" />
+        <typeAlias type="com.myspring.Onaju.host.goods.vo.HostInfoVO" alias="hostInfoVO" />
+    	<typeAlias type="com.myspring.Onaju.host.reservation.vo.ReservationVO" alias="reservationVO" />
+    	<typeAlias type="com.myspring.Onaju.host.goods.vo.HostGoodsVO" alias="hostGoodsVO" />  
+    	<typeAlias type="com.myspring.Onaju.host.goods.vo.HostImageFileVO" alias="hostImageFileVO" />  
+    	<typeAlias type="com.myspring.Onaju.host.community.vo.HostCommunityVO" alias="hostCommunityVO" />
+	<typeAlias type="com.myspring.Onaju.host.money.vo.HostMoneyVO" alias="hostMoneyVO" />
+	
+	
+	
+      	<typeAlias type="com.myspring.Onaju.order.vo.OrderVO" alias="orderVO" />
+       	<typeAlias type="com.myspring.Onaju.cart.vo.CartVO" alias="cartVO" />
+       	<typeAlias type="com.myspring.Onaju.order.vo.OrderVO" alias="orderVO" />
+   		<typeAlias type="com.myspring.Onaju.s_member.S_memberVO" alias="s_memberVO" />
+		
+		<typeAlias type="com.myspring.Onaju.admin.admin.vo.AdminVO" alias="adminVO" />
+		<typeAlias type="com.myspring.Onaju.admin.adminHost.vo.AdminHostVO" alias="adminHostVO" />
+		<typeAlias type="com.myspring.Onaju.admin.adminHost.vo.AdminHostInfoVO" alias="adminHostInfoVO" />
+		<typeAlias type="com.myspring.Onaju.admin.adminBoard.vo.AdminNoticeVO" alias="adminNoticeVO" />
+    <typeAlias type="com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireVO" alias="adminEnquireVO" />
+		<typeAlias type="com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireReplyVO" alias="adminEnquireReplyVO" />
+		<typeAlias type="com.myspring.Onaju.admin.adminGoods.vo.AdminHostRoomVO" alias="adminHostRoomVO" />
+		<typeAlias type="com.myspring.Onaju.admin.adminOrder.vo.AdminOrderVO" alias="adminOrderVO" />
+		
+		<typeAlias type="com.myspring.Onaju.board.review.vo.ReviewVO" alias="reviewVO" />
+
+		
+	</typeAliases>
+</configuration>
+
+
+

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	<definition name="hostLayout"
+		template="/WEB-INF/views/host/common/layout.jsp">
+		<put-attribute name="title" value="레이아웃 페이지" />
+		<put-attribute name="header"
+			value="/WEB-INF/views/host/common/header.jsp" />
+		<put-attribute name="side"
+			value="/WEB-INF/views/host/common/side.jsp" />
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer"
+			value="/WEB-INF/views/host/common/footer.jsp" />
+		<put-attribute name="quickMenu" value="" />
+	</definition>
+
+	<definition name="/host/main/main" extends="hostLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body"
+			value="/WEB-INF/views/host/main/main.jsp" />
+	</definition>
+
+
+</tiles-definitions>
+
+

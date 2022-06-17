@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>       
+       
+  <definition name="/admin/hostList" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminHost/adminHostList.jsp" />
+  </definition>
+  
+  <definition name="/admin/hostInfoList" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminHost/adminHostInfoList.jsp" />
+  </definition>
+  
+  <definition name="/admin/hostDetail" extends="adminLayout">
+    <put-attribute name="title" value="호스트 상세 정보" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminHost/adminHostDetail.jsp" />
+  </definition>	
+  
+  <definition name="/admin/hostInfoDetail" extends="adminLayout">
+    <put-attribute name="title" value="호스트 상세 정보" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminHost/adminHostInfoDetail.jsp" />
+  </definition>	
+  
+  <definition name="/admin/hostInfoModify" extends="adminLayout">
+    <put-attribute name="title" value="호스트 상세 정보" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminHost/adminHostInfoModify.jsp" />
+  </definition>	
+  
+  <definition name="/admin/hostCalculate" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminHost/adminHostCalculate.jsp" />
+  </definition> 
+  
+  <definition name="/admin/hostModify" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminHost/adminHostModify.jsp" />
+  </definition> 
+
+</tiles-definitions>

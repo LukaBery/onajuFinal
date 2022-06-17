@@ -1,0 +1,308 @@
+
+* {
+	margin: 0 0 0 0;
+	padding: 0 0 0 0;
+}
+
+hr {
+	border: 1px solid #CCCCCC;
+}
+
+.allbody {
+	display: table;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.hb_section_1 {
+	display: block;
+	width: 1100px;
+	height: 70px;
+}
+
+.hb_section_2 {
+	display: inline-block;
+	width: 500px;
+	height: 100%;
+	float: left;
+	margin-bottom: 30px;
+}
+
+.hb_section_3 {
+	display: inline-block;
+	width: 600px;
+	height: 100%;
+	float: left;
+}
+
+.hb_rec_1 {
+	float: left;
+	display: inline-block;
+	width: 1100px;
+	height: 70px;
+}
+
+#img1 {
+	display: inline-block;
+	width: 40px;
+	height: 40px;
+	margin-top: 15px;
+	float: left;
+}
+
+#te {
+	padding: 17px 0px 0px 10px;
+	display: inline-block;
+	font-size: 25px;
+	float: left;
+}
+
+.hb_rec_2 {
+	display: inline-block;
+	float: right;
+	width: 500px;
+	height: 100%;
+}
+
+.box1 {
+	display: inline-block;
+	border-radius: 10px;
+	border: 1px solid #CCCCCC;
+	width: 500px;
+	height: 20%;
+	margin: auto;
+	padding:12px;
+	font-size: 20px;
+	font-weight: bolder;
+	text-align: center;
+}
+
+.box2 {
+	display: inline-block;
+	width: 500px;
+	height: 70%;
+	margin: 15px 0px 0px 0px;
+}
+
+#btbt1 {
+	float: right;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+
+
+.hb_rec_4 {
+	display: inline-block;
+	float: right;
+	width: 500px;
+	height: auto;
+	border-radius: 12px;
+	border: 1px solid #CCCCCC;
+	padding: 20px;
+}
+
+#img2 {
+	display: inline-block;
+	width: 30%;
+	height: 110px;
+	border-radius: 12px;
+	float: left;
+}
+
+#te2 {
+	text-align: left;
+	width: 70%;
+	float: left;
+	font-weight: bold;
+	padding: 0px 10px;
+	max-height: 82px;
+}
+
+/*결제수단 드롭다운1*/
+select {
+	/* Reset Select */
+	appearance: none;
+	outline: 0;
+	border: 0;
+	box-shadow: none;
+	/* Personalize */
+	flex: 1;
+	padding: 0 1em;
+	color: black;
+	border: 1px solid #CCCCCC;
+	background-color: white;
+	background-image: none;
+	cursor: pointer;
+	font-weight: bold;
+}
+/* Remove IE arrow */
+select::-ms-expand {
+	display: none;
+}
+/* Custom Select wrapper */
+.select {
+	position: relative;
+	display: flex;
+	width: 500px;
+	height: 3em;
+	border-radius: 0.25em;
+	overflow: hidden;
+}
+/* Arrow */
+.select::after {
+	content: "\25BC";
+	position: absolute;
+	top: 0;
+	right: 0;
+	padding: 1em;
+	color: white;
+	background-color: #FC4E82;
+	transition: 0.25s all ease;
+	pointer-events: none;
+}
+/*a링크 효과*/
+#cou a:link {
+	font-weight: bold;
+	color: black;
+}
+
+#cou a:hover {
+	color: blue;
+}
+
+#cou a:visited {
+	color: black;
+}
+
+#btbt3 {
+	display: inline-block;
+	width: 160px;
+	height: 35px;
+	border: 0;
+	outline: 0;
+	border-radius: 5px;
+	float: right;
+	font-weight: bold;
+	color: white;
+	background-color: #FC4E82; font-size: 15px;
+}
+
+#rr {
+	float: left;
+	height:18px;
+	font-size: 14px;
+	font-weight: bold;
+	
+}
+
+#r2 {
+	float: left;
+	font-size: 16px;
+	font-weight: 540;
+	text-decoration: underline;
+	width: 40%; text-align: left;
+}
+
+#r3 {
+	float: left;
+	font-size: 16px;
+	
+	text-decoration: underline;
+	width: 40%; 
+	  padding: 0px 0px 0px 20px;
+    font-weight: 570;
+    text-align: left;
+}
+
+.email_sel {
+	width: 17%; margin-left: 10px; float: left; margin-top: 20px;
+	font-size: 14px;
+	padding: 0px;
+	text-align: left;
+	appearance: auto;
+	border: 1px solid #cfcfcf;
+}
+
+#tt {
+	border-radius: 5px;
+	border: 1px solid #CCCCCC;
+	height: 40px;
+}
+
+#te3 {
+	float: left;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.hb_text_order01 {
+	height: 25px;
+	margin: 12px 0px;
+}
+
+.hb_text_order02 {
+	height: 25px;
+	margin: 12px 0px;
+	margin-top:20px;display:inline-block; width:100%;
+}
+
+.hb_gray_line {
+	border-top: 2px solid #CCCCCC;
+	margin: 30px 0px;
+	width: 100%;
+	display: inline-block;
+}
+
+.order_input_0 {
+padding:0px 5px;
+height:18px;
+font-size:14px;
+	width: 80%;
+	float: left;
+	margin: 15px 0;
+	border-bottom: 1.5px solid #DCDCDC
+}
+.order_back_btn {
+	display: inline-block;
+	font-size: 30px;
+	float: left;
+	margin: 17px 20px 0px 0px;
+	color: black;
+	opacity: 70%;}
+.order_title_middel{
+	font-weight: 550; font-size: 25px; text-align: left;
+}
+
+.order_title_middel_b{
+	font-weight: 550; font-size: 25px; text-align: left;margin-bottom: 20px;
+}
+.order_input_top{
+	width:70%; font-size:16px; float:left;text-align:center;font-weight:550; color:black;
+}
+.order_input_middel{
+	width: 20%; text-align: left; margin: 15px 0;float: left;
+	
+}
+.order_email_g{
+	margin-top: 20px; width: 5%; display: inline-block; float: left
+	
+}
+.order_warning{
+	text-align: left; font-size: 8px;margin-bottom:20px;
+}
+.order_goods_title{
+	font-weight: 550; opacity: 50%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;
+	
+}
+.order_goods_content{
+	margin-top: 10px; white-space: normal; word-wrap: break-word; overflow: hidden;
+}
+.order_goods_middle_line{
+	display: inline-block; width: 100%; margin-top: 20px; margin-bottom: 20px;
+	
+}
+.order_goods_price{
+	width: 60%; display:inline-block;text-align: right;
+	
+}

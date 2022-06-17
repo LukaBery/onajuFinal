@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.mypage">
+<!-- 리절트 맵 정의 -->
+
+
+
+	<resultMap id="orderResult" type="OrderVO">
+		<result property="order_code" column="order_code" />
+		<result property="order_name" column="order_name" />
+		
+
+		<result property="u_id" column="u_id" />
+		<result property="h_code" column="h_code" />
+		<result property="h_name" column="h_name" />
+		<result property="title" column="title" />
+
+		<result property="room_code" column="room_code" />
+		<result property="room_imageName" column="room_imageName" />
+
+		<result property="order_name" column="order_name" />
+		<result property="order_phone" column="order_phone" />
+		<result property="order_email1" column="order_email1" />
+		<result property="order_email2" column="order_email2" />
+
+		<result property="checkIn_date" column="checkIn_date" />
+		<result property="checkOut_date" column="checkOut_date" />
+
+		<result property="people_count" column="people_count" />
+		<result property="room_fee" column="room_fee" />
+
+		<result property="pay_type" column="pay_type" />
+		<result property="discount" column="discount" />
+
+		<result property="total" column="total" />
+		<result property="pay_state" column="pay_state" />
+		<result property="creDate" column="creDate" />
+
+	</resultMap>	
+	
+	
+	
+	
+	 <select id="selectMyOrderGoodsList" resultMap="orderResult"  parameterType="java.util.HashMap"  >
+
+
+
+
+
+	select * from (
+	select @rowNum := @rowNum + 1 as recNum, t.*
+	from (select (@rowNum := 0)) R,
+	(
+	
+			select U.*, I.h_name, Y.title, G.room_imageName from u_order U, h_host I, h_host_info F, h_room Y, h_roomimage G
+			
+            where U.u_id=#{u_id}
+            and F.h_code=U.h_code
+            and F.h_id= I.h_id
+            and Y.room_code = U.room_code
+            and G.room_code = U.room_code
+            and G.room_imageType= 'main_image'
+            and U.use_state = 'fin'
+     
+                <if test="checkIn_date!='' and checkIn_date!=null and checkOut_date!='' and checkOut_date!=null">
+			         and U.checkIn_date  between #{checkIn_date} and #{checkOut_date}
+			      </if>
+            order by creDate desc
+               
+	   ) t
+	) y
+	where				
+		recNum between (#{section}-1)*100+ (#{pageNum}-1)*10+1 and (#{section}-1)*100+(#{pageNum})*10		
+    
+   
+	   
+
+	</select>
+	
+	 <select id="listMyOrderGoods_fu" resultMap="orderResult"  parameterType="java.util.HashMap"  >
+
+
+
+
+
+	
+			select U.*, I.h_name, Y.title, G.room_imageName from u_order U, h_host I, h_host_info F, h_room Y, h_roomimage G
+			
+            where U.u_id=#{u_id}
+            and F.h_code=U.h_code
+            and F.h_id= I.h_id
+            and Y.room_code = U.room_code
+            and G.room_code = U.room_code
+            and G.room_imageType= 'main_image'
+         
+     
+              
+			         and U.checkOut_date >=  (SELECT DATE_ADD(NOW(), INTERVAL -1 day))
+			     
+            order by checkIn_date desc
+	 
+    
+   
+	   
+
+	</select>
+	
+	
+	 <select id="selectMyOrderGoodsList_cnt" resultType="String"  parameterType="java.util.HashMap"  >
+
+
+
+
+
+	select COUNT(*) as cnt from 
+	(
+	
+			select U.*, I.h_name, Y.title, G.room_imageName from u_order U, h_host I, h_host_info F, h_room Y, h_roomimage G
+			
+            where U.u_id=#{u_id}
+            and F.h_code=U.h_code
+            and F.h_id= I.h_id
+            and Y.room_code = U.room_code
+            and G.room_code = U.room_code
+            and G.room_imageType= 'main_image'
+            and U.use_state = 'fin'
+     
+                <if test="checkIn_date!='' and checkIn_date!=null and checkOut_date!='' and checkOut_date!=null">
+			         and U.checkIn_date  between #{checkIn_date} and #{checkOut_date}
+			      </if>
+            order by creDate desc
+               
+	   ) R
+    
+   
+	   
+
+	</select>
+	
+	
+	
+	
+	<update id="updateMyInfo" parameterType="java.util.HashMap">
+	   update u_member
+			   <set>
+			      <if test=" u_pw!='' and u_pw!=null">
+			        u_pw=#{u_pw},
+			      </if>
+			      <if test=" u_gender!='' and u_gender!=null">
+			         u_gender=#{u_gender},
+			      </if>
+			       <if test=" u_birth_y!='' and u_birth_y!=null">
+			         u_birth_y=#{u_birth_y},
+			      </if>
+			      <if test=" u_birth_m!='' and u_birth_m!=null">
+			         u_birth_m=#{u_birth_m},
+			      </if>
+			      <if test=" u_birth_d!='' and u_birth_d!=null">
+			         u_birth_d=#{u_birth_d},
+			      </if>
+			   
+			      <if test=" u_phone!='' and u_phone!=null">
+			         u_phone=#{u_phone},
+			      </if>
+			    
+			     
+			      <if test=" u_email1!='' and u_email1!=null">
+			         u_email1=#{u_email1},
+			      </if>
+			      <if test=" u_email2!='' and u_email2!=null">
+			         u_email2=#{u_email2},
+			      </if>
+			  
+			      <if test=" zipcode!='' and zipcode!=null">
+			         zipcode=#{zipcode},
+			      </if>
+			      <if test=" roadAddress!='' and roadAddress!=null">
+			         roadAddress=#{roadAddress},
+			      </if>			     
+			      <if test=" numberAddress!='' and numberAddress!=null">
+			         numberAddress=#{numberAddress},
+			      </if>
+			      <if test=" restAddress!='' and restAddress!=null">
+			         restAddress=#{restAddress},
+			      </if>
+			      <if test=" u_name!='' and u_name!=null">
+			         u_name=#{u_name}
+			      </if>
+			   </set>
+		where 
+		u_id=#{u_id}
+	</update>
+	
+	<select id="selectMyDetailInfo" resultType="memberVO"   parameterType="String"  >
+	    <![CDATA[
+			select * from u_member
+			where u_id=#{u_id}
+    	]]>
+	</select>	
+	
+	<delete id="deleteMember" parameterType="String">
+	    <![CDATA[
+	      delete from u_member
+	      where u_id=#{u_id}
+	      
+    	]]>
+	</delete>
+	
+		
+		
+</mapper>

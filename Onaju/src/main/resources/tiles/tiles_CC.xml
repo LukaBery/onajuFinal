@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="/CC/User_CCForm" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/CC/User_CCForm.jsp" />
+	</definition>
+	<definition name="/CC/User_CC2Form" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/CC/User_CC2Form.jsp" />
+	</definition>
+	
+	<definition name="/CC/Question1Form" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/CC/Question1Form.jsp" />
+	</definition>
+	
+	<definition name="/CC/Question2Form" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/CC/Question2Form.jsp" />
+	</definition>
+	
+
+	
+</tiles-definitions>
+

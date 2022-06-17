@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.admin.goods">
+	<resultMap id="roomResult" type="adminHostRoomVO">
+		<result property="h_id" column="h_id"/>
+		<result property="h_name" column="h_name"/>
+		<result property="h_phone" column="h_phone"/>
+		<result property="h_email1" column="h_email1"/>
+		<result property="h_email2" column="h_email2"/>
+		<result property="deputy_name" column="deputy_name"/>
+		<result property="deputy_phone" column="deputy_phone"/>
+		<result property="deputy_birth" column="deputy_birth"/>
+		<result property="deputy_department" column="deputy_department"/>
+		<result property="hostInfo_name" column="hostInfo_name"/>
+		<result property="h_code" column="h_code"/>
+		<result property="room_code" column="room_code"/>
+		<result property="h_sellerNum" column="h_sellerNum"/>
+		<result property="h_accountNum" column="h_accountNum"/>
+		<result property="zipcode" column="zipcode"/>
+		<result property="roadAddress" column="roadAddress"/>
+		<result property="numberAddress" column="numberAddress"/>
+		<result property="restAddress" column="restAddress"/>
+		<result property="host_type" column="host_type"/>
+		<result property="room_type" column="room_type"/>
+		<result property="room_number" column="room_number"/>
+		<result property="room_fee" column="room_fee"/>
+		<result property="able_checkIn" column="able_checkIn"/>
+		<result property="able_checkOut" column="able_checkOut"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="room_status" column="room_status"/>
+		<result property="min_number" column="min_number"/>
+		<result property="max_number" column="max_number"/>
+		<result property="bed_type" column="bed_type"/>
+		<result property="bed_count" column="bed_count"/>
+		<result property="bath_count" column="bath_count"/>
+		<result property="party_check" column="party_check"/>
+		<result property="kitchen" column="kitchen"/>
+		<result property="wifi" column="wifi"/>
+		<result property="parking" column="parking"/>
+		<result property="tv" column="tv"/>
+		<result property="refrigerator" column="refrigerator"/>
+		<result property="hairdryer" column="hairdryer"/>
+		<result property="washer" column="washer"/>
+		<result property="pet" column="pet"/>
+		<result property="pickup" column="pickup"/>
+		<result property="dryer" column="dryer"/>
+		<result property="elevator" column="elevator"/>
+		<result property="barbecue" column="barbecue"/>
+		<result property="pool" column="pool"/>
+		<result property="aircon" column="aircon"/>
+		<result property="heater" column="heater"/>
+		<result property="smoking" column="smoking"/>
+		<result property="creDate" column="creDate"/>
+		<result property="del_yn" column="del_yn"/>
+		
+	</resultMap>
+	<select id="selectAllRoomList" resultType="map"   parameterType="map"  >
+		 <![CDATA[
+		 select * 
+		 from (
+		 select (@ROWNUM := @ROWNUM + 1) rn, c.*
+		 from (
+		 select H.h_id, 
+        		H.h_name, 
+        		H.h_phone, 
+       	    	H.h_email1,
+        		H.h_email2, 
+        		H.deputy_name,
+        		H.deputy_phone,
+        		H.deputy_birth,
+        		H.deputy_department,
+        		I.hostInfo_name,
+        		I.h_code,
+        		R.room_code,
+        		I.h_sellerNum,
+        		I.h_accountNum,
+        		I.zipcode,
+        		I.roadAddress,
+        		I.numberAddress,
+        		I.restAddress,
+        		I.host_type,
+        		R.room_type,
+        		R.room_number,
+        		R.room_fee,
+        		R.able_checkIn,
+        		R.able_checkOut,
+        		R.title, 
+        		R.content,
+        		R.room_status,
+        		R.min_number,
+        		R.max_number,
+        		R.bed_type,
+        		R.bed_count,
+        		R.bath_count,
+        		R.party_check,
+        		R.kitchen,
+        		R.wifi,
+        		R.parking,
+        		R.tv,
+        		R.refrigerator,
+        		R.hairdryer,
+        		R.washer,
+        		R.pet,
+        		R.pickup,
+        		R.dryer,
+        		R.elevator,
+        		R.barbecue,
+       			R.pool,
+        		R.aircon,
+        		R.heater,
+        		R.smoking,
+        		R.creDate,
+        		R.del_yn 
+		 from h_host H
+		 inner join h_host_info I
+         		 on H.h_id = I.h_id
+		 inner join h_room R
+		 on I.h_code = R.h_code
+		 where R.room_code > 0
+		 ]]>
+		 <if test="h_id2 != '' and h_id2 != null">
+		 and H.h_id like concat('%',#{h_id2},'%')
+		 </if>
+		 <if test="join_startDate != '' and join_startDate != null">
+		 and R.creDate >= #{join_startDate}
+		 </if>
+		 <if test="join_endDate != '' and join_endDate != null">
+		  <![CDATA[
+		 and R.creDate <= #{join_endDate}
+		 ]]>
+		 </if>
+		 <if test="h_name2 != '' and h_name2 != null">
+		 and H.h_name like concat('%',#{h_name2},'%')
+		 </if>
+		 <if test="r_del_yn != '' and r_del_yn != null">
+		 and R.del_yn = #{r_del_yn}
+		 </if>
+		 <if test="h_sellerNum2 != '' and h_sellerNum2 != null">
+		 and I.h_sellerNum like concat('%',#{h_sellerNum2},'%') 
+		 </if>
+		 <if test="hostInfo_name2 != '' and hostInfo_name2 != null">
+		 and I.hostInfo_name like concat('%',#{hostInfo_name2},'%')
+		 </if>
+		 <if test="roadAddress2 != '' and roadAddress2 != null">
+		 and I.roadAddress like concat('%',#{roadAddress2},'%')
+		 </if>
+		 <![CDATA[
+		 order by R.room_code desc
+		 )c,(select @ROWNUM := 0)s)b  
+		 where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount}
+		 ]]>			        
+	</select>
+	
+	<select id="selectAllRoomTotal" resultType="java.lang.Integer">
+   		<![CDATA[
+        SELECT count(*) FROM h_host H inner join h_host_info I on H.h_id = I.h_id inner join h_room R on I.h_code = R.h_code where R.room_code > 0
+    	]]>
+    	<if test="h_id2 != '' and h_id2 != null">
+		 and I.h_id like concat('%',#{h_id2},'%')
+		 </if>
+		 <if test="join_startDate != '' and join_startDate != null">
+		 and I.creDate >= #{join_startDate}
+		 </if>
+		 <if test="join_endDate != '' and join_endDate != null">
+		  <![CDATA[
+		 and I.creDate <= #{join_endDate}
+		 ]]>
+		 </if>
+		 <if test="h_name2 != '' and h_name2 != null">
+		 and H.h_name like concat('%',#{h_name2},'%')
+		 </if>
+		 <if test="r_del_yn != '' and r_del_yn != null">
+		 and I.del_yn = #{r_del_yn}
+		 </if>
+		 <if test="h_sellerNum2 != '' and h_sellerNum2 != null">
+		 and I.h_sellerNum like concat ('%',#{h_sellerNum2},'%')
+		 </if>
+		 <if test="hostInfo_name2 != '' and hostInfo_name2 != null">
+		 and I.hostInfo_name like concat('%',#{hostInfo_name2},'%')
+		 </if>
+		 <if test="roadAddress2 != '' and roadAddress2 != null">
+		 and I.roadAddress like concat('%',#{roadAddress2},'%')
+		 </if>
+	</select>
+	<select id="selectOneRoomDetail" resultMap="roomResult" parameterType="String">
+	select  H.h_id, 
+        H.h_name, 
+        H.h_phone, 
+        H.h_email1,
+        H.h_email2, 
+        H.deputy_name,
+        H.deputy_phone,
+        H.deputy_birth,
+        H.deputy_department,
+        I.h_code,
+        R.room_code,
+        I.hostInfo_name,
+        I.h_sellerNum,
+        I.h_accountNum,
+        I.zipcode,
+        I.roadAddress,
+        I.numberAddress,
+        I.restAddress,
+        I.host_type,
+        R.room_type,
+        R.room_number,
+        R.room_fee,
+        R.able_checkIn,
+        R.able_checkOut,
+        R.title, 
+        R.content,
+        R.room_status,
+        R.min_number,
+        R.max_number,
+        R.bed_type,
+        R.bed_count,
+        R.bath_count,
+        R.party_check,
+        R.kitchen,
+        R.wifi,
+        R.parking,
+        R.tv,
+        R.refrigerator,
+        R.hairdryer,
+        R.washer,
+        R.pet,
+        R.pickup,
+        R.dryer,
+        R.elevator,
+        R.barbecue,
+        R.pool,
+        R.aircon,
+        R.heater,
+        R.smoking,
+        R.creDate,
+        R.del_yn
+        from h_host H
+        inner join h_host_info I
+        on H.h_id = I.h_id
+        inner join h_room R
+        on I.h_code = R.h_code
+		where R.room_code = #{room_code};
+	</select>
+	
+	<update id="selectOneRoomUpdate">
+	update
+			h_host H
+	inner join 
+			 h_host_info I 
+	on H.h_id = I.h_id 
+	inner join room R
+	on I.h_code = R.h_code
+	<set> 
+		<if test="h_name != '' and h_name != null">
+			H.h_name = #{h_name}, 
+		</if>
+		<if test="h_birth_y != '' and h_birth_y != null">
+			H.h_birth_y = #{h_birth_y}, 
+		</if>
+		<if test="h_birth_m != '' and h_birth_m != null">
+			H.h_birth_m = #{h_birth_m}, 
+		</if>
+		<if test="h_birth_d != '' and h_birth_d != null">
+			H.h_birth_d = #{h_birth_d}, 
+		</if>
+		<if test="h_gender != '' and h_gender != null">
+			H.h_gender = #{h_gender}, 
+		</if>
+		<if test="h_phone != '' and h_phone != null">
+			H.h_phone = #{h_phone},
+		</if>
+		<if test="h_email1 != '' and h_email1 != null">
+			H.h_email1 = #{h_email1}, 
+		</if>
+		<if test="h_email2 != '' and h_email2 != null">
+			H.h_email2 = #{h_email2}, 
+		</if>
+		<if test="zipcode != '' and zipcode != null">
+			I.zipcode = #{zipcode}, 
+		</if>
+		<if test="roadAddress != '' and roadAddress != null">
+			I.roadAddress = #{roadAddress}, 
+		</if>
+		<if test="numberAddress != '' and numberAddress != null">
+			I.numberAddress = #{numberAddress}, 
+		</if>
+		<if test="restAddress != '' and restAddress != null">
+			I.restAddress = #{restAddress}, 
+		</if>
+		<if test="deputy_name != '' and deputy_name != null">	
+			H.deputy_name = #{deputy_name}, 
+		</if>
+		<if test="deputy_phone != '' and deputy_phone != null">
+			H.deputy_phone = #{deputy_phone}, 
+		</if>
+		<if test="deputy_department != '' and deputy_department != null">
+			H.deputy_department = #{deputy_department}, 
+		</if>
+		<if test="deputy_birth != '' and deputy_birth != null">
+			H.deputy_birth = #{deputy_birth}, 
+		</if>
+		<if test="hostInfo_name != '' and hostInfo_name != null">
+			I.hostInfo_name = #{hostInfo_name}, 
+		</if>
+		<if test="h_sellerNum != '' and h_sellerNum != null">
+			I.h_sellerNum = #{h_sellerNum}, 
+		</if>
+		<if test="h_accountNum != '' and h_accountNum != null">
+			I.h_accountNum = #{h_accountNum}, 
+		</if>
+		<if test="host_type != '' and host_type != null">
+			I.host_type = #{host_type}, 
+		</if>
+		<if test="room_count != '' and room_count != null">
+			I.room_count = #{room_count}
+		</if>
+		<if test="room_type != '' and room_type != null">
+			R.room_type = #{room_type}
+		</if>
+		<if test="room_number != '' and room_number != null">
+			R.room_number = #{room_number}
+		</if>
+		<if test="room_fee != '' and room_fee != null">
+			R.room_fee = #{room_fee}
+		</if>
+		<if test="able_checkIn != '' and able_checkIn != null">
+			R.able_checkIn = #{able_checkIn}
+		</if>
+		<if test="able_checkOut != '' and able_checkOut != null">
+			R.able_checkOut = #{able_checkOut}
+		</if>
+		<if test="room_status != '' and room_status != null">
+			R.room_status = #{room_status}
+		</if>
+		<if test="title != '' and title != null">
+			R.title = #{title}
+		</if>
+		<if test="min_number != '' and min_number != null">
+			R.min_number = #{min_number}
+		</if>
+		<if test="max_number != '' and max_number != null">
+			R.max_number = #{max_number}
+		</if>
+		<if test="bed_count != '' and bed_count != null">
+			R.bed_count = #{bed_count}
+		</if>
+		<if test="bath_count != '' and bath_count != null">
+			R.bath_count = #{bath_count}
+		</if>
+		<if test="party_check != '' and party_check != null">
+			R.party_check = #{party_check}
+		</if>
+		<if test="kitchen != '' and kitchen != null">
+			R.kitchen = #{kitchen}
+		</if>
+		<if test="wifi != '' and wifi != null">
+			R.wifi = #{wifi}
+		</if>
+		<if test="parking != '' and parking != null">
+			R.parking = #{parking}
+		</if>
+		<if test="tv != '' and tv != null">
+			R.tv = #{tv}
+		</if>
+		<if test="refrigerator != '' and refrigerator != null">
+			R.refrigerator = #{refrigerator}
+		</if>
+		<if test="hairdryer != '' and hairdryer != null">
+			R.hairdryer = #{hairdryer}
+		</if>
+		<if test="washer != '' and washer != null">
+			R.washer = #{washer}
+		</if>
+		<if test="pet != '' and pet != null">
+			R.pet = #{pet}
+		</if>
+		<if test="pickup != '' and pickup != null">
+			R.pickup = #{pickup}
+		</if>
+		<if test="dryer != '' and dryer != null">
+			R.dryer = #{dryer}
+		</if>
+		<if test="elevator != '' and elevator != null">
+			R.elevator = #{elevator}
+		</if>
+		<if test="barbecue != '' and barbecue != null">
+			R.barbecue = #{barbecue}
+		</if>
+		<if test="pool != '' and pool != null">
+			R.pool = #{pool}
+		</if>
+		<if test="aircon != '' and aircon != null">
+			R.aircon = #{aircon}
+		</if>
+		<if test="heater != '' and heater != null">
+			R.heater = #{heater}
+		</if>
+		<if test="smoking != '' and smoking != null">
+			R.smoking = #{smoking}
+		</if>
+		<if test="content != '' and content != null">
+			R.content = #{content}
+		</if>
+		<if test="bed_type != '' and bed_type != null">
+			R.bed_type = #{bed_type}
+		</if>
+	</set>
+    where 
+   			R.room_code = #{room_code}
+	</update>
+</mapper>

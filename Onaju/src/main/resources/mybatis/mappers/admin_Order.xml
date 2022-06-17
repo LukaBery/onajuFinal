@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.order">
+	<resultMap type="adminOrderVO" id="orderResult">
+		<result property="order_code" column="order_code"/>
+		<result property="u_id" column="u_id"/>
+		<result property="h_code" column="h_code"/>
+		<result property="room_code" column="room_code"/>
+		<result property="order_name" column="order_name"/>
+		<result property="order_phone" column="order_phone"/>
+		<result property="order_email1" column="order_email1"/>
+		<result property="order_email2" column="order_email2"/>
+		<result property="checkIn_date" column="checkIn_date"/>
+		<result property="checkOut_date" column="checkOut_date"/>
+		<result property="people_count" column="people_count"/>
+		<result property="room_fee" column="room_fee"/>
+		<result property="pay_type" column="pay_type"/>
+		<result property="discount" column="discount"/>
+		<result property="total" column="total"/>
+		<result property="pay_state" column="pay_state"/>
+		<result property="creDate" column="creDate"/>
+		<result property="u_name" column="u_name"/>
+		<result property="u_point" column="u_point"/>
+		<result property="u_grade" column="u_grade"/>
+		<result property="hostInfo_name" column="hostInfo_name"/>
+		<result property="zipcode" column="zipcode"/>
+		<result property="roadAddress" column="roadAddress"/>
+		<result property="numberAddress" column="numberAddress"/>
+		<result property="restAddress" column="restAddress"/>
+		<result property="host_type" column="host_type"/>
+		<result property="h_name" column="h_name"/>
+		<result property="h_phone" column="h_phone"/>
+		<result property="h_email1" column="h_email1"/>
+		<result property="h_email2" column="h_email2"/>
+		<result property="deputy_name" column="deputy_name"/>
+		<result property="deputy_phone" column="deputy_phone"/>
+		<result property="room_number" column="room_number"/>
+		<result property="reservation_state" column="reservation_state"/>
+		<result property="use_state" column="use_state"/>
+	</resultMap>
+	
+	<select id="selectAllOrderList" resultType="map" parameterType="map">
+		<![CDATA[
+		 select * 
+		 from (
+		 select (@ROWNUM := @ROWNUM + 1) rn, c.*
+		 from (
+		 select O.order_code, 
+        		M.u_id, 
+        		I.h_code, 
+       	    	R.room_code,
+        		O.order_name,
+				O.order_phone, 
+        		O.order_email1,
+        		O.order_email2,
+        		O.checkIn_date,
+				O.checkOut_date,
+				O.people_count,
+				O.room_fee,
+				O.pay_type,
+				O.discount,
+				O.total,
+				O.use_state,
+				O.pay_state,
+				O.creDate,
+				O.review_state,
+				O.reservation_state,
+				M.u_point,
+				M.u_grade,
+				I.hostInfo_name,
+				I.zipcode,
+				I.roadAddress,
+				I.numberAddress,
+				I.restAddress,
+				I.host_type,
+				H.h_name,
+				H.h_phone,
+				H.h_email1,
+				H.h_email2,
+				H.deputy_name,
+				H.deputy_phone,
+				R.room_number 
+		 from 
+		 		u_order O
+		 inner join 
+		 		u_member M
+         on 
+         		O.u_id = M.u_id
+		 inner join 
+		 		h_room R
+		 on 
+		 		O.room_code = R.room_code
+		 inner join 
+		 		h_host_Info I
+		 on 
+		 		O.h_code = I.h_code
+		 inner join 
+		 		h_host H
+		 on 
+		 		I.h_id = H.h_id
+		 where 
+		 		O.order_code > 0
+		 ]]>
+		 <if test="u_id2 != '' and u_id2 != null">
+		 and M.u_id like concat('%',#{u_id2},'%')
+		 </if>
+		 <if test="join_startDate != '' and join_startDate != null">
+		 and O.creDate >= #{join_startDate}
+		 </if>
+		 <if test="join_endDate != '' and join_endDate != null">
+		  <![CDATA[
+		 and O.creDate <= #{join_endDate}
+		 ]]>
+		 </if>
+		 <if test="u_name2 != '' and u_name2 != null">
+		 and O.order_name like concat('%',#{u_name2},'%')
+		 </if>
+		 <if test="pay_state != '' and pay_state != null">
+		 and O.pay_state = #{pay_state}
+		 </if>
+		 <if test="order_code2 != '' and order_code2 != null">
+		 and O.order_code like concat('%',#{order_code2},'%') 
+		 </if>
+		 <![CDATA[
+		 order by creDate desc
+		 )c,(select @ROWNUM := 0)s)b  
+		 where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount}
+		 ]]>
+	</select>
+	
+	
+	
+	<select id="selectOneOrderList" resultType="map" parameterType="String">
+		<![CDATA[
+		 select * 
+		 from (
+		 select (@ROWNUM := @ROWNUM + 1) rn, c.*
+		 from (
+		 select O.order_code, 
+        		M.u_id, 
+        		I.h_code, 
+       	    	R.room_code,
+       	    	R.room_type,
+        		O.order_name,
+				O.order_phone, 
+        		O.order_email1,
+        		O.order_email2,
+        		O.checkIn_date,
+				O.checkOut_date,
+				O.people_count,
+				O.room_fee,
+				O.pay_type,
+				O.discount,
+				O.total,
+				O.use_state,
+				O.pay_state,
+				O.creDate,
+				O.review_state,
+				O.reservation_state,
+				M.u_point,
+				M.u_grade,
+				I.hostInfo_name,
+				I.zipcode,
+				I.roadAddress,
+				I.numberAddress,
+				I.restAddress,
+				I.host_type,
+				H.h_name,
+				H.h_phone,
+				H.h_email1,
+				H.h_email2,
+				H.deputy_name,
+				H.deputy_phone,
+				R.room_number 
+		 from 
+		 		u_order O
+		 inner join 
+		 		u_member M
+         on 
+         		O.u_id = M.u_id
+		 inner join 
+		 		h_room R
+		 on 
+		 		O.room_code = R.room_code
+		 inner join 
+		 		h_host_Info I
+		 on 
+		 		O.h_code = I.h_code
+		 inner join 
+		 		h_host H
+		 on 
+		 		I.h_id = H.h_id
+		 where 
+		 		O.order_code > 0
+		 
+		 and 
+		 		M.u_id = #{u_id}
+		
+		 order by creDate desc
+		 )c,(select @ROWNUM := 0)s)b  
+		 limit 10
+		 ]]>
+	</select>
+	
+	
+	
+	
+	
+	
+	<select id="selectOrderListTotal" resultType="java.lang.Integer">
+		SELECT count(*) FROM u_order where people_count > 0
+    		
+    	 <if test="u_id2 != '' and u_id2 != null">
+		 and u_id like concat('%',#{u_id2},'%')
+		 </if>
+		 <if test="join_startDate != '' and join_startDate != null">
+		 and creDate >= #{join_startDate}
+		 </if>
+		 <if test="join_endDate != '' and join_endDate != null">
+		  <![CDATA[
+		 and creDate <= #{join_endDate}
+		 ]]>
+		 </if>
+		 <if test="u_name2 != '' and u_name2 != null">
+		 and order_name like concat('%',#{u_name2},'%')
+		 </if>
+		 <if test="pay_state != '' and pay_state != null">
+		 and pay_state = #{pay_state}
+		 </if>
+		 <if test="order_code2 != '' and order_code2 != null">
+		 and order_code like concat('%',#{order_code2},'%') 
+		 </if>
+	</select>
+	
+	<select id="selectOrderDetail" resultMap="orderResult" parameterType="String">
+		select  O.order_code, 
+        		M.u_id, 
+        		I.h_code, 
+       	    	R.room_code,
+        		O.order_name,
+				O.order_phone, 
+        		O.order_email1,
+        		O.order_email2,
+        		O.checkIn_date,
+				O.checkOut_date,
+				O.people_count,
+				O.room_fee,
+				O.pay_type,
+				O.discount,
+				O.total,
+				O.use_state,
+				O.pay_state,
+				O.creDate,
+				O.review_state,
+				O.reservation_state,
+				M.u_point,
+				M.u_grade,
+				I.hostInfo_name,
+				I.zipcode,
+				I.roadAddress,
+				I.numberAddress,
+				I.restAddress,
+				I.host_type,
+				H.h_name,
+				H.h_phone,
+				H.h_email1,
+				H.h_email2,
+				H.deputy_name,
+				H.deputy_phone,
+				R.room_number
+		from u_order O 
+		inner join u_member M
+		on O.u_id = M.u_id 
+		inner join h_room R
+		on O.room_code = R.room_code
+		inner join h_host_Info I
+		on O.h_code = I.h_code
+		inner join h_host H
+		on I.h_id = H.h_id
+		where order_code = #{order_code}
+	</select>
+	<update id="selectOrderCancel" parameterType="String">
+		update u_order
+		<set>
+			
+			 	pay_state = 'refund_fin'
+			
+		</set>
+		where order_code = #{order_code}
+	</update>
+
+</mapper>

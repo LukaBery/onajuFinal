@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.hostMypage">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="hostResult" type="HostVO">
+		<result property="h_id" column="h_id" />
+		<result property="h_pw" column="h_pw" />
+		<result property="h_name" column="h_name" />
+		
+		<result property="h_birth_y" column="h_birth_y" />
+		<result property="h_birth_m" column="h_birth_m" />
+		<result property="h_birth_d" column="h_birth_d" />
+		
+		<result property="h_gender" column="h_gender" />
+		<result property="h_phone" column="h_phone" />
+		<result property="h_email1" column="h_email1" />
+		<result property="h_email2" column="h_email2" />
+		
+		<result property="zipcode" column="zipcode" />
+		<result property="roadAddress" column="roadAddress" />
+		<result property="numberAddress" column="numberAddress" />
+		<result property="restAddress" column="restAddress" />
+		
+		<result property="h_sellerNum" column="h_sellerNum" />
+		
+		
+		<result property="h_agree_1" column="h_agree_1" />
+		<result property="h_agree_2" column="h_agree_2" />
+		<result property="h_agree_3" column="h_agree_3" />
+		
+		<result property="h_service_01" column="h_service_01" />
+		<result property="h_service_02" column="h_service_02" />
+		
+		
+	</resultMap>	
+	<update id="updateHostMyInfo" parameterType="java.util.Map">
+	   update h_host
+			   <set>
+			   	  <if test=" h_name!='' and h_name!=null">
+			         h_name=#{h_name},
+			      </if>
+			      <if test=" h_pw!='' and h_pw!=null">
+			        h_pw=#{h_pw},
+			      </if>
+			       <if test=" h_birth_y!='' and h_birth_y!=null">
+			         h_birth_y=#{h_birth_y},
+			      </if>
+			      <if test=" h_birth_m!='' and h_birth_m!=null">
+			         h_birth_m=#{h_birth_m},
+			      </if>
+			      <if test=" h_birth_d!='' and h_birth_d!=null">
+			         h_birth_d=#{h_birth_d},
+			      </if>
+			   
+			      <if test=" h_phone!='' and h_phone!=null">
+			         h_phone=#{h_phone},
+			      </if>
+			      <if test=" h_email1!='' and h_email1!=null">
+			         h_email1=#{h_email1},
+			      </if>
+			      <if test=" h_email2!='' and h_email2!=null">
+			         h_email2=#{h_email2},
+			      </if>
+			  
+			      <if test=" zipcode!='' and zipcode!=null">
+			         zipcode=#{zipcode},
+			      </if>
+			      <if test=" roadAddress!='' and roadAddress!=null">
+			         roadAddress=#{roadAddress},
+			      </if>			     
+			      <if test=" numberAddress!='' and numberAddress!=null">
+			         numberAddress=#{numberAddress},
+			      </if>
+			      <if test=" restAddress!='' and restAddress!=null">
+			         restAddress=#{restAddress},
+			      </if>
+			       <if test=" h_sellerNum !='' and h_sellerNum !=null">
+			         h_sellerNum=#{h_sellerNum}
+			      </if>
+			      
+			   </set>
+		where 
+		h_id=#{h_id}
+	</update>
+	 <update id="insertHostProfile" parameterType="java.util.Map">	 
+		   update h_host 
+		   <set>
+		   h_imageName = #{h_imageName}
+		   </set>
+		    where h_id=#{h_id} 
+	</update>
+	<select id="selectHostMyDetailInfo" resultType="hostVO"   parameterType="String"  >
+	    <![CDATA[
+			select * from h_host
+			where h_id=#{h_id}
+    	]]>
+	</select>		
+	<delete id="deleteHost" parameterType="String">
+	    <![CDATA[
+	      delete from h_host
+	      where h_id=#{h_id}
+	      
+    	]]>
+	</delete>
+	
+</mapper>

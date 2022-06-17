@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.order">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="orderResult" type="OrderVO">
+		<result property="order_code" column="order_code" />
+				<result property="order_name" column="order_name" />
+		
+		<result property="u_id" column="u_id" />
+		<result property="h_code" column="h_code" />
+		<result property="h_name" column="h_name" />
+				<result property="title" column="title" />
+		
+		<result property="room_code" column="room_code" />
+		<result property="room_imageName" column="room_imageName" />
+			
+		<result property="order_name" column="order_name" />
+		<result property="order_phone" column="order_phone" />
+		<result property="order_email1" column="order_email1" />
+		<result property="order_email2" column="order_email2" />
+		
+		<result property="checkIn_date" column="checkIn_date" />
+		<result property="checkOut_date" column="checkOut_date" />
+		
+		<result property="people_count" column="people_count" />
+		<result property="room_fee" column="room_fee" />
+		
+		<result property="pay_type" column="pay_type" />
+		<result property="discount" column="discount" />
+		
+			<result property="total" column="total" />
+		<result property="pay_state" column="pay_state" />
+		<result property="creDate" column="creDate" />
+		<result property="review_state" column="review_state" />
+		
+		<result property="review_num" column="review_num" />
+		<result property="review_star" column="review_star" />
+		<result property="review_content" column="review_content" />
+		
+	</resultMap>	
+
+
+<select id="reservationList" resultType="orderVO"  parameterType="String"  >
+	    <![CDATA[
+				select * from u_order  where room_code=#{room_code} 
+				and checkOut_date >= sysdate()
+		]]>
+	</select>
+	
+	
+	
+	
+	<insert id="insertNewOrder" parameterType="orderVO"  >
+	    <selectKey resultType="int" keyProperty="order_seq_num" order="BEFORE">
+	    	select max(order_seq_num)+1 from u_order
+	    </selectKey>
+	  
+			insert into u_order(room_code,
+			 <if test=" u_id!='' and u_id!=null">
+			         u_id,
+			      </if>
+			      
+			                            h_code,
+			                            order_name,
+			                            order_phone,
+			                            order_email1,
+			                            order_email2,
+			                            checkIn_date,
+										  checkOut_date,
+									    people_count,
+									    room_fee,
+									    pay_type,
+									    discount,
+									    total,
+									    pay_state
+									   )
+							     values(#{room_code},
+							     	 <if test=" u_id!='' and u_id!=null">
+							            #{u_id},
+			      </if>
+			      						#{h_code},
+			      						#{order_name},
+			      						#{order_phone},
+			      						#{order_email1},
+			      						#{order_email2},
+			      
+							            
+							            #{checkIn_date},
+									    #{checkOut_date},
+									    #{people_count},
+									    #{room_fee},
+									    #{pay_type},
+									    #{discount},
+									    #{total},
+									    #{pay_state})
+   
+	</insert>
+	
+<update id="memberGradeMod" parameterType="orderVO">
+
+update u_member
+<set>
+<![CDATA[u_grade = (case when ( (
+select sum(total) from u_order where u_id = #{u_id} )<150000) then 'silver' 
+ when ( (
+select sum(total) from u_order where u_id = #{u_id} ) <=300000) then 'gold' 
+ when ( 300000<(
+select sum(total) from u_order where u_id = #{u_id} )) then 'vip' end)
+]]>
+</set>
+where u_id =  #{u_id};
+
+
+</update>
+
+<update id="requestRefund" parameterType="String">
+
+update u_order
+<set>
+<![CDATA[
+pay_state = '환불 완료'
+]]>
+</set>
+where order_code =  #{order_code};
+
+
+</update>
+	
+
+</mapper>

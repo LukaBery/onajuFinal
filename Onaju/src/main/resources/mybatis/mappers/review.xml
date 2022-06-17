@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.review">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="reviewResult" type="ReviewVO">
+		<result property="review_num" column="review_num" />
+		<result property="u_id" column="u_id" />
+		<result property="order_code" column="order_code" />
+		
+		<result property="room_code" column="room_code" />
+		<result property="review_star" column="review_star" />
+		<result property="review_content" column="review_content" />
+		
+		<result property="creDate" column="creDate" />
+
+		<result property="room_imageName" column="room_imageName" />
+		<result property="title" column="title" />
+		<result property="checkIn_date" column="checkIn_date" />
+		<result property="checkOut_date" column="checkOut_date" />
+		<result property="u_name" column="u_name" />
+		<result property="u_imageName" column="u_imageName" />
+	</resultMap>	
+
+<select id="selectReview" parameterType="java.util.HashMap" resultType="reviewVO">
+	   <![CDATA[  select * from u_reviewboard where order_code = #{order_code} order by creDate desc
+	   		]]>
+	</select>
+	<select id="selectReviewListByRoom" parameterType="reviewVO"
+	resultType="reviewVO">
+   <![CDATA[  
+	select * from (
+	select @rowNum := @rowNum + 1 as recNum, t.*
+	from (select (@rowNum := 0)) R,
+	(
+	select U.*, T.u_imageName, T.u_name from u_reviewboard U
+	left join u_member T on T.u_id = U.u_id
+	where U.room_code = #{room_code}
+	order by U.creDate desc
+	) t
+	) y
+	where
+	recNum between(#{pageNum}-1)*10+1 and
+	(#{pageNum})*6
+
+	   		]]>
+	</select>
+	
+	<select id="selectReviewListById" parameterType="java.util.HashMap" resultType="reviewVO">
+	  
+
+	select * from (
+	select @rowNum := @rowNum + 1 as recNum, t.*
+	from (select (@rowNum := 0)) R,
+	(
+	
+<!-- 	if문 넣는 자리
+ -->	
+select U.*, T.room_imageName, O.checkIn_date, O.checkOut_date, F.title from u_reviewboard U 
+left join h_roomimage T on T.room_code = U.room_code and T.room_imageType = 'main_image'
+left join u_order O on U.order_code = O.order_code 
+left join h_room F on U.room_code = F.room_code
+	   where U.u_id = #{u_id}
+	   
+	   
+	   
+
+	       <if test="checkIn_date!='' and checkIn_date!=null and checkOut_date!='' and checkOut_date!=null">
+			         and U.creDate between #{checkIn_date} and #{checkOut_date}
+			      </if>
+	   
+	   
+	   
+	   order by U.creDate desc
+	   
+	   
+	   
+	   
+	   
+	   
+	   ) t
+	) y
+	where				
+		recNum between (#{section}-1)*100+ (#{pageNum}-1)*10+1 and (#{section}-1)*100+(#{pageNum})*10		
+    
+   
+	   
+
+
+    
+   
+	   
+
+
+	   		
+	</select>
+	
+	
+	
+	 <select id="selectMyReviewList_cnt" resultType="String"  parameterType="java.util.HashMap"  >
+
+
+
+
+
+	select COUNT(*) as cnt from
+	(
+
+	select U.*, T.room_imageName, O.checkIn_date, O.checkOut_date, F.title from
+	u_reviewboard U
+	left join h_roomimage T on T.room_code = U.room_code and T.room_imageType =
+	'main_image'
+	left join u_order O on U.order_code = O.order_code
+	left join h_room F on U.room_code = F.room_code
+	where U.u_id = #{u_id}
+
+
+
+
+	<if
+		test="checkIn_date!='' and checkIn_date!=null and checkOut_date!='' and checkOut_date!=null">
+		and U.creDate between #{checkIn_date} and #{checkOut_date}
+	</if>
+
+
+
+	order by U.creDate desc
+
+	) R
+    
+   
+	   
+
+	</select>
+	
+
+  <insert id="insertNewReview"  parameterType="reviewVO">
+  <![CDATA[
+    	insert into u_reviewboard (u_id,
+								order_code,
+								room_code,
+								review_star,
+								review_content
+							
+								)
+										
+					   values  (#{u_id},
+								#{order_code},
+								#{room_code},
+								#{review_star},
+								#{review_content}
+								)         
+   ]]>  
+   </insert>    
+   <update id="updateReviewState" parameterType="int">
+	   update u_order
+			   <set>
+			     
+			        review_state='y'
+			    
+			      
+			   </set>
+		where 
+		order_code=#{order_code}
+	</update>
+	<update id="modReview" parameterType="reviewVO">
+	   update u_reviewboard
+			   <set>
+			     
+			      review_star = #{review_star},
+			      review_content = #{review_content}
+			    
+			      
+			   </set>
+		where 
+		review_num=#{review_num}
+	</update>
+
+<delete id="removeReview" parameterType="String">
+		delete from u_reviewboard where review_num = #{review_num}
+	</delete>
+	
+<update id="deleteReviewState" parameterType="int">
+	   update u_order
+			   <set>
+			     
+			        review_state='n'
+			    
+			      
+			   </set>
+		where 
+		order_code=#{order_code}
+	</update>
+</mapper>
