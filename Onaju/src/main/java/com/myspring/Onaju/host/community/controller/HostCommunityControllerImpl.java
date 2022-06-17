@@ -273,14 +273,14 @@ public class HostCommunityControllerImpl extends BaseController implements HostC
 				String roomCode = request.getParameter("room_code");
 				MultipartFile image =  request.getFile("cmnImage");
 				
-				
+				if(image != null && image.getSize() != 0){
 				String originFileName = image.getOriginalFilename(); // 원본 파일 명
 				long fileSize = image.getSize(); // 파일 사이즈
 				hostCommunityVO.setCmn_image(originFileName);
 				System.out.println("originFileName : " + originFileName);
 				
 				//폴더 안의 파일 삭제
-				String path=CURR_IMAGE_REPO_PATH_COMMUNITY ;
+				String path=CURR_IMAGE_REPO_PATH_COMMUNITY + "\\" + roomCode ;
 				File folder = new File(path);
 				    if (folder.exists()) {
 				  	  FileUtils.cleanDirectory(folder);//하위 폴더와 파일 모두 삭제
@@ -302,6 +302,7 @@ public class HostCommunityControllerImpl extends BaseController implements HostC
 						}
 						image.transferTo(new File(CURR_IMAGE_REPO_PATH_COMMUNITY + "\\" + roomCode + "\\" + originFileName));
 					}
+	}
 				      
 				// 이미지 업로드 끝
 					String bigTitle = request.getParameter("bigTitle");

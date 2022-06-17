@@ -146,8 +146,10 @@
 		        bigTitle=#{bigTitle},
 		     
 		        smallTitle=#{smallTitle},
-		      
-		        cmn_image=#{cmn_image},
+		          <if test="cmn_image!='' and cmn_image!=null">
+			         cmn_image=#{cmn_image},
+			      </if>
+		       
 		      
 		        content=#{content},
 		   

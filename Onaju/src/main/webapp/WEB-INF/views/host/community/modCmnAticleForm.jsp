@@ -7,21 +7,18 @@
   request.setCharacterEncoding("UTF-8");
 %> 
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+<c:set var="goods"  value="${goodsMap.goods}"  />
 <c:set var="imageFileList"  value="${goodsMap.imageFileList}"  />
-
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Life Style 글 수정</title>
+<title>Life Style 글쓰기</title>
 <script src="http://madalla.kr/js/jquery-1.8.3.min.js"></script>
 
 <script type="text/javascript">
 
-	
-	
-//사진 미리보기	
 function readURL(input,preview) {
 	   //  alert(preview);
 	    if (input.files && input.files[0]) {
@@ -45,29 +42,17 @@ function uploadImgPreview() {
     }
 
 }
-//슬라이드 사진
-$(function () {
-    var n = 0;
-    var pos = 0;
-    setInterval(function () {
-        n = n + 1;
-        pos = -1 * 896 * n;
-        $(".slider ul").animate({ "left": pos }, 300, function () {
-            if (n == 3) {
-                n = 0;
-                pos = 0;
-                $(".slider ul").css({ "left": pos });
-            }
-        });
-    }, 3000);
-});
+
+
 	</script>
 
 <style>
 @charset "utf-8";
-body{
-height:100%;
+
+body {
+	height: 100%;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -75,7 +60,6 @@ table {
 
 section.host_notice {
 	width: 850px;
-	height:2450px; /* 삭제할 것 */ 
 	padding: 0 auto;
 	margin: 30px 75px 30px 75px;
 }
@@ -138,42 +122,32 @@ section.host_notice {
 	padding: 10px 0;
 }
 
-
-
-
-
 .noticeBtn2 {
-	position: absolute;
-	right: 880px;
+	display: inline-block;
 	padding: 5px 30px;
-	margin: 30px 10px 30px 10px;
+	margin: 30px 10px 30px 5px;
 	font-size: 16px;
 	font-weight: 400;
+	background: transparent;
 	text-align: center;
 	white-space: nowrap;
 	vertical-align: middle;
+	-ms-touch-action: manipulation;
 	touch-action: manipulation;
+	cursor: pointer;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
 	user-select: none;
 	border: 1px solid transparent;
 	text-transform: uppercase;
+	-webkit-border-radius: 0;
+	-moz-border-radius: 0;
 	border-radius: 0;
-	transition: all 0.3s;
-}
-.noticeBtn3 {
-	position: absolute;
-    bottom: -76px;
-	padding: 5px 30px;
-	margin: 30px 10px 30px 10px;
-	font-size: 16px;
-	font-weight: 400;
-	text-align: center;
-	white-space: nowrap;
-	vertical-align: middle;
-	touch-action: manipulation;
-	user-select: none;
-	border: 1px solid transparent;
-	text-transform: uppercase;
-	border-radius: 0;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	-ms-transition: all 0.3s;
+	-o-transition: all 0.3s;
 	transition: all 0.3s;
 }
 
@@ -189,14 +163,11 @@ section.host_notice {
 	color: #fff;
 }
 
-
-
 .clearfix:after {
 	content: '';
 	display: block;
 	clear: both;
 }
-
 
 /*-------------------------------------------------------------------------------------------------------------*/
 /* 슬라이드바 */
@@ -248,8 +219,8 @@ ul {
 }
 
 .bigInfo {
-	width: 850px;
-	height: 240px;
+	width: 100%;
+	height: 350px;
 }
 
 #bigTitle {
@@ -266,35 +237,40 @@ ul {
 	height: 100px;
 	margin: 30px 0px 0px 0px;
 }
-.introduce {
-	position:relative;
-	width:850px;
+
+#introduce {
+	position: relative;
+	width: 850px;
 }
+
 .introduce_title {
-    position: absolute;
-    width: 850px;
-    height: 70px;
-    bottom: -100px;
+	width: 100%;
+	padding:20px;
+	height: 70px;
+	bottom: 800px;
 }
+
 .introduce_image {
-	position: absolute;
-    width: 850px;
-    height: 700px;
-    bottom: -850px;
+    width: 100%;
+    padding: 30px 250px 30px 250px;
+    height: 250px;
+    bottom: 750px;
 }
+
 .introduce_text {
-	position: absolute;
-    width: 850px;
-    bottom: -1220px;
+	width: 100%;
+	padding:0px 20px 20px 20px;
+	bottom: -300px;
 }
 
 .noticeBtn2Box {
 	position: relative;
-    width: 850px;
-    margin-left: 750px;
-    margin-top: 850px;
-    top: 400px;
+	width: 850px;
+	margin-left: 750px;
+	margin-top: 850px;
+	top: 400px;
 }
+
 #profile {
 	position: relative;
 	border-radius: 50px;
@@ -313,172 +289,173 @@ ul {
 	margin: 25px 0px 0px 20px;
 }
 
+#bigTitle {
+background-color: rgb(225,245,196);
+	width: 100%;
+	padding:10px 20px;
+	height: 50px;
+	font-size: 20px;
+	font-weight: bold;
+	border:1px solid #CCCCCC;
+	border-radius:10px;
+}
+
 
 #smallTitle {
-	background-color: #E8F0FE;
-	width: 842px;
-    height: 70px;
-    font-size: 20px;
-    font-weight: bold;
+background-color: rgb(225,245,196);
+	width: 100%;
+	padding:7px 20px;
+	height: 35px;
+	font-size: 14px;
+	font-weight: bold;
+	border:1px solid #CCCCCC;
+	border-radius:10px;
 }
 
-#thumbnailImg{
-	width: 850px;
-    height: 750px;
+#thumbnailImg {
+border-radius:15px;
+	width: 100%;
+	height: 100%;
 }
-#content{	
-	background-color: #E8F0FE;
-	width: 850px;
+
+#content {
+background-color: rgb(225,245,196);
+
+	width: 100%;
+	padding: 20px;
+	border:1px solid #CCCCCC;
 	height: 200px;
+	border-radius:10px;
+}
+
+#host_type {
+	font-size: 24px;
+	font-weight: bold;
+	margin: 30px 0px 10px 10px;
+	color: #7f9b75;
+}
+
+.commu_inform {
+	width: 50%;
+	height: 250px;
+	display: inline-block;
+	float: left;
+	padding: 20px;
+}
+
+.commu_text {
+text-align:center;
+	width: 100%;
+	height: 25px;
+	margin:10px 0px;
+	font-size: 14px;
 	
 }
-#host_type{
-	font-size: 24px;
-    font-weight: bold;
-    margin: 30px 0px 10px 10px;
-    color: #7f9b75;
+.commu_text_input{
+text-align:center;
+width: 70%;
+    padding: 0px 10px;
+    float: left;
+    font-family: inherit;
+    font-size: 15px;
 }
-#cmnImg{
-	max-width: 100%;
-    height: 800px;
+.commu_text_bold{font-weight: bold; width:30%;float:left;
 }
 </style>
+<script>
+function modArticleForm() {
+	//변수에 담아주기
+	var _bigTitle = document.getElementById("bigTitle");
+	var _smallTitle = document.getElementById("smallTitle");
+	var _upImgFile = document.getElementById("upImgFile");
+	var _content = document.getElementById("content");
 
+	if (_bigTitle.value == "") { 
+		alert("제목을 입력해주세요.");
+		_bigTitle.focus(); 
+		return false; 
+	}
+	;
+	
+
+	if (_smallTitle.value == "") { 
+		alert("소제목을 입력해주세요.");
+		_smallTitle.focus(); 
+		return false; 
+	}
+	;
+
+	
+
+	if (_content.value == "") { 
+		alert("소개글 내용을 입력해주세요.");
+		_content.focus(); 
+		return false; 
+	}
+	;
+	document.modArticle.submit(); 
+
+}
+
+</script>
 </head>
 
 <body>
 	
 <!-- 바디 시작 -->
 				<section class="host_notice">
-				<form id="modify"  action="${contextPath}/host/community/modingCmnAticleForm.do?cmnNum=${hostCommunityVO.cmnNum}&room_code=${hostCommunityVO.room_code}" method="post" enctype="multipart/form-data" >
+				<form id="introduce" name="modArticle" action="${contextPath}/host/community/modingCmnAticleForm.do?cmnNum=${hostCommunityVO.cmnNum}&room_code=${hostCommunityVO.room_code}" method="post" enctype="multipart/form-data" >
 					<div class="host-title">
 						<div class="host_contai">
-							<h3>Life Style 글 수정</h3>
+							<h3>Life Style 글쓰기</h3>
 						</div>
 					</div>
 					
-					<div class="container1">
-						        <div class="slider">
-						      	  <ul>
-						      	  <c:forEach var="list" items="${imageFileList }">
-						      	  	<li class="active">
-									<img src="${contextPath}/download.do?room_code=${hostCommunityVO.room_code}&fileName=${list.room_imageName}">
-									</li>
-								 </c:forEach>
-				           
-								 </ul>
-								</div>
-				        </div>
+					
+					
+					
 					<div class="container2">
 						<div class="bigInfo">
-							<input type="text"  name="host_type" disabled id="host_type" value="${hostCommunityVO.host_type}" >
-							<input type="text" id="bigTitle" name="bigTitle"  value="${hostCommunityVO.bigTitle}" />
-							<div class="h_profile">
-								<img id="profile" src="https://g-grafolio.pstatic.net/20190525_229/15587582702938v22E_JPEG/20190330-IMG_5851.jpg?type=w896_2" alt="프로필이미지">
-								<p id="hostid">${hostCommunityVO.h_id}</p>
-							</div>
-						</div>
+							<input type="text"  name="host_type" disabled id="host_type" value="${goods.host_type} 정보" style="margin-bottom:20px; width:100%;" >
+<img src="${contextPath}/download.do?room_code=${goods.room_code}&fileName=${imageFileList[0].room_imageName}" style="width:45%; float:left;height:250px; border-radius:15px; display:inline-block;">
+<div class="commu_inform"> 
+<div class="commu_text"><i class="commu_text_bold">사업장 상호명 </i><input type="text"  name="hostInfo_name" disabled class="commu_text_input" value="${goods.hostInfo_name}" ></div>
+<div class="commu_text"><i class="commu_text_bold">주소 </i><input type="text"  name="hostInfo_name" disabled class="commu_text_input" value="${goods.roadAddress}" ></div>
+<div class="commu_text"><i class="commu_text_bold">객실번호 </i><input type="text"  name="hostInfo_name" disabled class="commu_text_input" value="${goods.room_number}" ></div>
+
+</div>
+										</div>
 					</div>
 					
-					<div class="container3">
-						<div class="detail">
-							
-								<table class="detail-table">
-									<colgroup>
-						            	<col width="14%"/>
-										<col width="19%"/>
-										<col width="10%"/>
-									</colgroup>
-									<thead>
-										<tr>
-											<th class="th-date">사업장 상호명 </th>
-											<td class="td-date-writer" >
-											<input type="text"  name="hostInfo_name" disabled id="hostInfo_name" value="${hostCommunityVO.hostInfo_name}" >
-											
-											</td>
-											<th scope="col" class="th-writer">주소</th>
-											<td class="td-date-writer" colspan="2">
-											<input type="text"  name="hostInfo_name" disabled id="hostInfo_name" value="${hostCommunityVO.roadAddress}" >
-											
-											
-											</td>
-										</tr>
-										
-										<tr>
-										<th class="th-title">상호명</th>
-										<td class="notice_title">
-										<input type="text"  name="title" disabled id="title" value="${hostCommunityVO.title}" >
-											
-										</td>
-										<th class="th-title">객실타입</th>
-										<td class="notice_title">
-											<input type="text"  name="room_type" disabled id="room_type" value="${hostCommunityVO.room_type}" >
-											
-										</td>
-										<th class="th-title">객실번호</th>
-										<td class="notice_title">
-										<input type="text"  name="room_number" disabled id="room_number" value="${hostCommunityVO.room_number}" >
-										</td>
-									</tr>
-									<tr>
-										
-										<th class="th-title">객실요금</th>
-										<td class="notice_title">
-										<input type="text"  name="room_fee" disabled id="room_fee" value="${hostCommunityVO.room_fee}" >
-											
-										</td>
-										<th class="th-title">입실 시간</th>
-										<td class="notice_title">
-										<input type="text"  name="able_checkIn"  disabled id="able_checkIn" value="${hostCommunityVO.able_checkIn}" >
-											 
-										</td>
-										<th class="th-title">퇴실 시간</th>
-										<td class="notice_title">
-										<input type="text"  name="able_checkOut" disabled  id="able_checkOut" value="${hostCommunityVO.able_checkOut}" >
-										</td>
-									<tr>	
-										<th class="th-title">최소 인원</th>
-										<td class="notice_title">
-										<input type="text"  name="min_number" disabled id="min_number" value="${hostCommunityVO.min_number}" >
-											
-										</td>
-										<th class="th-title">최대 인원</th>
-										<td class="notice_title">
-										<input type="text"  name="max_number" disabled id="max_number" value="${hostCommunityVO.max_number}" >
-											 
-										</td>
-									</tr>
-									</thead>
-								</table>
-									
-						</div>
-					</div>
-					
-					<div class="container4">
+	
+					<div style="width:100%; height: 100%; border:1px solid #CCCCCC; border-radius:12px;cursor:pointer;background-color:#7f9b75;">
 						
 							<div class="introduce">
+							<div class="introduce_title">
+									<textarea id="bigTitle" name="bigTitle" placeholder="객실 제목을 작성해 주세요.">${hostCommunityVO.bigTitle}</textarea>
+								</div>	
 								<div class="introduce_title">
-									<textarea id="smallTitle" name="smallTitle" >${hostCommunityVO.smallTitle}</textarea>
+									<textarea id="smallTitle" name="smallTitle" placeholder="객실 소제목을 작성해 주세요.">${hostCommunityVO.smallTitle}</textarea>
 								</div>	
 								<div class="introduce_image">
-									 <input type="file" id="upImgFile" name="cmnImage" onChange="uploadImgPreview();" accept="image/*">
-									 <img id="thumbnailImg" src="${contextPath}/host/community/download2.do?room_code=${hostCommunityVO.room_code}&fileName=${hostCommunityVO.cmn_image}">
+									 <input type="file" style="display:none;"id="upImgFile" name="cmnImage" style="width:100%;height:100%;"onChange="uploadImgPreview();" accept="image/*">
+									 <img id="thumbnailImg" src="${contextPath}/host/community/download2.do?room_code=${hostCommunityVO.room_code}&fileName=${hostCommunityVO.cmn_image}"
+									  onclick="document.all.cmnImage.click()" onerror="this.onerror=null; this.src='${contextPath}/resources/image/addImage.svg';">
 								</div>	
 								<div class="introduce_text">
-									<textarea name="content" id="content" name="content" >${hostCommunityVO.content}</textarea> 
+									<textarea name="content" id="content" name="content" placeholder="객실 소개글을 작성해 주세요">${hostCommunityVO.content}</textarea> 
 								</div>
+							</div>
 							
 							
-						</div>
-					</div>
-						<div class="noticeBtn2Box">
-								<button type="submit" class="noticeBtn2 btn-dark2" >수정 완료</button>
-								
-						</div>
+							
+							</div>
+							
+							
+									<button type="button" class="noticeBtn2 btn-dark2" onClick="modArticleForm()">수정</button>
+						
+						
 					</form>
-						<div class="noticeBtn2Box">
-						<a href="${contextPath}/host/community/deleteHostCommunity.do?cmnNum=${hostCommunityVO.cmnNum}"><button class="noticeBtn3 btn-dark2">삭제</button></a>
-						</div>
 					</section>			
 										
 		
