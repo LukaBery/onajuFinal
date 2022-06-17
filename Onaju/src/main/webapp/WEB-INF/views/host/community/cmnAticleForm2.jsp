@@ -44,29 +44,15 @@ function uploadImgPreview() {
 }
 
 
-	
-$(function () {
-    var n = 0;
-    var pos = 0;
-    setInterval(function () {
-        n = n + 1;
-        pos = -1 * 896 * n;
-        $(".slider ul").animate({ "left": pos }, 300, function () {
-            if (n == 3) {
-                n = 0;
-                pos = 0;
-                $(".slider ul").css({ "left": pos });
-            }
-        });
-    }, 3000);
-});
 	</script>
 
 <style>
 @charset "utf-8";
-body{
-height:100%;
+
+body {
+	height: 100%;
 }
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -74,7 +60,6 @@ table {
 
 section.host_notice {
 	width: 850px;
-	height:2450px; /* 삭제할 것 */ 
 	padding: 0 auto;
 	margin: 30px 75px 30px 75px;
 }
@@ -137,10 +122,6 @@ section.host_notice {
 	padding: 10px 0;
 }
 
-
-
-
-
 .noticeBtn2 {
 	display: inline-block;
 	padding: 5px 30px;
@@ -182,14 +163,11 @@ section.host_notice {
 	color: #fff;
 }
 
-
-
 .clearfix:after {
 	content: '';
 	display: block;
 	clear: both;
 }
-
 
 /*-------------------------------------------------------------------------------------------------------------*/
 /* 슬라이드바 */
@@ -241,8 +219,8 @@ ul {
 }
 
 .bigInfo {
-	width: 850px;
-	height: 120px;
+	width: 100%;
+	height: 350px;
 }
 
 #bigTitle {
@@ -259,34 +237,40 @@ ul {
 	height: 100px;
 	margin: 30px 0px 0px 0px;
 }
+
 #introduce {
-	position:relative;
-	width:850px;
+	position: relative;
+	width: 850px;
 }
+
 .introduce_title {
-    position: absolute;
-    width: 850px;
-    height: 70px;
-    bottom: 800px;
+	width: 100%;
+	padding:20px;
+	height: 70px;
+	bottom: 800px;
 }
+
 .introduce_image {
-	position: absolute;
-    width: 850px;
-    bottom: 750px;	
+	width: 100%;
+	padding:20px 10px 0px 10px;
+	height:250px;
+	bottom: 750px;
 }
+
 .introduce_text {
-	position: absolute;
-    width: 850px;
-    bottom: -300px;
+	width: 100%;
+	padding:0px 20px 20px 20px;
+	bottom: -300px;
 }
 
 .noticeBtn2Box {
 	position: relative;
-    width: 850px;
-    margin-left: 750px;
-    margin-top: 850px;
-    top: 400px;
+	width: 850px;
+	margin-left: 750px;
+	margin-top: 850px;
+	top: 400px;
 }
+
 #profile {
 	position: relative;
 	border-radius: 50px;
@@ -305,33 +289,64 @@ ul {
 	margin: 25px 0px 0px 20px;
 }
 
-
 #smallTitle {
-	background-color: #E8F0FE;
-	width: 842px;
-    height: 70px;
-    font-size: 20px;
-    font-weight: bold;
+background-color: rgb(225,245,196);
+	width: 100%;
+	padding:10px 20px;
+	height: 50px;
+	font-size: 20px;
+	font-weight: bold;
+	border:1px solid #CCCCCC;
+	border-radius:10px;
 }
 
-#thumbnailImg{
-	position:absolute;
-	width: 700px;
-	height: 750px;
-	top: 200%;
-    left: 10%;
+#thumbnailImg {
+	width: 100%;
+	height: 100%;
 }
-#content{	
-	background-color: #E8F0FE;
-	width: 850px;
+
+#content {
+background-color: rgb(225,245,196);
+
+	width: 100%;
+	padding: 20px;
+	border:1px solid #CCCCCC;
 	height: 200px;
+	border-radius:10px;
+}
+
+#host_type {
+	font-size: 24px;
+	font-weight: bold;
+	margin: 30px 0px 10px 10px;
+	color: #7f9b75;
+}
+
+.commu_inform {
+	width: 50%;
+	height: 250px;
+	display: inline-block;
+	float: left;
+	padding: 20px;
+}
+
+.commu_text {
+text-align:center;
+	width: 100%;
+	height: 25px;
+	margin:10px 0px;
+	font-size: 14px;
 	
 }
-#host_type{
-	font-size: 24px;
-    font-weight: bold;
-    margin: 30px 0px 10px 10px;
-    color: #7f9b75;
+.commu_text_input{
+text-align:center;
+width: 70%;
+    padding: 0px 10px;
+    float: left;
+    font-family: inherit;
+    font-size: 15px;
+}
+.commu_text_bold{font-weight: bold; width:30%;float:left;
 }
 </style>
 
@@ -348,125 +363,46 @@ ul {
 						</div>
 					</div>
 					
-					<div class="container1">
-				       
-				           
-				          
-						        
-						        <div class="slider">
-						      	  <ul>
-						      	  <c:forEach var="list" items="${imageFileList }">
-						      	  	<li class="active">
-									<img src="${contextPath}/download.do?room_code=${goods.room_code}&fileName=${list.room_imageName}">
-									</li>
-								 </c:forEach>
-				           
-								 </ul>
-								</div>
-				        </div>
- 					
+					
 					
 					
 					<div class="container2">
 						<div class="bigInfo">
-							<input type="text"  name="host_type" disabled id="host_type" value="${goods.host_type}" >
-							<input type="text" id="bigTitle" name="bigTitle" placeholder="커뮤니티 제목을 작성해 주세요."/>
-						</div>
+							<input type="text"  name="host_type" disabled id="host_type" value="${goods.host_type} 정보" style="margin-bottom:20px; width:100%;" >
+<img src="${contextPath}/download.do?room_code=${goods.room_code}&fileName=${imageFileList[0].room_imageName}" style="width:45%; float:left;height:250px; border-radius:15px; display:inline-block;">
+<div class="commu_inform"> 
+<div class="commu_text"><i class="commu_text_bold">사업장 상호명 </i><input type="text"  name="hostInfo_name" disabled class="commu_text_input" value="${goods.hostInfo_name}" ></div>
+<div class="commu_text"><i class="commu_text_bold">주소 </i><input type="text"  name="hostInfo_name" disabled class="commu_text_input" value="${goods.roadAddress}" ></div>
+<div class="commu_text"><i class="commu_text_bold">객실번호 </i><input type="text"  name="hostInfo_name" disabled class="commu_text_input" value="${goods.room_number}" ></div>
+
+</div>
+										</div>
 					</div>
 					
-					<div class="container3">
-						<div class="detail">
-							
-								<table class="detail-table">
-									<colgroup>
-						            	<col width="14%"/>
-										<col width="19%"/>
-										<col width="10%"/>
-									</colgroup>
-									<thead>
-										<tr>
-											<th class="th-date">사업장 상호명 </th>
-											<td class="td-date-writer" >
-											<input type="text"  name="hostInfo_name" disabled id="hostInfo_name" value="${goods.hostInfo_name}" >
-											
-											</td>
-											<th scope="col" class="th-writer">주소</th>
-											<td class="td-date-writer" colspan="2">
-											<input type="text"  name="hostInfo_name" disabled  id="hostInfo_name" value="${goods.roadAddress}" >
-											
-											
-											</td>
-										</tr>
-										
-										<tr>
-										<th class="th-title">상호명</th>
-										<td class="notice_title">
-										<input type="text"  name="title" disabled id="title" value="${goods.title}" >
-											
-										</td>
-										<th class="th-title">객실타입</th>
-										<td class="notice_title">
-											<input type="text"  name="room_type" disabled id="room_type" value="${goods.room_type}" >
-											
-										</td>
-										<th class="th-title">객실번호</th>
-										<td class="notice_title">
-										<input type="text"  name="room_number" disabled id="room_number" value="${goods.room_number}" >
-										</td>
-									</tr>
-									<tr>
-										
-										<th class="th-title">객실요금</th>
-										<td class="notice_title">
-										<input type="text"  name="room_fee" disabled id="room_fee" value="${goods.room_fee}" >
-											
-										</td>
-										<th class="th-title">입실 시간</th>
-										<td class="notice_title">
-										<input type="text"  name="able_checkIn" disabled  id="able_checkIn" value="${goods.able_checkIn}" >
-											 
-										</td>
-										<th class="th-title">퇴실 시간</th>
-										<td class="notice_title">
-										<input type="text"  name="able_checkOut" disabled id="able_checkOut" value="${goods.able_checkOut}" >
-										</td>
-									<tr>	
-										<th class="th-title">최소 인원</th>
-										<td class="notice_title">
-										<input type="text"  name="min_number" disabled id="min_number" value="${goods.min_number}" >
-											
-										</td>
-										<th class="th-title">최대 인원</th>
-										<td class="notice_title">
-										<input type="text"  name="max_number" disabled id="max_number" value="${goods.max_number}" >
-											 
-										</td>
-									</tr>
-									</thead>
-								</table>
-									
-						</div>
-					</div>
-					
-					<div class="container4">
+	
+					<div style="width:100%; height: 100%; border:1px solid #CCCCCC; border-radius:12px;cursor:pointer;background-color:#7f9b75;">
 						
 							<div class="introduce">
 								<div class="introduce_title">
 									<textarea id="smallTitle" name="smallTitle" placeholder="객실 소제목을 작성해 주세요."></textarea>
 								</div>	
 								<div class="introduce_image">
-									 <input type="file" id="upImgFile" name="cmnImage" onChange="uploadImgPreview();" accept="image/*">
-									 <img id="thumbnailImg" src="">
+									 <input type="file" style="display:none;"id="upImgFile" name="room_image" style="width:100%; height:100%;"onChange="uploadImgPreview();" accept="image/*">
+									 <img id="thumbnailImg" src="" onclick="document.all.room_image.click()" onerror="this.onerror=null; this.src='${contextPath}/resources/image/addImage.svg';">
 								</div>	
 								<div class="introduce_text">
 									<textarea name="content" id="content" name="content" placeholder="객실 소개글을 작성해 주세요"></textarea> 
 								</div>
 							</div>
-							<div class="noticeBtn2Box">
-									<button type="submit" class="noticeBtn2 btn-dark2">등록</button>
+							
+							
+							
 							</div>
+							
+							
+									<button type="submit" class="noticeBtn2 btn-dark2">등록</button>
 						
-					</div>
+						
 					</form>
 					</section>			
 										

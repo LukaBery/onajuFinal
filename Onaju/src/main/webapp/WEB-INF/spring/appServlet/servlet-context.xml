@@ -53,6 +53,12 @@
     		<mvc:mapping path="/*/*/*.do"/> 
     	<mvc:exclude-mapping  path="/mypage/*.do"/>
     					<mvc:exclude-mapping path="/mypage/*/*.do"/>
+    				
+    					<mvc:exclude-mapping path="/host/main/main.do"/>
+    					<mvc:exclude-mapping path="/host/mypage/*.do"/>
+    	    					<mvc:exclude-mapping path="/host/goods/addNewGoodsForm.do"/>
+    	    					<mvc:exclude-mapping path="/host/money/*.do"/>
+    	    					<mvc:exclude-mapping path="/host/community/cmnAticleForm1.do"/>
     	
       		<beans:bean class="com.myspring.Onaju.common.interceptor.ViewNameInterceptor" />
   		</mvc:interceptor>
@@ -68,6 +74,22 @@
 		</mvc:interceptor>
 		
 	</mvc:interceptors>
+	<mvc:interceptors>
+ 	
+ 	<mvc:interceptor>
+			<!-- path 에 있는 서블릿이 호출될때 ref 에 참조되어 있는 interceprot 를 샐행하여 세션을 관리한다. -->
+			<mvc:mapping path="/host/main/main.do"/>
+			    					<mvc:mapping path="/host/mypage/*.do"/>
+			
+    					<mvc:mapping path="/host/goods/addNewGoodsForm.do"/>
+    					<mvc:mapping path="/host/money/*.do"/>
+    	    					<mvc:mapping path="/host/community/cmnAticleForm1.do"/>
+
+			<beans:bean class="com.myspring.Onaju.common.interceptor.HostLoginInterceptor" />
+		</mvc:interceptor>
+		
+	</mvc:interceptors>
+	
  
  
  	<!-- 멀티파트 리졸버 -->

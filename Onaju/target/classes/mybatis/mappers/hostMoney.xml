@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.money">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="hostCommunity" type="hostMoneyVO">
+		<result property="h_id" column="h_id" />
+		<result property="h_code" column="h_code" />
+		<result property="room_code" column="room_code" />
+		<result property="order_code" column="order_code" />
+		<result property="sale_amount" column="sale_amount" />
+		<result property="refund_amount" column="refund_amount" />
+		
+		
+	</resultMap>
+	
+
+
+
+<!-- 게시판 목록 불러오기 -->
+	<select id="hostSalesAllList" resultType="hostMoneyVO"  parameterType="String"  >
+	    <![CDATA[
+				select S.salesNO,I.hostInfo_name,R.title,R.room_number,S.sale_amount,S.refund_amount,O.pay_state,O.use_state, S.salesDate
+				from h_sales S 
+				left outer join h_host_info I 
+				on S.h_code=I.h_code 
+				left outer join h_room R 
+				on S.room_code=R.room_code 
+				left outer join u_order O 
+				on S.order_code=O.order_code 
+				where O.pay_state='fin' and O.use_state='fin' and S.h_id=#{h_id}
+		]]>
+	</select>
+
+
+	
+   
+</mapper>

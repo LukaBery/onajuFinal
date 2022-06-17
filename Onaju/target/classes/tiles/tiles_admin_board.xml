@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>       
+       
+  <definition name="/admin/noticeList" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminBoard/noticeList.jsp" />
+  </definition>
+  
+  <definition name="/admin/enquireBoard" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminBoard/enquireBoardList.jsp" />
+  </definition>  
+  
+  <definition name="/admin/noticeDetail" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminBoard/noticeDetail.jsp" />
+  </definition>
+  
+  <definition name="/admin/noticeForm" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminBoard/noticeForm.jsp" />
+  </definition>
+  
+  <definition name="/admin/enquireBoardList" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminBoard/enquireBoardList.jsp" />
+  </definition>
+  
+  <definition name="/admin/enquireDetail" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminBoard/enquireBoardDetail.jsp" />
+  </definition>
+</tiles-definitions>

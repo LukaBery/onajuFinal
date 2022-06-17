@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="/host/management/reviewList" extends="hostLayout">
+		<put-attribute name="title" value="호스트 공지사항" />
+		<put-attribute name="body" value="/WEB-INF/views/host/management/reviewList.jsp" />
+	</definition>
+	
+	<definition name="/host/management/reviewEX" extends="hostLayout">
+		<put-attribute name="title" value="호스트 공지사항" />
+		<put-attribute name="body" value="/WEB-INF/views/host/management/reviewEX.jsp" />
+	</definition>
+</tiles-definitions>	

@@ -1,0 +1,396 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.host">
+
+	<resultMap id="hostResult" type="adminHostVO">
+      	<result property="h_id" column="h_id" />
+      	<result property="h_pw" column="h_pw" />
+      	<result property="h_name" column="h_name" />
+      	<result property="h_birth_y" column="h_birth_y" />
+      	<result property="h_birth_m" column="h_birth_m" />
+      	<result property="h_birth_d" column="h_birth_d" />
+      	<result property="h_gender" column="h_gender" />
+      	<result property="h_phone" column="h_phone" />
+      	<result property="h_email1" column="h_email1" />
+      	<result property="h_email2" column="h_email2" />
+      	<result property="h_sellerNum" column="h_sellerNum" />
+      	<result property="zipcode" column="zipcode" />
+      	<result property="roadAddress" column="roadAddress" />
+      	<result property="numberAddress" column="numberAddress" />
+      	<result property="restAddress" column="restAddress" />
+      	<result property="deputy_name" column="deputy_name" />
+      	<result property="deputy_phone" column="deputy_phone" />
+      	<result property="deputy_department" column="deputy_department" />
+      	<result property="deputy_birth" column="deputy_birth" />
+      	<result property="h_imageName" column="h_imageName" />
+      	<result property="h_imageType" column="h_imageType" />
+      	<result property="h_agree_1" column="h_agree_1" />
+      	<result property="h_agree_2" column="h_agree_2" />
+      	<result property="h_agree_3" column="h_agree_3" />
+      	<result property="h_service_01" column="h_service_01" />
+      	<result property="h_service_02" column="h_service_02" />
+      	<result property="joinDate" column="joinDate" />
+      	<result property="del_yn" column="del_yn" />
+	</resultMap>
+	
+	
+	<resultMap id="hostInfoResult" type="adminHostInfoVO">
+      	<result property="h_code" column="h_code" />
+      	<result property="h_id" column="h_id" />
+      	<result property="h_name" column="h_name" />
+      	<result property="hostInfo_name" column="hostInfo_name" />
+      	<result property="zipcode" column="zipcode" />
+      	<result property="roadAddress" column="roadAddress" />
+      	<result property="numberAddress" column="numberAddress" />
+      	<result property="restAddress" column="restAddress" />
+      	<result property="host_type" column="host_type" />
+      	<result property="room_count" column="room_count" />
+      	<result property="h_sellerNum" column="h_sellerNum" />
+      	<result property="h_accountNum" column="h_accountNum" />
+      	<result property="creDate" column="creDate" />
+      	<result property="del_yn" column="del_yn" />
+      	
+      	<result property="h_email1" column="h_email1" />
+      	<result property="h_email2" column="h_email2" />
+      	<result property="h_phone" column="h_phone" />
+      	<result property="deputy_name" column="deputy_name" />
+      	<result property="deputy_phone" column="deputy_phone" />
+      	<result property="deputy_department" column="deputy_department" />
+      	<result property="deputy_birth" column="deputy_birth" />
+	</resultMap>
+	
+	<select id="selectAllHostList" resultType="hashmap"   parameterType="hashmap"  >
+		 <![CDATA[
+		 select * 
+		 from (
+		 select (@ROWNUM := @ROWNUM + 1) rn, c.* 
+		 from (
+		 select * 
+		 from h_host 
+		 where h_agree_1 = 'Y'
+		 ]]>
+		 <if test="h_id2 != '' and h_id2 != null">
+		 and h_id like concat('%',#{h_id2},'%')
+		 </if>
+		 <if test="join_startDate != '' and join_startDate != null">
+		 and joinDate >= #{join_startDate}
+		 </if>
+		 <if test="join_endDate != '' and join_endDate != null">
+		  <![CDATA[
+		 and joinDate <= #{join_endDate}
+		 ]]>
+		 </if>
+		 <if test="h_name2 != '' and h_name2 != null">
+		 and h_name like concat('%',#{h_name2},'%')
+		 </if>
+		 <if test="h_del_yn != '' and h_del_yn != null">
+		 and del_yn = #{h_del_yn}
+		 </if>
+		 <if test="h_sellerNum2 != '' and h_sellerNum2 != null">
+		 and h_sellerNum like concat('%',#{h_sellerNum2},'%') 
+		 </if>
+		 <![CDATA[
+		 order by joinDate desc
+		 )c,(select @ROWNUM := 0)s)b  
+		 where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount}
+		 ]]>						        
+	</select>
+	
+	<select id="selectAllHostTotal" resultType="java.lang.Integer">
+        SELECT count(*) FROM h_host where h_agree_1 = 'Y'
+        <if test="h_id2 != '' and h_id2 != null">
+		 and h_id like concat('%',#{h_id2},'%')
+		 </if>
+		 <if test="join_startDate != '' and join_startDate != null">
+		 and joinDate >= #{join_startDate}
+		 </if>
+		 <if test="join_endDate != '' and join_endDate != null">
+		  <![CDATA[
+		 and joinDate <= #{join_endDate}
+		 ]]>
+		 </if>
+		 <if test="h_name2 != '' and h_name2 != null">
+		 and h_name like concat('%',#{h_name2},'%')
+		 </if>
+		 <if test="h_del_yn != '' and h_del_yn != null">
+		 and del_yn = #{h_del_yn}
+		 </if>
+		 <if test="h_sellerNum2 != '' and h_sellerNum2 != null">
+		 and h_sellerNum like concat ('%',#{h_sellerNum2},'%')
+		 </if>
+	</select>
+	
+	<select id="selectHostDetail" resultMap="hostResult"   parameterType="String"  >
+		 select * from h_host where h_id = #{h_id}					        
+	</select>
+	
+	<update id="selectUpdateHost" parameterType="adminHostVO">
+		update h_host
+		<set>
+			<if test="h_name != '' and h_name != null">
+				h_name = #{h_name},
+			</if>
+			<if test="h_birth_y != '' and h_birth_y != null">
+				h_birth_y = #{h_birth_y},
+			</if>
+			<if test="h_birth_m != '' and h_birth_m != null">
+				h_birth_m = #{h_birth_m},
+			</if>
+			<if test="h_birth_d != '' and h_birth_d != null">
+				h_birth_d = #{h_birth_d},
+			</if>
+			<if test="h_gender != '' and h_gender != null">
+				h_gender = #{h_gender},
+			</if>
+			<if test="h_phone != '' and h_phone != null">
+				h_phone = #{h_phone},
+			</if>
+			<if test="h_email1 != '' and h_email1 != null">
+				h_email1 = #{h_email1},
+			</if>
+			<if test="h_email2 != '' and h_email2 != null">
+				h_email2 = #{h_email2},
+			</if>
+			<if test="zipcode != '' and zipcode != null">
+				zipcode = #{zipcode},
+			</if>
+			<if test="roadAddress != '' and roadAddress != null">
+				roadAddress = #{roadAddress},
+			</if>
+			<if test="numberAddress != '' and numberAddress != null">
+				numberAddress = #{numberAddress},
+			</if>
+			<if test="restAddress != '' and restAddress != null">
+				restAddress = #{restAddress},
+			</if>
+			<if test="h_service_01 != '' and h_service_01 != null">
+				h_service_01 = #{h_service_01},
+			</if>
+			<if test="h_service_02 != '' and h_service_02 != null">
+				h_service_02 = #{h_service_02},
+			</if>
+			<if test="deputy_name != '' and deputy_name != null">
+				deputy_name = #{deputy_name},
+			</if>
+			<if test="h_sellerNum != '' and h_sellerNum != null">
+				h_sellerNum = #{h_sellerNum},
+			</if>
+			<if test="deputy_birth != '' and deputy_birth != null">
+				deputy_birth = #{deputy_birth},
+			</if>
+			<if test="deputy_phone != '' and deputy_phone != null">
+				deputy_phone = #{deputy_phone},
+			</if>
+			<if test="deputy_department != '' and deputy_department != null">
+				deputy_department = #{deputy_department},
+			</if>
+		</set>
+		where h_id = #{h_id}
+	</update>
+	
+	
+	
+	
+	<select id="selectAllHostInfoList" resultType="hashmap"   parameterType="hashmap"  >
+		 <![CDATA[
+		 select * 
+		 from (
+		 select (@ROWNUM := @ROWNUM + 1) rn, c.*
+		 from (
+		 select H.h_id, H.h_name, I.hostInfo_name, I.creDate, I.h_sellerNum, I.host_type, I.del_yn, I.roadAddress, I.h_code  
+		 from h_host_Info I
+		 inner join h_host H
+         on I.h_id = H.h_id
+		 where I.h_code > 0
+		 ]]>
+		 <if test="h_id2 != '' and h_id2 != null">
+		 and H.h_id like concat('%',#{h_id2},'%')
+		 </if>
+		 <if test="join_startDate != '' and join_startDate != null">
+		 and I.creDate >= #{join_startDate}
+		 </if>
+		 <if test="join_endDate != '' and join_endDate != null">
+		  <![CDATA[
+		 and I.creDate <= #{join_endDate}
+		 ]]>
+		 </if>
+		 <if test="h_name2 != '' and h_name2 != null">
+		 and H.h_name like concat('%',#{h_name2},'%')
+		 </if>
+		 <if test="h_del_yn != '' and h_del_yn != null">
+		 and H.del_yn = #{h_del_yn}
+		 </if>
+		 <if test="h_sellerNum2 != '' and h_sellerNum2 != null">
+		 and I.h_sellerNum like concat('%',#{h_sellerNum2},'%') 
+		 </if>
+		 <if test="info_del_yn != '' and info_del_yn != null">
+		 and I.del_yn = #{info_del_yn}
+		 </if>
+		 <if test="hostInfo_name2 != '' and hostInfo_name2 != null">
+		 and hostInfo_name like concat('%',#{hostInfo_name2},'%')
+		 </if>
+		 <if test="roadAddress2 != '' and roadAddress2 != null">
+		 and I.roadAddress like concat('%',#{roadAddress2},'%')
+		 </if>
+		 <![CDATA[
+		 order by creDate desc
+		 )c,(select @ROWNUM := 0)s)b  
+		 where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount}
+		 ]]>							        
+	</select>
+	
+	
+	<select id="selectAllHostInfoTotal" resultType="java.lang.Integer">
+        SELECT count(*) 
+        from h_host_Info I
+		inner join h_host H
+        on I.h_id = H.h_id where I.h_code > 0
+        <if test="h_id2 != '' and h_id2 != null">
+		 and I.h_id like concat('%',#{h_id2},'%')
+		 </if>
+		 <if test="join_startDate != '' and join_startDate != null">
+		 and I.creDate >= #{join_startDate}
+		 </if>
+		 <if test="join_endDate != '' and join_endDate != null">
+		  <![CDATA[
+		 and I.creDate <= #{join_endDate}
+		 ]]>
+		 </if>
+		 <if test="h_name2 != '' and h_name2 != null">
+		 and H.h_name like concat('%',#{h_name2},'%')
+		 </if>
+		 <if test="h_del_yn != '' and h_del_yn != null">
+		 and I.del_yn = #{h_del_yn}
+		 </if>
+		 <if test="h_sellerNum2 != '' and h_sellerNum2 != null">
+		 and I.h_sellerNum like concat ('%',#{h_sellerNum2},'%')
+		 </if>
+		 <if test="info_del_yn != '' and info_del_yn != null">
+		 and I.del_yn = #{info_del_yn}
+		 </if>
+		 <if test="hostInfo_name2 != '' and hostInfo_name2 != null">
+		 and I.hostInfo_name like concat('%',#{hostInfo_name2},'%')
+		 </if>
+		 <if test="roadAddress2 != '' and roadAddress2 != null">
+		 and I.roadAddress like concat('%',#{roadAddress2},'%')
+		 </if>
+	</select>
+	
+	
+	
+	
+	
+	<select id="selectHostInfoDetail" resultMap="hostInfoResult"   parameterType="String"  >
+		 select I.h_code, 
+		 		H.h_id, 
+		 		I.hostInfo_name, 
+		 		I.h_sellerNum, 
+		 		I.h_accountNum, 
+		 		I.zipcode, 
+		 		I.roadAddress, 
+		 		I.numberAddress, 
+		 		I.restAddress, 
+		 		I.host_type, 
+		 		I.room_count, 
+		 		I.del_yn, 
+		 		I.creDate, 
+		 		H.h_name, 
+		 		H.h_email1, 
+		 		H.h_email2, 
+		 		H.h_phone, 
+		 		H.deputy_name, 
+		 		H.deputy_phone, 
+		 		H.deputy_department, 
+		 		H.deputy_birth 
+		 		from h_host_info I 
+		 		inner join h_host H 
+		 		on I.h_id = H.h_id 
+		 		where I.h_code = #{h_code}					        
+	</select>
+	<delete id="selectDeleteHost" parameterType="String">
+		delete from h_host where h_id = #{h_id}
+	</delete>
+	
+	<update id="selectUpdateHostInfo">
+	update
+			h_host_info I 
+	inner join 
+			h_host H 
+	on I.h_id = H.h_id 
+	<set> 
+		<if test="h_name != '' and h_name != null">
+			H.h_name = #{h_name}, 
+		</if>
+		<if test="h_birth_y != '' and h_birth_y != null">
+			H.h_birth_y = #{h_birth_y}, 
+		</if>
+		<if test="h_birth_m != '' and h_birth_m != null">
+			H.h_birth_m = #{h_birth_m}, 
+		</if>
+		<if test="h_birth_d != '' and h_birth_d != null">
+			H.h_birth_d = #{h_birth_d}, 
+		</if>
+		<if test="h_gender != '' and h_gender != null">
+			H.h_gender = #{h_gender}, 
+		</if>
+		<if test="h_phone != '' and h_phone != null">
+			H.h_phone = #{h_phone},
+		</if>
+		<if test="h_email1 != '' and h_email1 != null">
+			H.h_email1 = #{h_email1}, 
+		</if>
+		<if test="h_email2 != '' and h_email2 != null">
+			H.h_email2 = #{h_email2}, 
+		</if>
+		<if test="zipcode != '' and zipcode != null">
+			I.zipcode = #{zipcode}, 
+		</if>
+		<if test="roadAddress != '' and roadAddress != null">
+			I.roadAddress = #{roadAddress}, 
+		</if>
+		<if test="numberAddress != '' and numberAddress != null">
+			I.numberAddress = #{numberAddress}, 
+		</if>
+		<if test="restAddress != '' and restAddress != null">
+			I.restAddress = #{restAddress}, 
+		</if>
+		<if test="deputy_name != '' and deputy_name != null">	
+			H.deputy_name = #{deputy_name}, 
+		</if>
+		<if test="deputy_phone != '' and deputy_phone != null">
+			H.deputy_phone = #{deputy_phone}, 
+		</if>
+		<if test="deputy_department != '' and deputy_department != null">
+			H.deputy_department = #{deputy_department}, 
+		</if>
+		<if test="deputy_birth != '' and deputy_birth != null">
+			H.deputy_birth = #{deputy_birth}, 
+		</if>
+		<if test="hostInfo_name != '' and hostInfo_name != null">
+			I.hostInfo_name = #{hostInfo_name}, 
+		</if>
+		<if test="h_sellerNum != '' and h_sellerNum != null">
+			I.h_sellerNum = #{h_sellerNum}, 
+		</if>
+		<if test="h_accountNum != '' and h_accountNum != null">
+			I.h_accountNum = #{h_accountNum}, 
+		</if>
+		<if test="host_type != '' and host_type != null">
+			I.host_type = #{host_type}, 
+		</if>
+		<if test="room_count != '' and room_count != null">
+			I.room_count = #{room_count}
+		</if>
+	</set>
+   where 
+   			I.h_code = #{h_code}
+	</update>
+	
+	<delete id="selectDeleteHostInfo">
+	delete from h_host_info where h_code = #{h_code} 
+	</delete>
+	
+</mapper>

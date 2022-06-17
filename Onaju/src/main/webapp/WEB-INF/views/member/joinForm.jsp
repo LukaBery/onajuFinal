@@ -249,6 +249,7 @@ var SetTime = 180;
 var input_id = document.getElementById("input_id");
 		var u_email1 = document.getElementById("u_email1");
 		var agreebox = document.getElementsByClassName("agree_box");
+		var zipCode = document.getElementsByClassName("zipcode");
 		var agreebox_0 = true;
 		for (var i = 0; i <= agreebox.length; i++) {
 			agree0 = agreebox[0].checked;
@@ -318,6 +319,12 @@ var input_id = document.getElementById("input_id");
 		if (!reg.test(u_phone.value)) {
 			alert("전화번호는 숫자만 입력할 수 있습니다.");
 			u_phone.focus();
+			return false;
+		}
+		;
+		if (!reg.test(zipCode.value)) {
+			alert("우편번호는 숫자만 입력 가능합니다.");
+			zipCode.focus();
 			return false;
 		}
 		;
@@ -1030,7 +1037,7 @@ var input_id = document.getElementById("input_id");
 								</tr>
 								<tr>
 									<th><span class="none_important">주소</span></th>
-									<td><input type="text" id="zipcode" name="zipcode"><input
+									<td><input type="text" id="zipcode" name="zipcode" onclick="execDaumPostcode()"><input
 										type="button" class="zipcode_search" value="우편번호검색"
 										onclick="execDaumPostcode()"><br> <br>
 										<div>
@@ -1048,9 +1055,9 @@ var input_id = document.getElementById("input_id");
 										</div></td>
 								</tr>
 								<tr>
-									<th><span class="none_important" name="proposer">추천인
+									<th><span class="none_important" >추천인
 											아이디</span></th>
-									<td><input type="text" name=""></td>
+									<td><input type="text" name="proposer"></td>
 								</tr>
 							</tbody>
 						</table>
@@ -1089,7 +1096,7 @@ var input_id = document.getElementById("input_id");
 
 						<div class="checkbox_wrap">
 							<input type="checkbox" class="agree_box_0" name="u_service_02"
-								value="Y" checked> <label for="select_disable">[선택]&nbsp위치기반
+								value="Y" > <label for="select_disable">[선택]&nbsp위치기반
 								서비스 이용약관 동의</label>
 						</div>
 					</div>

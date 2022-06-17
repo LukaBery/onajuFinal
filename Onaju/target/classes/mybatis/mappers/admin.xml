@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin">
+
+	<resultMap id="adminResult" type="adminVO">
+      	<result property="a_id" column="a_id" />
+      	<result property="a_pw" column="a_pw" />
+      	<result property="a_name" column="a_name" />
+      	<result property="a_birth" column="a_birth" />
+      	<result property="a_grade" column="a_grade" />     
+      	<result property="a_phone" column="a_phone" />
+      	<result property="a_email1" column="a_email1" />
+      	<result property="a_email2" column="a_email2" />
+      	<result property="del_yn" column="del_yn" />
+	</resultMap>
+	<!-- 로그인 -->
+	<select id="login" resultMap="adminResult"  parameterType="String"  >
+	    <![CDATA[
+				select * from a_adminmember  where a_id=#{a_id} and a_pw=#{a_pw} 
+		]]>
+	</select>
+	
+	<!-- 관리자 회원가입 -->
+	<select id="insertNewAdmin" parameterType="String"  >
+	    <![CDATA[
+				insert into a_adminmember(a_id, a_pw, a_name, a_birth, a_phone, a_email1, a_email2) values(#{a_id}, #{a_pw}, #{a_name}, #{a_birth}, #{a_phone}, #{a_email1}, #{a_email2})
+		]]>
+	</select>
+	
+	<!-- 관리자 아이디 유효성 검사 -->
+	<select id="selectOverlappedID" parameterType="String" resultType="String">
+	   <![CDATA[  select case count(*) when 1 then  'true'  when 0 then  'false' end
+	   from a_adminmember
+	   where a_id = #{id}
+	   		]]>
+	</select>
+	
+	<!-- 관리자 리스트 -->
+	<select id="selectAllAdminList" resultMap="adminResult"   parameterType="adminVO"  >
+		 <![CDATA[
+		 select * from 
+        (select @rownum := @rownum + 1 as rn, a_id, a_name, joinDate, a_email1, a_email2, a_phone, del_yn 
+        from a_adminmember, (select @rownum := 0)  as rowcolumn order by joinDate desc) z 
+		where rn >= #{startNO} and rn <= #{endNO};
+		 ]]>			        
+	</select>
+	
+	
+	<select id="selectAllAdminTotal" resultType="java.lang.Integer">
+   		<![CDATA[
+        SELECT count(*) total FROM a_adminmember
+    	]]>
+	</select>
+
+	
+	
+	<!-- 관리자 상세정보 -->
+	<select id="selectAdminDetail" resultMap="adminResult"   parameterType="String"  >
+		 select * from a_adminmember where a_id = #{a_id}					        
+	</select>
+	
+</mapper>
+

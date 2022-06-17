@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+       
+<tiles-definitions>       
+       
+  <definition name="/admin/goodsList" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminGoods/adminGoodsList.jsp" />
+  </definition>
+  
+  <definition name="/admin/goodsDetail" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminGoods/adminGoodsDetail.jsp" />
+  </definition>
+  
+  <definition name="/admin/goodsModify" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminGoods/adminGoodsModify.jsp" />
+  </definition>
+  
+</tiles-definitions>

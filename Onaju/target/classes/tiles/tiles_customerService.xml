@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="/customerService/noticeBoard" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/customerService/noticeBoard.jsp" />
+	</definition>
+	<definition name="/customerService/Question" extends="baseLayout">
+		<put-attribute name="title" value="자주 묻는 질문페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/customerService/Question.jsp" />
+	</definition>
+	
+	<definition name="/customerService/qnaList" extends="baseLayout">
+		<put-attribute name="title" value="1:1문의 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/customerService/qnaList.jsp" />
+	</definition>
+	
+	<definition name="/customerService/Question2Form" extends="baseLayout">
+		<put-attribute name="title" value="1:1문의글쓰기 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/customerService/Question2Form.jsp" />
+	</definition>
+		<definition name="/customerService/siteMap" extends="baseLayout">
+		<put-attribute name="title" value="1:1문의글쓰기 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/customerService/siteMap.jsp" />
+	</definition>
+	
+		<definition name="/customerService/qnaForm" extends="baseLayout">
+		<put-attribute name="title" value="1:1문의글쓰기 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/customerService/qnaForm.jsp" />
+	</definition>
+		<definition name="/customerService/noticeDetail" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 상세페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/customerService/noticeDetail.jsp" />
+	</definition>
+	
+		<definition name="/customerService/qnaDetail" extends="baseLayout">
+		<put-attribute name="title" value="공지사항 상세페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/customerService/qnaDetail.jsp" />
+	</definition>
+	
+</tiles-definitions>

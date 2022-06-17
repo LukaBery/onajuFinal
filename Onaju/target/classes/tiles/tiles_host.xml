@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="/host/h_joinForm" extends="baseLayout">
+		<put-attribute name="title" value="호스트 회원가입" />
+		<put-attribute name="body" value="/WEB-INF/views/host/h_joinForm.jsp" />
+	</definition>
+	<definition name="/host/h_joinResult" extends="baseLayout">
+		<put-attribute name="title" value="호스트 회원가입 결과페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/host/h_joinResult.jsp" />
+	</definition>
+	
+	<definition name="/host/h_loginForm" extends="baseLayout">
+		<put-attribute name="title" value="호스트 로그인 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/host/h_loginForm.jsp" />
+	</definition> 
+	
+	<definition name="/host/h_idFindForm" extends="baseLayout">
+		<put-attribute name="title" value="호스트 아이디찾기 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/host/h_idFindForm.jsp" />
+	</definition>
+	<definition name="/host/h_idFindResult" extends="baseLayout">
+		<put-attribute name="title" value="호스트 아이디찾기 결과페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/host/h_idFindResult.jsp" />
+	</definition> 
+	<definition name="/host/h_pwdFindForm" extends="baseLayout">
+		<put-attribute name="title" value="호스트 비밀번호찾기 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/host/h_pwdFindForm.jsp" />
+	</definition>
+	<definition name="/host/h_pwdFind2Form" extends="baseLayout">
+		<put-attribute name="title" value="호스트 비밀번호변경 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/host/h_pwdFind2Form.jsp" />
+	</definition>
+	
+	<definition name="/host/h_pwdFindResult" extends="baseLayout">
+		<put-attribute name="title" value="호스트 비밀번호찾기 결과페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/host/h_pwdFindResult.jsp" />
+	</definition> 
+</tiles-definitions>

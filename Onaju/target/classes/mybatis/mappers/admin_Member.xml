@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.admin.member">
+
+	<resultMap id="memberResult" type="memberVO">
+      	<result property="u_id" column="u_id" />
+      	<result property="u_pw" column="u_pw" />
+      	<result property="u_name" column="u_name" />
+      	<result property="u_birth_y" column="u_birth_y" />
+      	<result property="u_birth_m" column="u_birth_m" />
+      	<result property="u_birth_d" column="u_birth_d" />
+      	<result property="u_gender" column="u_gender" />
+      	<result property="u_phone" column="u_phone" />
+      	<result property="u_email1" column="u_email1" />
+      	<result property="u_email2" column="u_email2" />
+      	<result property="zipcode" column="zipcode" />
+      	<result property="roadAddress" column="roadAddress" />
+      	<result property="numberAddress" column="numberAddress" />
+      	<result property="restAddress" column="restAddress" />
+      	<result property="u_point" column="u_point" />
+      	<result property="u_grade" column="u_grade" />
+      	<result property="proposer" column="proposer" />
+      	<result property="u_imageName" column="u_imageName" />
+      	<result property="u_imageType" column="u_imageType" />
+      	<result property="u_agree_1" column="u_agree_1" />
+      	<result property="u_agree_2" column="u_agree_2" />
+      	<result property="u_agree_3" column="u_agree_3" />
+      	<result property="u_service_01" column="u_service_01" />
+      	<result property="u_service_02" column="u_service_02" />
+      	<result property="joinDate" column="joinDate" />
+      	<result property="del_yn" column="del_yn" />
+	</resultMap>
+	
+<!-- 		<resultMap id="schMemResult" type="schMemVO">
+      	<result property="u_id" column="u_id" />
+      	<result property="u_pw" column="u_pw" />
+      	<result property="u_name" column="u_name" />
+      	<result property="u_birth_y" column="u_birth_y" />
+      	<result property="u_birth_m" column="u_birth_m" />
+      	<result property="u_birth_d" column="u_birth_d" />
+      	<result property="u_gender" column="u_gender" />
+      	<result property="u_phone" column="u_phone" />
+      	<result property="u_email1" column="u_email1" />
+      	<result property="u_email2" column="u_email2" />
+      	<result property="zipcode" column="zipcode" />
+      	<result property="roadAddress" column="roadAddress" />
+      	<result property="numberAddress" column="numberAddress" />
+      	<result property="restAddress" column="restAddress" />
+      	<result property="u_point" column="u_point" />
+      	<result property="u_grade" column="u_grade" />
+      	<result property="proposer" column="proposer" />
+      	<result property="u_imageName" column="u_imageName" />
+      	<result property="u_imageType" column="u_imageType" />
+      	<result property="u_agree_1" column="u_agree_1" />
+      	<result property="u_agree_2" column="u_agree_2" />
+      	<result property="u_agree_3" column="u_agree_3" />
+      	<result property="u_service_01" column="u_service_01" />
+      	<result property="u_service_02" column="u_service_02" />
+      	<result property="joinDate" column="joinDate" />
+      	<result property="del_yn" column="del_yn" />
+	</resultMap> -->
+	
+	
+	<select id="selectAllMemberList" resultType="hashmap"   parameterType="hashmap"  >
+		 <![CDATA[
+		 select * 
+		 from (
+		 select (@ROWNUM := @ROWNUM + 1) rn, c.* 
+		 from (
+		 select * 
+		 from u_member 
+		 where u_agree_1 = 'Y'
+		 ]]>
+		 <if test="u_id2 != '' and u_id2 != null">
+		 and u_id like concat('%',#{u_id2},'%')
+		 </if>
+		 <if test="join_startDate != '' and join_startDate != null">
+		 and joinDate >= #{join_startDate}
+		 </if>
+		 <if test="join_endDate != '' and join_endDate != null">
+		  <![CDATA[
+		 and joinDate <= #{join_endDate}
+		 ]]>
+		 </if>
+		 <if test="u_name2 != '' and u_name2 != null">
+		 and u_name like concat('%',#{u_name2},'%')
+		 </if>
+		 <if test="u_del_yn != '' and u_del_yn != null">
+		 and del_yn = #{u_del_yn}
+		 </if>
+		 <![CDATA[
+		 order by joinDate desc
+		 )c,(select @ROWNUM := 0)s)b  
+		 where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount}
+		 ]]>				        
+	</select>
+	
+	<select id="selectAllMemberTotal" resultType="java.lang.Integer">
+  
+		SELECT count(*) FROM u_member where u_agree_1 = 'Y'
+    		
+    		<if test="join_startDate !='' and join_startDate != null">
+        		and joinDate >= #{join_startDate}
+        	</if>
+        	
+        	<if test="join_endDate !='' and join_endDate != null"> 
+        	<![CDATA[
+        		and joinDate <= #{join_endDate} 
+        	]]>
+        	</if>
+        	
+        	<if test="u_del_yn !='' and u_del_yn != null">
+        		and del_yn = #{u_del_yn} 
+        	</if>
+        	
+        	<if test="u_id2 !='' and u_id2 != null">
+        		and u_id like concat('%',#{u_id2},'%') 
+        	</if>
+	</select>
+	
+	<select id="selectMemberDetail" resultMap="memberResult"   parameterType="String"  >
+		 select * from u_member where u_id = #{u_id}					        
+	</select>
+	
+	<update id="selectMemberUpdate">
+		
+		update u_member 
+		<set>
+			<if test="u_name != '' and u_name != null">
+				u_name=#{u_name},	
+			</if>
+			<if test="u_birth_y != '' and u_birth_y != null">  
+				u_birth_y=#{u_birth_y}, 
+			</if>
+			<if test="u_birth_m != '' and u_birth_m != null">
+				u_birth_m=#{u_birth_m},
+			</if>
+			<if test="u_birth_d != '' and u_birth_d != null">
+				u_birth_d=#{u_birth_d}, 
+			</if>
+			<if test="u_gender != '' and u_gender != null">
+				u_gender=#{u_gender}, 
+			</if>
+			<if test="u_phone != '' and u_phone != null">
+				u_phone=#{u_phone},
+			</if>
+			<if test="u_email1 != '' and u_email1 != null">
+				u_email1=#{u_email1}, 
+			</if>
+			<if test="u_email2 != '' and u_email2 != null">
+				u_email2=#{u_email2}, 
+			</if>
+			<if test="zipcode != '' and zipcode != null">
+				zipcode=#{zipcode}, 
+			</if>
+			<if test="roadAddress != '' and roadAddress != null">
+				roadAddress=#{roadAddress}, 
+			</if>
+			<if test="numberAddress != '' and numberAddress != null">
+				numberAddress=#{numberAddress}, 
+			</if>
+			<if test="restAddress != '' and restAddress != null">
+				restAddress=#{restAddress}, 
+			</if>
+			<if test="u_point != '' and u_point != null">
+				u_point=#{u_point}, 
+			</if>
+			<if test="u_grade != '' and u_grade != null">
+				u_grade=#{u_grade},
+			</if>
+			<if test="proposer != '' and proposer != null">
+				proposer=#{proposer},
+			</if>
+			<if test="u_service_01 != '' and u_service_01 != null">
+				u_service_01=#{u_service_01}, 
+			</if>
+			<if test="u_service_01 == '' or u_service_01 == null">
+				u_service_01='N',
+			</if>
+			<if test="u_service_02 != '' and u_service_02 != null">
+				u_service_02=#{u_service_02},
+			</if>
+			<if test="u_service_02 == '' or u_service_02 == null">
+				u_service_02='N',
+			</if>
+			<if test="del_yn != '' and del_yn != null">
+				del_yn=#{del_yn},
+			</if>
+		</set>
+		where u_id=#{u_id}
+		
+	</update>
+	
+	<select id="selectSearchMember" resultType="hashmap" parameterType="hashmap">
+		<![CDATA[
+		 select *
+		 from u_member
+		 where u_id != ''
+        ]]>      
+        <if test="join_startDate !='' and join_startDate != null">
+        and joinDate >= #{join_startDate}
+        </if>
+        <if test="join_endDate !='' and join_endDate != null"> 
+        <![CDATA[
+        and joinDate <= #{join_endDate} 
+        ]]>
+        </if>
+        <if test="u_del_yn != '' and u_del_yn != null">
+        and del_yn = #{u_del_yn}
+        </if>
+        <if test="u_id != '' and u_id != null">
+        and u_id like concat('%',#{u_id},'%')
+        </if>
+        order by joinDate desc
+		limit #{pageStart}, #{perPageNum}
+	</select>
+	
+	<!-- <select id="selectRetireMembers" resultMap="schMemResult">
+		select * from u_member where del_yn = 'Y'
+	</select>
+	
+	<delete id="deleteRetireMember" parameterType="schMemVO">
+		delete from u_member where u_id = #{u_id}
+	</delete> -->
+	<delete id="selectMemberDelete" parameterType="String">
+		delete from u_member where u_id = #{u_id}
+	</delete>
+	
+</mapper>

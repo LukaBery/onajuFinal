@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+ 	<definition name="/mypage/mypageMain" extends="baseLayout">
+		<put-attribute name="title" value="로그인 페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/mypageMain.jsp" />
+	</definition> 
+	
+
+
+	<definition name="/mypage/Mypage2" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/Mypage2.jsp" />
+	</definition>
+	
+	<definition name="/mypage/Mypage3" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/Mypage3.jsp" />
+	</definition>
+	
+	<definition name="/mypage/Mypage4" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/Mypage4.jsp" />
+	</definition>
+	
+	<definition name="/mypage/Mypage5" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/Mypage5.jsp" />
+	</definition>
+	<definition name="/mypage/Mypage6" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/Mypage6.jsp" />
+	</definition>
+	<definition name="/mypage/delMember" extends="baseLayout">
+		<put-attribute name="title" value="쇼핑몰 메인페이지" />
+		<put-attribute name="body" value="/WEB-INF/views/mypage/delMember.jsp" />
+	</definition>
+	
+
+
+
+
+	
+</tiles-definitions>

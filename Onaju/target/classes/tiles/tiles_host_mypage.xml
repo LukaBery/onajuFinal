@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="/host/mypage/hostMypageDetail" extends="hostLayout">
+		<put-attribute name="title" value="호스트 회원정보 수정" />
+		<put-attribute name="body" value="/WEB-INF/views/host/mypage/hostMypageDetail.jsp" />
+	</definition>
+	
+	<definition name="/host/mypage/dropOut" extends="hostLayout">
+		<put-attribute name="title" value="호스트탈퇴" />
+		<put-attribute name="body" value="/WEB-INF/views/host/mypage/dropOut.jsp" />
+	</definition>
+	
+</tiles-definitions>	

@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.member">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="memberResult" type="MemberVO">
+		<result property="u_id" column="u_id" />
+		<result property="u_pw" column="u_pw" />
+		<result property="u_name" column="u_name" />
+		
+		<result property="u_birth_y" column="u_birth_y" />
+		<result property="u_birth_m" column="u_birth_m" />
+		<result property="u_birth_d" column="u_birth_d" />
+		
+		<result property="u_gender" column="u_gender" />
+		<result property="u_phone" column="u_phone" />
+		
+		<result property="u_email1" column="u_email1" />
+		<result property="u_email2" column="u_email2" />
+		
+			<result property="zipcode" column="zipcode" />
+		<result property="roadAddress" column="roadAddress" />
+		<result property="jibunAddress" column="numberAddress" />
+		<result property="restAddress" column="restAddress" />
+		
+		<result property="u_point" column="u_point" />
+		<result property="u_grade" column="u_grade" />
+		<result property="proposer" column="proposer" />
+		
+		<result property="u_imageName" column="u_imageName" />
+		<result property="u_imageType" column="u_imageType" />
+
+		
+		<result property="u_agree_1" column="u_agree_1" />
+		<result property="u_agree_2" column="u_agree_2" />
+		<result property="u_agree_3" column="u_agree_3" />
+		
+		<result property="u_service1" column="u_service_01" />
+		<result property="u_service2" column="u_service_02" />
+				<result property="salt" column="salt" />
+		
+		<result property="joinDate" column="joinDate" />
+	
+
+		
+		<result property="del_yn" column="del_yn" />
+	</resultMap>	
+
+
+		<!-- 로그인 -->
+	<select id="login" resultType="memberVO"  parameterType="java.util.Map"  >
+	    <![CDATA[
+				select * from u_member  where u_id=#{u_id} 
+		]]>
+	</select>
+	
+	<select id="idFind" resultType="memberVO"  parameterType="java.util.Map"  >
+	    <![CDATA[
+				select * from u_member  where u_name=#{u_name} and u_phone=#{u_phone} and u_email1=#{u_email1} and u_email2=#{u_email2}
+		]]>
+	</select>
+	
+	<select id="pwdFind" resultType="memberVO"  parameterType="java.util.Map"  >
+	    <![CDATA[
+				select * from u_member  where u_id=#{u_id} and u_name=#{u_name} and u_phone=#{u_phone} and u_email1=#{u_email1} and u_email2=#{u_email2}
+		]]>
+	</select>
+		<update id="pwdChange"   parameterType="java.util.Map"  >
+	   
+				update u_member
+				<set>
+				u_pw = #{u_pw}
+				</set>
+				where u_id = #{u_id}
+	
+	</update>
+		<select id="selectOverlappedID" parameterType="String" resultType="String">
+	   <![CDATA[  select case count(*) when 1 then  'true'  when 0 then  'false' end
+	   from u_member
+	   where u_id = #{id}
+	   		]]>
+	</select>
+	
+  <insert id="insertNewMember"  parameterType="memberVO">
+  <![CDATA[
+    	insert into u_member (u_id,
+								u_pw,
+								u_name,
+								u_birth_y,
+								u_birth_m,
+								u_birth_d,
+								u_gender,
+								u_phone,
+								u_email1,
+								u_email2,
+								zipcode,
+								roadAddress,
+								numberAddress,
+								restAddress,
+								u_point,
+								u_grade,
+								proposer,
+								u_imageName,
+								u_imageType,							
+							    u_agree_1,						
+								u_agree_2,
+								u_agree_3,
+								u_service_01,
+								u_service_02,
+								salt
+							
+								)
+										
+					   values  (#{u_id},
+								#{u_pw},
+								#{u_name},
+								#{u_birth_y},
+								#{u_birth_m},
+								#{u_birth_d},
+								#{u_gender},
+								#{u_phone},
+								#{u_email1},
+								#{u_email2},
+								#{zipcode},
+								#{roadAddress},
+								#{numberAddress},
+								#{restAddress},
+								#{u_point},
+								#{u_grade},
+								#{proposer},
+								#{u_imageName},
+								#{u_imageType},								
+								#{u_agree_1},
+								#{u_agree_2},
+								#{u_agree_3},
+								#{u_service_01},
+								#{u_service_02},
+								#{salt})         
+   ]]>  
+   </insert>    
+   <update id="insertUserProfile" parameterType="java.util.Map"   >
+	<!-- <selectKey resultType="int" keyProperty="roomImage_NO" order="BEFORE"> 
+		SELECT MAX(roomImage_NO)+1 FROM h_roomImage </selectKey> -->
+
+		   update u_member 
+		   <set>
+		   u_imageName = #{u_imageName}
+		   </set>
+		   
+		    where u_id=#{u_id} 
+
+	</update> 
+	
+	<select id="selectRetireMembers" resultMap="memberResult">
+		select * from u_member where del_yn = 'Y'
+	</select>
+	
+	<delete id="deleteRetireMember" parameterType="memberVO">
+		delete from u_member where u_id = #{u_id}
+	</delete>
+
+
+		
+
+</mapper>

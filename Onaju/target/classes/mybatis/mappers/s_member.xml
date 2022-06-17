@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.s_member">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="s_memberResult" type="S_memberVO">
+		<result property="s_number" column="s_number" />
+		<result property="s_name" column="s_name" />
+		<result property="s_email1" column="s_email1" />
+		<result property="s_email2" column="s_email2" />
+		<result property="s_type" column="s_type" />
+	</resultMap>
+	
+	
+	<!-- 카카오 정보 찾기 -->
+		<select id="findKakao" parameterType="java.util.HashMap" resultType="s_memberVO">
+			<![CDATA[	select * from s_member where s_email1=#{email1} and s_email2=#{email2} and s_type= 'k'
+			]]> 
+		</select>
+	
+		<!-- 카카오 정보 저장 -->
+		<insert id="kakaoInsert" parameterType="java.util.HashMap">
+			<![CDATA[	insert into s_member(s_name, s_email1,s_email2,s_type) values(#{nickname}, #{email1}, #{email2}, 'k')
+			]]> 
+		</insert>
+		<!--네이버 정보 찾기 -->
+		<select id="findNaver" parameterType="java.util.HashMap" resultType="s_memberVO">
+			<![CDATA[	select * from s_member where s_email1=#{email1} and s_email2=#{email2} and s_type= 'n'
+			]]> 
+		</select>
+			<!--네이버 정보 저장 -->
+		<insert id="naverInsert" parameterType="java.util.HashMap">
+			<![CDATA[	insert into s_member(s_name, s_email1,s_email2,s_type) values(#{name}, #{email1}, #{email2}, 'n')
+			]]> 
+		</insert>
+</mapper>

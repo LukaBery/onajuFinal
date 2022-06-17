@@ -1,0 +1,637 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.hostGoods">
+<!-- 리절트 맵 정의 -->	
+	<resultMap id="hostInfo" type="HostInfoVO">
+		<result property="h_code" column="h_code" />
+		<result property="h_id" column="h_id" />
+		<result property="hostInfo_name" column="hostInfo_name" />
+		
+		<result property="h_sellerNum" column="h_sellerNum" />
+		<result property="h_accountNum" column="h_accountNum" />
+		
+		<result property="zipcode" column="zipcode" />
+		<result property="roadAddress" column="roadAddress" />
+		<result property="numberAddress" column="numberAddress" />
+		<result property="restAddress" column="restAddress" />
+		<result property="host_type" column="host_type" />
+		<result property="room_count" column="room_count" />
+		
+		<result property="longitude" column="longitude" />
+		<result property="latitude" column="latitude" />
+	</resultMap>	
+	
+	<resultMap id="goodsResult" type="HostGoodsVO">
+	
+			<result property="h_name" column="h_name" />
+		<result property="hostInfo_name" column="hostInfo_name" />
+		<result property="zipcode" column="zipcode" />
+		<result property="roadAddress" column="roadAddress" />
+		<result property="numberAddress" column="numberAddress" />
+		<result property="restAddress" column="restAddress" />
+		<result property="host_type" column="host_type" />
+		<result property="room_count" column="room_count" />
+	
+		<result property="room_code" column="room_code" />
+		<result property="h_code" column="h_code" />
+		<result property="h_id" column="h_id" />
+		<result property="room_type" column="room_type" />
+		<result property="room_number" column="room_number" />
+		<result property="room_fee" column="room_fee" />
+		<result property="able_checkIn" column="able_checkIn" />
+		<result property="able_checkOut" column="able_checkOut" />
+		<result property="room_status" column="room_status" />
+		<result property="longitude " column="longitude " />
+		<result property="latitude" column="latitude" />
+
+		
+		
+		<result property="title" column="title" />
+		<result property="min_number" column="min_number" />
+		<result property="max_number" column="max_number" />
+		<result property="bed_type" column="bed_type" />
+		<result property="bed_count" column="bed_count" />
+		<result property="bath_count" column="bath_count" />
+		<result property="party_check" column="party_check" />
+		<result property="kitchen" column="kitchen" />
+		<result property="wifi" column="wifi" />
+		<result property="parking" column="parking" />
+		<result property="tv" column="tv" />
+		<result property="refrigerator" column="refrigerator" />
+		<result property="hairdryer" column="hairdryer" />
+		<result property="washer" column="washer" />
+		<result property="pet" column="pet" />
+		<result property="pickup" column="pickup" />
+		<result property="dryer" column="dryer" />
+		<result property="elevator" column="elevator" />
+		<result property="barbecue" column="barbecue" />
+		<result property="pool" column="pool" />
+		<result property="aircon" column="aircon" />
+		<result property="heater" column="heater" />
+		<result property="smoking" column="smoking" />
+		<result property="content" column="content" javaType="java.lang.String" jdbcType="CLOB"  />
+		<result property="creDate" column="creDate" />
+	<result property="room_imageName" column="room_imageName" />
+	<result property="like_state" column="like_state" />
+	<result property="like_id" column="like_id" />
+		
+		
+</resultMap>		
+	<resultMap id="imageResult" type="hostImageFileVO">
+		<result property="roomImage_NO" column="roomImage_NO" />
+		<result property="room_code" column="room_code" />
+		<result property="room_imageName" column="room_imageName" />
+		<result property="room_imageType" column="room_imageType" />
+		<result property="h_id" column="h_id" />
+		
+	</resultMap>
+
+
+	<!-- 상품리스트 조회 -->
+	<select id="hostGoodsList" resultMap="goodsResult"  parameterType="java.util.Map" >
+
+	select R.*,
+	<if test="u_id!='' and u_id!=null">
+	 S.like_state, S.like_id,
+	        </if>
+	 I.room_imageName, H.* from h_room R
+	
+	<if test="u_id!='' and u_id!=null">
+	left join u_like S on R.room_code = S.room_code and S.u_id = #{u_id}
+			                </if>
+
+
+	left join h_roomimage I on R.room_code=I.room_code
+	left join h_host_info
+	H on R.h_code=H.h_code
+	where I.room_imageType = 'main_image'
+	<if test="hairDryer =='on'">
+	AND hairdryer='Y'
+</if>
+	<if test="wifi =='on'">
+		AND wifi='Y'
+	</if>
+	<if test="parking =='on'">
+		AND parking='Y'
+	</if>
+
+        	                <if test="kitchen=='on'">
+			                  AND kitchen='Y'
+			                </if>
+	                       <if test="party_check =='on'">
+			                  AND party_check='Y'
+			                </if>
+			    
+			                 <if test="tv =='on'">
+			                  AND tv='Y'
+			                </if>
+			    
+			                 <if test="refrigerator =='on'">
+			                  AND refrigerator='Y'
+			                </if>
+			               
+			               
+			               
+			               
+			                 <if test="washer =='on'">
+			                  AND washer='Y'
+			                </if>
+			                 <if test="pet =='on'">
+			                  AND pet='Y'
+			                </if>
+			                  <if test="elevator =='on'">
+			                  AND elevator='Y'
+			                </if>
+			                
+			                 <if test="barbecue =='on'">
+			                  AND barbecue='Y'
+			                </if>
+			                 <if test="pool =='on'">
+			                  AND pool='Y'
+			                </if>
+			                  <if test="aircon =='on'">
+			                  AND aircon='Y'
+			                </if>
+			                  <if test="smoking =='on'">
+			                  AND smoking='Y'
+			                </if>
+			                 
+			                 <if test="heater =='on'">
+			                  AND heater='Y'
+			                </if>
+			                
+			                
+			                
+			                 <if test="pickup =='on'">
+			                  AND pickup='Y'
+			                </if>
+			                
+			                	
+			                 <if test="dryer =='on'">
+			                  AND dryer='Y'
+			                </if>
+			               
+			              
+			              
+			               
+			                
+			                 <if test="pension_check =='on' and hotel_check ==null and motel_check ==null">
+			                  AND room_type='pension'
+			                </if>
+			                  <if test="pension_check =='on' and hotel_check =='on'  and motel_check ==null">
+			                  AND room_type=('pension' or 'hotel')
+			                </if>
+			                 <if test="pension_check =='on' and hotel_check =='on' and motel_check =='on'">
+			                  AND room_type=('pension' or 'hotel' or 'motel')
+			                </if>
+			                 <if test="pension_check =='on' and motel_check =='on' and hotel_check ==null">
+			                  AND room_type=('pension' or  'motel')
+			                </if>
+			                 <if test="hotel_check =='on'  and pension_check ==null  and motel_check ==null">
+			                  AND room_type='hotel'
+			                </if>
+			                 <if test="hotel_check =='on' and motel_check =='on'  and pension_check ==null">
+			                  AND room_type=('hotel' or 'motel')
+			                </if>
+			                 <if test="motel_check =='on'  and pension_check ==null and hotel_check ==null">
+			                  AND room_type='motel'
+			                </if>
+			   
+			                  <if test="min_price !=null">
+			                    <![CDATA[  AND room_fee >= #{min_price}]]>
+			                </if>
+			                
+			                 <if test="max_price !='' and max_price !=null">
+			                  <![CDATA[ AND R.room_fee <= #{max_price} ]]>
+			                </if>
+			                
+			                 <if test="room_count !='' and room_count !=null">
+			                  <![CDATA[ AND R.room_count>= #{room_count}]]>
+			                </if>
+			                
+			                 <if test="bed_count !='' and bed_count !=null">
+			                  <![CDATA[ AND R.bed_count>= #{bed_count}]]>
+			                </if>
+			                  <if test="bath_count !='' and bath_count !=null">
+			                  <![CDATA[ AND R.bath_count>= #{bath_count}]]>
+			                </if>
+			                 <if test="checkin !='' and checkin !=null and checkout !='' and checkout != null">
+			                <![CDATA[ and R.room_code not in (select O.room_code from u_order O where  #{checkin} < checkOut_date 
+                            and #{checkout} > checkIn_date group by O.room_code) ]]>
+			                </if>
+			                <if test="search_longitude !='' and search_longitude !=null and search_latitude !='' and search_latitude != null">
+			                
+			                order by (abs(H.longitude - #{search_longitude}) + abs(H.latitude - ${search_latitude}))
+			                </if>
+	
+	</select> 
+	
+	
+	
+	<!-- 상품상세 조회 -->
+	<select id="hostGoodsDetail" resultMap="goodsResult"  parameterType="String"  >
+	    <![CDATA[
+				select *, T.h_name, F.room_imageName from h_room R , h_roomimage F, h_host_info H , h_host T 
+				where F.room_imageType = 'main_image'
+				and R.room_code= #{room_code}
+				and F.room_code = R.room_code
+				and R.h_code=H.h_code
+				and R.h_id = T.h_id 
+		]]>
+	</select>
+	
+	
+	
+	<!-- 이하 이정아 추가 작성  -->
+	
+	<!--  사업자 세션 로그인 필요없다면 삭제 -->
+	<select id="hostLogin" resultType="hostInfoVO"  parameterType="String"  >
+	    <![CDATA[
+				select * from h_host_info  where h_id=#{h_id}
+		]]>
+	</select>
+	
+	<select id="hostInfoDetail" resultType="hostInfoVO"   parameterType="String"  >
+	    <![CDATA[
+	    		select * from h_host_info  where h_code=#{h_code} 
+    	]]>
+	</select>
+	<update id="updateHostInfo" parameterType="java.util.Map" >
+	   update h_host_info
+	    <set> 
+	      <if test=" hostInfo_name !='' and hostInfo_name !=null">
+	        hostInfo_name=#{hostInfo_name},
+	      </if>
+	      <if test=" h_sellerNum !='' and h_sellerNum !=null">
+	        h_sellerNum=#{h_sellerNum},
+	      </if>
+	      <if test=" h_accountNum !='' and h_accountNum !=null">
+	        h_accountNum=#{h_accountNum},
+	      </if>
+	      <if test=" zipcode !='' and zipcode !=null">
+	        zipcode=#{zipcode},
+	      </if>
+	      <if test=" roadAddress !='' and roadAddress !=null">
+	        roadAddress=#{roadAddress},
+	      </if>
+	      <if test=" numberAddress !='' and numberAddress !=null">
+	        numberAddress=#{numberAddress},
+	      </if>
+	      <if test=" restAddress !='' and restAddress !=null">
+	        restAddress=#{restAddress},
+	      </if>
+	      <if test=" host_type !='' and host_type !=null">
+	        host_type=#{host_type},
+	      </if>
+	      <if test=" room_count !='' and room_count !=null">
+	        room_count=#{room_count},
+	      </if>
+	     </set>
+	    where 
+	    h_code=#{h_code}
+	</update>
+	
+	
+	<delete id="deleteHostInfo" parameterType="int">
+	  delete from h_host_info
+	  where h_code=#{h_code}
+	</delete>
+	<select id="selectAllHostInfoListTotal" resultType="java.lang.Integer" parameterType="hostInfoVO">
+	
+		SELECT count(*) total FROM h_host_info where h_code > 0 and h_id=#{h_id}
+	
+	</select>
+	
+  <select id="selectHostInfoList" resultMap="hostInfo" parameterType="hostInfoVO">
+	   
+	    <![CDATA[
+		 select * from 
+        (select @rownum := @rownum + 1 as rn, h_code, hostInfo_name, roadAddress, host_type, room_count 
+        from h_host_info, (select @rownum := 0)  as rowcolumn where h_id=#{h_id} order by h_code desc) z 
+		where rn >= #{startNO} and rn <= #{endNO};
+		 ]]>  	
+    	
+	</select>
+	
+	<select id="selectGoodsList" resultMap="goodsResult"  parameterType="String"  >
+	    <![CDATA[
+	    		select R.h_code, H.hostInfo_name, R.room_code, R.title, R.room_fee, R.room_type, R.room_number, R.room_status
+				from h_host_info H inner join h_room R
+				on H.h_code = R.h_code
+				where H.h_id = #{h_id}
+		]]>
+	</select>
+	
+	<select id="selectHostGoodsDetail" resultMap="goodsResult"   parameterType="String"  >
+	    <![CDATA[
+	    
+	    		select * from h_room R left outer join h_roomImage H
+        		on R.room_code = H.room_code and H.room_imageType='main_image'
+        		left outer join h_host_info I
+      			on R.h_code = I.h_code
+				where R.room_code = #{room_code} 
+    	]]>
+	</select>
+	<select id="selectHostGoodsImageFileList" resultMap="imageResult"   parameterType="String"  >
+	    <![CDATA[
+	    		select * from  h_roomImage 
+     			where  room_code = #{room_code}
+      			order by roomImage_NO asc
+		    	
+    	]]>
+	</select>
+	
+	<select id="selectHostGoodsDetailImage" resultMap="imageResult"   parameterType="String"  >
+	    <![CDATA[
+		    	select g.room_code,d.*, d.room_imageType from h_room g, h_roomimage d
+	        where g.room_code=d.room_code
+	        and d.room_code=#{room_code}
+	       
+	       
+    	]]>
+	</select>
+	<insert id="insertNewHostInfo"  parameterType="HostInfoVO">
+	  <![CDATA[
+	    	insert into h_host_info(
+				 					h_id,
+	                                hostInfo_name,
+	                                h_sellerNum,
+	                                h_accountNum,
+	                                zipcode,
+	                                roadAddress,
+	                                numberAddress,
+	                                restAddress,
+	                                host_type,
+	                                room_count,
+	                                longitude,
+	                                latitude
+	                                )
+								 values(
+										#{h_id},
+										#{hostInfo_name},
+	                                 	#{h_sellerNum},
+	                                   	#{h_accountNum},
+	                                   	#{zipcode},
+	                                    #{roadAddress},
+	                                    #{numberAddress},
+	                                    #{restAddress},
+	                                    #{host_type},
+	                                    #{room_count},
+	                                      #{longitude},
+	                                    #{latitude}
+	                                   )
+	                                  
+	                                      
+	   ]]>      
+  </insert>
+  <select id="hostInfoChange" resultType="hostInfoVO"   parameterType="String"  >
+	    <![CDATA[
+		    	select * from h_host_info
+            where h_code = #{h_code}     
+	       
+    	]]>
+	</select>
+	<insert id="insertNewGoods" parameterType="java.util.Map"  >
+	 <selectKey resultType="int" keyProperty="room_code" order="BEFORE">
+			SELECT MAX(room_code) +1 FROM h_room 
+
+		    </selectKey>  
+	    
+	    <![CDATA[
+		   insert into h_room(  
+				                h_code, 
+		                  		h_id,
+		                   		room_type,
+		                    	room_number,
+								room_fee,
+								able_checkIn,
+		                    	able_checkOut,
+								room_status,
+								
+								title,
+		                    	min_number,
+								max_number,
+								bed_type,
+		                    	bed_count,
+								bath_count,
+								party_check,
+		                    	kitchen,
+								wifi,
+								parking,
+								tv,
+		                    	refrigerator,
+								hairdryer,
+								washer,
+		                    	pet,
+								pickup,
+								dryer,
+								elevator,
+								barbecue,
+		                    	pool,
+								aircon,
+								heater,
+								smoking,
+		                    	content
+		                    	)
+		                    	
+    				  
+				    				  			values  (   
+							    				  			#{h_code},
+															#{h_id},
+															#{room_type},
+															#{room_number},
+															#{room_fee},
+															#{able_checkIn},
+															#{able_checkOut},
+															#{room_status},
+															
+															#{title},
+							    				  			#{min_number},
+															#{max_number},
+															#{bed_type},
+															#{bed_count},
+															#{bath_count},
+															#{party_check},
+															#{kitchen},
+															#{wifi},
+															#{parking},
+															#{tv},
+							    				  			#{refrigerator},
+															#{hairdryer},
+															#{washer},
+															#{pet},
+															#{pickup},
+															#{dryer},
+															#{elevator},
+															#{barbecue},
+															#{pool},
+							    				  			#{aircon},
+															#{heater},
+															#{smoking},
+															#{content}	
+				    				  		  )   				  		  									  
+   		]]>
+	</insert>
+	<insert id="insertGoodsImageFile" parameterType="hostImageFileVO"   >
+	    <![CDATA[
+		   insert into h_roomImage(
+		   							
+		                            room_code,
+		                            room_imageName,
+		                            room_imageType,
+		                            h_code
+		                            )
+											  values(
+											  		
+											   		#{room_code},
+											   		#{room_imageName},
+											   		#{room_imageType},
+											   		#{h_code} 
+											   		)
+		]]>
+	</insert> 
+	<update id="updateHostGoodsInfo" parameterType="java.util.Map" >
+	
+	   update h_room
+	    <set> 
+	      <if test=" h_code !='' and h_code !=null">
+	        h_code=#{h_code},
+	      </if>
+	      <if test=" room_type !='' and room_type !=null">
+	        room_type=#{room_type},
+	      </if>
+	      <if test=" room_number!='' and room_number !=null">
+	        room_number=#{room_number},
+	      </if>
+	      <if test=" room_fee !='' and room_fee !=null">
+	        room_fee=#{room_fee},
+	      </if>
+	      <if test=" able_checkIn !='' and able_checkIn!=null">
+	        able_checkIn=#{able_checkIn},
+	      </if>
+	      <if test=" able_checkOut !='' and able_checkOut !=null">
+	        able_checkOut=#{able_checkOut},
+	      </if>
+	      <if test=" room_status !='' and room_status !=null">
+	        room_status=#{room_status},
+	      </if>
+	      <if test=" title !='' and title !=null">
+	        title=#{title},
+	      </if>
+	      <if test=" min_number !='' and min_number !=null">
+	        min_number=#{min_number},
+	      </if>
+	      <if test=" max_number !='' and max_number !=null">
+	        max_number=#{max_number},
+	      </if>
+	      <if test=" bed_type !='' and bed_type !=null">
+	        bed_type=#{bed_type},
+	      </if>
+	      
+	      <if test=" bed_count !='' and bed_count !=null">
+	        bed_count=#{bed_count},
+	      </if>
+	      <if test=" bath_count !='' and bath_count !=null">
+	        bath_count=#{bath_count},
+	      </if>
+	      <if test=" party_check!='' and party_check !=null">
+	        party_check=#{party_check},
+	      </if>
+	      <if test=" kitchen!='' and kitchen !=null">
+	        kitchen=#{kitchen},
+	      </if>
+	      <if test=" wifi !='' and wifi !=null">
+	        wifi=#{wifi},
+	      </if>
+	      <if test=" parking!='' and parking !=null">
+	        parking=#{parking},
+	      </if>
+	      <if test=" tv !='' and tv !=null">
+	        tv=#{tv},
+	      </if>
+	      <if test=" refrigerator !='' and refrigerator !=null">
+	        refrigerator=#{refrigerator},
+	      </if>
+	      <if test=" hairdryer !='' and hairdryer !=null">
+	        hairdryer=#{hairdryer},
+	      </if>
+	      <if test=" washer !='' and washer !=null">
+	        washer=#{washer},
+	      </if>
+	      <if test=" pet !='' and pet !=null">
+	        pet=#{pet},
+	      </if>
+	      <if test=" pickup !='' and pickup !=null">
+	        pickup=#{pickup},
+	      </if>
+	      <if test=" dryer!='' and dryer !=null">
+	        dryer=#{dryer},
+	      </if>
+	      <if test=" elevator !='' and elevator !=null">
+	        elevator=#{elevator},
+	      </if>
+	      
+	      <if test=" barbecue !='' and barbecue !=null">
+	        barbecue=#{barbecue},
+	      </if>
+	      <if test=" pool!='' and pool !=null">
+	        pool =#{pool},
+	      </if>
+	      <if test=" aircon !='' and aircon !=null">
+	        aircon=#{aircon},
+	      </if>
+	      <if test=" heater !='' and heater !=null">
+	        heater=#{heater},
+	      </if>
+	      <if test=" smoking !='' and smoking !=null">
+	        smoking=#{smoking},
+	      </if>
+	      <if test=" content !='' and content !=null">
+	        content=#{content}
+	      </if>
+	     </set>
+	    where 
+	    room_code=#{room_code}
+	</update>
+	<update id="updateHostGoodsImage" parameterType="hostImageFileVO">
+		update h_roomImage
+		set room_imageName = #{room_imageName}
+		where	 
+		room_code =# {room_code} and roomImage_NO =# {roomImage_NO}
+	</update>
+	
+	<insert id="insertHostGoodsImageFile" parameterType="hostImageFileVO"   >
+	    <![CDATA[
+		   insert into h_roomImage (room_code,
+		                            room_imageName,
+									room_imageType,
+									h_code
+									)
+				   							values
+				   							(#{room_code},
+				   					 		#{room_imageName},
+				   							#{room_imageType},
+				   							#{h_code} 
+				   							)
+		]]>
+	</insert>
+	<delete id="deleteHostGoodsImage" parameterType="String">
+	  delete from h_roomImage
+	  where roomImage_NO=#{roomImage_NO}
+	</delete>
+	
+	<delete id="deleteHostGoodsAllImage" parameterType="int">
+	  delete from h_roomImage
+	  where room_code=#{room_code}
+	</delete>	
+	
+	<delete id="deleteHostGoods" parameterType="int">
+	  delete from h_room
+	  where room_code=#{room_code}
+	</delete>
+	
+   
+</mapper>

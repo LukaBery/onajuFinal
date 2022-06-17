@@ -440,9 +440,7 @@
 </style>
 </head>
 <body>
-<section style="width:700px;height:900px;">
-	<div class="wrap wd668">
-			<div class="container">
+<section style="width:700px;height:600px;padding: 50px 0px 0px 0px;">
 				<div class="form_txtInput">
 				<a href="${contextPath}/main/main.do"> <img
 				src="${contextPath}/resources/image/onajulogo.png" width="150px"
@@ -462,8 +460,6 @@
 					</div>
 				
 			
-			</div><!-- content E-->
-		</div> <!-- container E -->
 		</section>
 </body>
 </html>
