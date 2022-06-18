@@ -12,4 +12,5 @@ public interface AdminOrderService {
 	public int orderListTotal(Criteria cri);
 	public AdminOrderVO orderDetail(String order_code);
 	public int orderCancel(String order_code);
+	public int orderUpdate(AdminOrderVO orderVO);
 }

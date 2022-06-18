@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.myspring.Onaju.admin.adminBoard.service.AdminBoardService;
 import com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireReplyVO;
 import com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireVO;
-import com.myspring.Onaju.admin.adminCommon.paging.vo.Criteria;
-import com.myspring.Onaju.admin.adminCommon.paging.vo.PageMaker;
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
+import com.myspring.Onaju.admin.adminCommon.paging.PageVO;
 import com.myspring.Onaju.common.base.BaseController;
 
 @Controller("csController")
@@ -26,15 +26,12 @@ public class CSControllerImpl extends BaseController implements CSController{
 	@Override
 	@RequestMapping(value = "/qnaList.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView qnaList(Criteria cri) throws Exception {
-ModelAndView mav = new ModelAndView();
-		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(adminBoardService.enquireListTotal());
-		
+		ModelAndView mav = new ModelAndView();
+
+		int total = adminBoardService.enquireListTotal(cri);
 		List<Map<String, Object>> enquireList = adminBoardService.enquireBoardList(cri);
 		mav.addObject("enquireList", enquireList);
-		mav.addObject("pageMaker", pageMaker);	
+		mav.addObject("pageMaker", new PageVO(cri, total));
 		mav.setViewName("/customerService/qnaList");
 
 		return mav;
@@ -43,15 +40,12 @@ ModelAndView mav = new ModelAndView();
 	@Override
 	@RequestMapping(value = "/noticeBoard.do", method = { RequestMethod.GET, RequestMethod.POST })
 	public ModelAndView noticeBoard(Criteria cri) throws Exception {
-ModelAndView mav = new ModelAndView();
+		ModelAndView mav = new ModelAndView();
 		
-		PageMaker pageMaker = new PageMaker();
-		pageMaker.setCri(cri);
-		pageMaker.setTotalCount(adminBoardService.noticeListTotal());
-		
+		int total = adminBoardService.noticeListTotal(cri);
 		List<Map<String, Object>> noticeList = adminBoardService.noticeList(cri);
 		mav.addObject("noticeList", noticeList);
-		mav.addObject("pageMaker", pageMaker);
+		mav.addObject("pageMaker", new PageVO(cri,total));
 		mav.setViewName("/customerService/noticeBoard");
 
 		return mav; 

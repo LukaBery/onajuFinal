@@ -256,7 +256,7 @@
 				<div class="mem-item2-chil-1"><div>대리인명</div></div>
 				<div class="mem-item2-chil-2"><div><input type="text" name="deputy_name" value="${adminHostInfoVO.deputy_name }" /></div></div>
 				<div class="mem-item2-chil-1"><div>대리인 생년월일</div></div>
-				<div class="mem-item2-chil-2"><div><input type="text" name="deputy_birth" value="${adminHostInfoVO.deputy_birth }" /></div></div>
+				<div class="mem-item2-chil-2"><div><input type="date" name="deputy_birth" value="${adminHostInfoVO.deputy_birth }" /></div></div>
 			</div>
 			<div class="mem-item2-chil">
 				<div class="mem-item2-chil-4"><div>대리인 전화번호</div></div>
@@ -330,14 +330,6 @@ function execDaumPostcode() {
 </script>
 <script type="text/javascript">
 $(document).ready(function(){
-	$("input[name=roadAddress]").attr("disabled", false);
-	$("input[name=numberAddress]").attr("disabled", false);
-	$("input[name=zipcode]").attr("disabled", false);
-	$("input[name=u_grade]").attr("disabled", false);
-	$("input[name=u_point]").attr("disabled", false);
-	$("input[name=joinDate]").attr("disabled", false);
-	$("input[name=h_code]").attr("disabled", false);
-	$("input[name=h_id]").attr("disabled", false);
 	
 	var formObj = $("#hostInfoVO");
 	
@@ -345,6 +337,15 @@ $(document).ready(function(){
 		e.preventDefault();
 		var operation = $(this).data("oper");
 		alert(operation);
+		
+		$("input[name=roadAddress]").attr("disabled", false);
+		$("input[name=numberAddress]").attr("disabled", false);
+		$("input[name=zipcode]").attr("disabled", false);
+		$("input[name=u_grade]").attr("disabled", false);
+		$("input[name=u_point]").attr("disabled", false);
+		$("input[name=joinDate]").attr("disabled", false);
+		$("input[name=h_code]").attr("disabled", false);
+		$("input[name=h_id]").attr("disabled", false);
 		
 		formObj.submit();
 	});

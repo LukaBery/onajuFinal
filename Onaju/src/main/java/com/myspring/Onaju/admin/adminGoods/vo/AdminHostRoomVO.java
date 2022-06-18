@@ -13,7 +13,11 @@ public class AdminHostRoomVO {
 	private String deputy_phone;		// 호스트 대리인 전화번호/
 	private String deputy_birth; 		// 호스트 대리인 생년월일/
 	private String deputy_department;	// 호스트 대리인 관계/
-	
+	private String h_birth_y;
+	private String h_birth_m;
+	private String h_birth_d;
+	private String h_gender;
+	private String room_count;
 	
 	private String hostInfo_name;   	// 호스트 사업장명/
 	private String h_code; 				// 호스트 사업장 관리 번호(사이트에서 부여한 관리번호)
@@ -62,31 +66,38 @@ public class AdminHostRoomVO {
 	
 	
 	
-	private int viewPage = 1; 			// 페이징 초기값(없으면 1)
-	private int startNO = 1; 			// 페이징 초기값(1번부터 불러오겠다)
-	private int endNO = 10; 			// 페이징 초기값(10번까지 불러오겠다)
 	
 	
-	public int getStartNO() {
-		return startNO;
+	public String getRoom_count() {
+		return room_count;
 	}
-	public void setStartNO(int startNO) {
-		this.startNO = startNO;
+	public void setRoom_count(String room_count) {
+		this.room_count = room_count;
 	}
-	public int getEndNO() {
-		return endNO;
+	public String getH_gender() {
+		return h_gender;
 	}
-	public void setEndNO(int endNO) {
-		this.endNO = endNO;
+	public void setH_gender(String h_gender) {
+		this.h_gender = h_gender;
 	}
-	public int getViewPage() {
-		return viewPage;
+	public String getH_birth_y() {
+		return h_birth_y;
 	}
-	public void setViewPage(int viewPage) {
-		this.viewPage = viewPage;
+	public void setH_birth_y(String h_birth_y) {
+		this.h_birth_y = h_birth_y;
 	}
-	
-	
+	public String getH_birth_m() {
+		return h_birth_m;
+	}
+	public void setH_birth_m(String h_birth_m) {
+		this.h_birth_m = h_birth_m;
+	}
+	public String getH_birth_d() {
+		return h_birth_d;
+	}
+	public void setH_birth_d(String h_birth_d) {
+		this.h_birth_d = h_birth_d;
+	}
 	public String getH_id() {
 		return h_id;
 	}

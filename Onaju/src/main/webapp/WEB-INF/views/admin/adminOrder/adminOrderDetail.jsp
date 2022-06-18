@@ -142,6 +142,17 @@
 	background: #ffffff;
 	color: #666666;	
 }
+.a3{
+	display:block; 
+	width:150px; 
+	line-height:50px; 
+	text-align:center; 
+	border-radius: 5px; 
+	border: none; 
+	text-decoration: none;
+	background: #000033;
+	color: #ffffff;	
+}
 
 </style>
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=e860fe5b0789947d9b32c332867dedc4&libraries=services,clusterer"></script>
@@ -237,6 +248,7 @@
 		</div>
 		<div class="mem-item5">
 			<div><button class="a2" type="submit" id="goodsList" data-oper="list">돌아가기</button></div>
+			<div><button class="a3" value='<c:out value="${orderVO.order_code }" />'>수정하기</button></div>
 			<div><a class="a1">취소하기</a></div>
 			
 		</div>
@@ -245,7 +257,7 @@
 			<input type="hidden" name="amount" value="${cri.amount }" />
 			<input type="hidden" name="join_startDate" value='<c:out value="${cri.join_startDate }" />'>
 			<input type="hidden" name="join_endDate" value='<c:out value="${cri.join_endDate }"/>' >
-			<input type="hidden" name="pay_state" value='<c:out value="${cri.pay_state }"/>'>
+			<input type="hidden" name="pay_state2" value='<c:out value="${cri.pay_state2 }"/>'>
 			<input type="hidden" name="u_name2" value='<c:out value="${cri.u_name2 }"/>'>
 			<input type="hidden" name="u_id2" value='<c:out value="${cri.u_id2 }"/>'>
 			<input type="hidden" name="order_code2" value='<c:out value="${cri.order_code2 }"/>'>
@@ -313,26 +325,6 @@ $(document).ready(function(){
 		e.preventDefault();
 		var operation = $(this).data("oper");
 		operForm.attr("action", "${contextPath}/admin/orderList.do").attr("method","get");
-		
-		var pageNumTag = $("input[name='pageNum']").clone();
-		var amountTag = $("input[name='amount']").clone();
-		var join_startDateTag = $("input[name='join_startDat']").clone();
-		var join_endDateTag = $("input[name='join_endDate']").clone();
-		var u_id2Tag = $("input[name='u_id2']").clone();
-		var pay_stateTag = $("input[name='pay_state']").clone();
-		var u_name2Tag = $("input[name='u_name2']").clone();
-		var order_code2Tag = $("input[name='order_code2']").clone();
-		
-		operForm.empty();
-		
-		operForm.append(pageNumTag);
-		operForm.append(amountTag);
-		operForm.append(join_startDateTag);
-		operForm.append(join_endDateTag);
-		operForm.append(u_id2Tag);
-		operForm.append(pay_stateTag);
-		operForm.append(u_name2Tag);
-		operForm.append(order_code2Tag);
 
 		alert("리스트로");
 		operForm.submit();
@@ -357,7 +349,7 @@ $(document).ready(function(){
 			var join_startDateTag = $("input[name='join_startDat']").clone();
 			var join_endDateTag = $("input[name='join_endDate']").clone();
 			var u_id2Tag = $("input[name='u_id2']").clone();
-			var pay_stateTag = $("input[name='pay_state']").clone();
+			var pay_state2Tag = $("input[name='pay_state2']").clone();
 			var u_name2Tag = $("input[name='u_name2']").clone();
 			var order_code2Tag = $("input[name='order_code2']").clone();
 			
@@ -368,7 +360,7 @@ $(document).ready(function(){
 			formObj.append(join_startDateTag);
 			formObj.append(join_endDateTag);
 			formObj.append(u_id2Tag);
-			formObj.append(pay_stateTag);
+			formObj.append(pay_state2Tag);
 			formObj.append(u_name2Tag);
 			formObj.append(order_code2Tag);
 			
@@ -381,10 +373,10 @@ $(document).ready(function(){
 <script type="text/javascript">
 $(document).ready(function(){
 	var operForm = $("#operForm");
-$(".a1").on("click",function(e){
+$(".a3").on("click",function(e){
 	alert("수정수정");
 	e.preventDefault();
-	operForm.append("<input type='hidden' name='order_code' value='"+$(this).attr("href")+"'>");
+	operForm.append("<input type='hidden' name='order_code' value='"+$(this).attr("value")+"'>");
 	operForm.attr("action", "${contextPath}/admin/orderModify.do");
 	operForm.submit();
 	});

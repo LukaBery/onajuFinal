@@ -1,6 +1,8 @@
 package com.myspring.Onaju.admin.adminBoard.controller;
 
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,6 +22,8 @@ public interface AdminBoardController {
 	public void imgFile(String a_id, String notice_code, HttpServletResponse response) throws Exception;
 	public ModelAndView adminNoticeForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ModelAndView insertNotice(AdminNoticeVO noticeVO, MultipartFile file, HttpServletRequest request) throws Exception;
+	public ModelAndView noticeModify(String notice_code, @ModelAttribute("cri") Criteria cri) throws Exception;
+	public ResponseEntity<String> imgDelete(Map<String, Object> deleteMap);
 	
 	public ModelAndView enquireBoardList(Criteria cri) throws Exception;
 	public ModelAndView enquireBoardDetail(@RequestParam("enquire_NO")String enquire_NO, @ModelAttribute("cri") Criteria cri) throws Exception;

@@ -170,12 +170,7 @@
                     <a href="#!"
                         >${item.notice_title}</a>   
                     </th>
-                    	<fmt:setLocale value="en_US" scope="session" />
-								<fmt:parseDate var="writeDate_" value="${ item.writeDate }"
-									pattern="yyyy-MM-dd hh:mm:ss.SSS" />
-								<fmt:formatDate var="writeDate" value="${writeDate_}"
-									pattern="yyyy년 MM월 dd일" />
-                    <td class="board-col-box">${writeDate}</td>
+                    <td class="board-col-box">${item.writeDate}</td>
                   </tr>
 </c:forEach>
 

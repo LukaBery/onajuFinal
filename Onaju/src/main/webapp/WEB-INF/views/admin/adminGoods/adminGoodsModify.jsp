@@ -302,7 +302,7 @@ $(document).ready(function(){
 				<div class="mem-item2-chil-1"><div>대리인명</div></div>
 				<div class="mem-item2-chil-2"><div><input type="text" name="deputy_name" value="${roomDetail.deputy_name }" /></div></div>
 				<div class="mem-item2-chil-1"><div>대리인 생년월일</div></div>
-				<div class="mem-item2-chil-2"><div><input type="text" name="deputy_birth" value="${roomDetail.deputy_birth }" /></div></div>
+				<div class="mem-item2-chil-2"><div><input type="date" name="deputy_birth" value="${roomDetail.deputy_birth }" /></div></div>
 			</div>
 			<div class="mem-item2-chil">
 				<div class="mem-item2-chil-4"><div>대리인 전화번호</div></div>
@@ -348,13 +348,13 @@ $(document).ready(function(){
 			<div class="mem-item2-chil">
 				<div class="mem-item2-chil-4"><div>가맹점 업종 타입</div></div>
 				<div class="mem-item2-chil-5"><div><input type="text" name="host_type" value="${roomDetail.host_type }" /></div></div>
-				<div class="mem-item2-chil-4"><div>가맹점 계좌번호</div></div>
-				<div class="mem-item2-chil-5"><div><input type="text" name="h_accountNum" value="${roomDetail.h_accountNum }" /></div></div>
+				<div class="mem-item2-chil-4"><div>현재 룸 관리번호</div></div>
+				<div class="mem-item2-chil-5"><div><input type="text" name="room_code" value="${roomDetail.room_code }" disabled /></div></div>
 			</div>
 		</div>
 		
 		
-		<div class="mem-item1"><div><h3><input type="text" name="room_code" value="${roomDetail.room_code }" disabled /> &nbsp;가맹점 룸 상세 정보 </h3></div></div>
+		<div class="mem-item1"><div><h3>가맹점 룸 상세 정보 </h3></div></div>
 		<div class="mem-item2">
 			<div class="mem-item2-chil">
 				<div class="mem-item2-chil-1"><div>가맹점 룸 호실</div></div>

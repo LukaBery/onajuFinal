@@ -237,8 +237,8 @@
 			<div class="mem-item2-chil">
 				<div class="mem-item2-chil-4"><div>가맹점 업종 타입</div></div>
 				<div class="mem-item2-chil-5"><div>${roomDetail.host_type }</div></div>
-				<div class="mem-item2-chil-4"><div>가맹점 계좌번호</div></div>
-				<div class="mem-item2-chil-5"><div>${roomDetail.h_accountNum }</div></div>
+				<div class="mem-item2-chil-4"><div>사업장 연계 룸</div></div>
+				<div class="mem-item2-chil-5"><div>${roomDetail.room_code }</div></div>
 			</div>
 		</div>
 		

@@ -14,5 +14,10 @@
     <put-attribute name="title" value="Tiles tutorial homepage" />  
     <put-attribute name="body" value="/WEB-INF/views/admin/adminOrder/adminOrderDetail.jsp" />
   </definition>
+  
+  <definition name="/admin/orderModify" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminOrder/adminOrderModify.jsp" />
+  </definition>
     
 </tiles-definitions>

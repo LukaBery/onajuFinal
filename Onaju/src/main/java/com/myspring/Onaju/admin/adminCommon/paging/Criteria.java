@@ -23,7 +23,7 @@ public class Criteria {
 	private String u_name2;
 	private String r_del_yn;
 	private String order_code2;
-	private String pay_state;
+	private String pay_state2;
 	private String notice_title;
 	private String notice_type;
 	private String title;
@@ -134,11 +134,11 @@ public class Criteria {
 	public void setOrder_code2(String order_code2) {
 		this.order_code2 = order_code2;
 	}
-	public String getPay_state() {
-		return pay_state;
+	public String getPay_state2() {
+		return pay_state2;
 	}
-	public void setPay_state(String pay_state) {
-		this.pay_state = pay_state;
+	public void setPay_state2(String pay_state2) {
+		this.pay_state2 = pay_state2;
 	}
 	public String getNotice_title() {
 		return notice_title;

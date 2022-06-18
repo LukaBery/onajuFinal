@@ -177,6 +177,16 @@ public class AdminBoardControllerImpl implements AdminBoardController {
 		out.close();	
 	}
 
+	@Override
+	@RequestMapping(value = "/admin/noticeModify.do", method = RequestMethod.GET)
+	public ModelAndView noticeModify(String notice_code, @ModelAttribute("cri") Criteria cri) throws Exception {
+		
+		ModelAndView mav = new ModelAndView();
+		Map<String, Object> noticeMap = adminBoardService.noticeDetail(notice_code);
+		mav.addObject("noticeMap", noticeMap);
+		return mav;
+	}
+	
 
 	@Override
 	@RequestMapping(value = "/admin/enquireBoard.do", method = {RequestMethod.GET, RequestMethod.POST})
@@ -218,5 +228,22 @@ public class AdminBoardControllerImpl implements AdminBoardController {
 	public ResponseEntity<List<Map<String, Object>>> ajaxcommentList(AdminEnquireReplyVO replyVO){
 		List<Map<String, Object>> replysList = adminBoardService.enquireReplyDetail(replyVO);
 		return new ResponseEntity<>(replysList, HttpStatus.OK);
+	}
+
+	@Override
+	@RequestMapping(value = "/admin/imgDelete.do", method = RequestMethod.POST)
+	public ResponseEntity<String> imgDelete(@RequestParam Map<String, Object> delet_img) {
+		String Save_File_Name = (String)delet_img.get("Save_File_Name");
+		String img_code = (String)delet_img.get("img_code");
+		File filePath = new File(adminUploadPath +"\\"+ Save_File_Name);
+		if(filePath.exists()) {
+			filePath.delete();
+			adminBoardService.deleteNoticeImg(img_code);
+			return new ResponseEntity<String>("success", HttpStatus.OK);
+			
+		}else{
+			adminBoardService.deleteNoticeImg(img_code);
+			return new ResponseEntity<String>("failed",HttpStatus.OK);
+		}
 	}
 }

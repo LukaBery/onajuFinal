@@ -39,6 +39,10 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	public int orderListTotal(Criteria cri) {
 		return adminOrderDAO.selectOrderListTotal(cri);
 	}
+	@Override
+	public int orderUpdate(AdminOrderVO orderVO) {
+		return adminOrderDAO.selectOrderUpdate(orderVO);
+	}
 
 
 }

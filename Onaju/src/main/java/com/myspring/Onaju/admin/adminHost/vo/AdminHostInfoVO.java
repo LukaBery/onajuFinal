@@ -31,30 +31,7 @@ public class AdminHostInfoVO {
 	private String deputy_department;
 	private String deputy_birth;
 
-	private int viewPage = 1;
-	private int startNO = 1;
-	private int endNO = 10;
 	
-	
-	public int getViewPage() {
-		return viewPage;
-	}
-	public void setViewPage(int viewPage) {
-		this.viewPage = viewPage;
-	}
-	public int getStartNO() {
-		return startNO;
-	}
-	public void setStartNO(int startNO) {
-		this.startNO = startNO;
-	}
-	public int getEndNO() {
-		return endNO;
-	}
-	public void setEndNO(int endNO) {
-		this.endNO = endNO;
-	}
-
 	
 	public String getH_name() {
 		return h_name;

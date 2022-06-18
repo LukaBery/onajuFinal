@@ -178,10 +178,10 @@
 			<div class="host-row-col1"><div>상태</div></div>
 			<div class="host-row-col3">
 				<div>
-					<select name="pay_state">
+					<select name="pay_state2">
 						<option value="">상태</option>
-						<option value="결제 완료" <c:out value="${pageMaker.cri.pay_state eq '결제 완료'?'selected':'' }" />>결제 완료</option>
-						<option value="환불 완료" <c:out value="${pageMaker.cri.pay_state eq '환불 완료'?'selected':'' }" />>환불 완료</option>
+						<option value="결제 완료" <c:out value="${pageMaker.cri.pay_state2 eq '결제 완료'?'selected':'' }" />>결제 완료</option>
+						<option value="환불 완료" <c:out value="${pageMaker.cri.pay_state2 eq '환불 완료'?'selected':'' }" />>환불 완료</option>
 					</select>
 				</div>
 			</div>
@@ -274,7 +274,7 @@
 			<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
 			<input type="hidden" name="join_startDate" value='<c:out value="${pageMaker.cri.join_startDate }" />'>
 			<input type="hidden" name="join_endDate" value='<c:out value="${pageMaker.cri.join_endDate }"/>' >
-			<input type="hidden" name="pay_state" value='<c:out value="${pageMaker.cri.pay_state }"/>'>
+			<input type="hidden" name="pay_state2" value='<c:out value="${pageMaker.cri.pay_state2 }"/>'>
 			<input type="hidden" name="u_name2" value='<c:out value="${pageMaker.cri.u_name2 }"/>'>
 			<input type="hidden" name="u_id2" value='<c:out value="${pageMaker.cri.u_id2 }"/>'>
 			<input type="hidden" name="order_code2" value='<c:out value="${pageMaker.cri.order_code2 }"/>'>

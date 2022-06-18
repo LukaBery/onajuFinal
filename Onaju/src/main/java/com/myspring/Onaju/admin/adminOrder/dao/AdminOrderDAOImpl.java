@@ -39,6 +39,10 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 	public int selectOrderListTotal(Criteria cri) {
 		return sqlSession.selectOne("mapper.admin.order.selectOrderListTotal", cri);
 	}
+	@Override
+	public int selectOrderUpdate(AdminOrderVO orderVO) {
+		return sqlSession.update("mapper.admin.order.selectOrderUpdate", orderVO);
+	}
 
 	
 

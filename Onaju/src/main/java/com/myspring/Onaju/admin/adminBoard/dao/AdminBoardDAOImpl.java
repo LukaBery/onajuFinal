@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireReplyVO;
-import com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireVO;
 import com.myspring.Onaju.admin.adminBoard.vo.AdminNoticeVO;
 import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 
@@ -93,6 +92,11 @@ public class AdminBoardDAOImpl implements AdminBoardDAO {
 	@Override
 	public int updateReplyCheck(AdminEnquireReplyVO replyVO) {
 		return sqlSession.update("mapper.admin.board.updateReplyCheck", replyVO);
+	}
+
+	@Override
+	public int selectDeleteNoticeImg(String img_code) {
+		return sqlSession.delete("mapper.admin.board.selectDeleteNoticeImg", img_code);
 	}
 
 	
