@@ -324,14 +324,8 @@ border-top:1px solid #CCCCCC;
 						<td>${enquire.reply_yn}</td>
 						<td>${enquire.enquire_NO }</td>
 						<td>${enquire.title }</td>
-						<td>${enquire.u_id }</td>
-						
-						<fmt:setLocale value="en_US" scope="session" />
-								<fmt:parseDate var="creDate_" value="${enquire.creDate}"
-									pattern="yyyy-MM-dd hh:mm:ss.SSS" />
-								<fmt:formatDate var="creDate" value="${creDate_}"
-									pattern="yyyy년 MM월 dd일" />
-						<td>${creDate}</td>   
+						<td>${enquire.u_id }</td>			
+						<td>${enquire.creDate}</td>   
 						<td>${enquire.hit_cnt }</td>      								  
 					</tr>
     			</c:forEach>

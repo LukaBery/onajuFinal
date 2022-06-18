@@ -12,5 +12,6 @@ public interface AdminOrderDAO {
 	public int selectOrderListTotal(Criteria cri);
 	public AdminOrderVO selectOrderDetail(String order_code);
 	public int selectOrderCancel(String order_code);
+	public int selectOrderUpdate(AdminOrderVO orderVO);
 
 }

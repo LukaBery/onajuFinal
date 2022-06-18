@@ -249,10 +249,13 @@
 	update
 			h_host H
 	inner join 
-			 h_host_info I 
-	on H.h_id = I.h_id 
-	inner join room R
-	on I.h_code = R.h_code
+			h_host_info I 
+	on 
+			H.h_id = I.h_id 
+	inner join 
+			h_room R
+	on 
+			I.h_code = R.h_code
 	<set> 
 		<if test="h_name != '' and h_name != null">
 			H.h_name = #{h_name}, 
@@ -315,97 +318,100 @@
 			I.host_type = #{host_type}, 
 		</if>
 		<if test="room_count != '' and room_count != null">
-			I.room_count = #{room_count}
+			I.room_count = #{room_count},
 		</if>
 		<if test="room_type != '' and room_type != null">
-			R.room_type = #{room_type}
+			R.room_type = #{room_type},
 		</if>
 		<if test="room_number != '' and room_number != null">
-			R.room_number = #{room_number}
+			R.room_number = #{room_number},
 		</if>
 		<if test="room_fee != '' and room_fee != null">
-			R.room_fee = #{room_fee}
+			R.room_fee = #{room_fee},
 		</if>
 		<if test="able_checkIn != '' and able_checkIn != null">
-			R.able_checkIn = #{able_checkIn}
+			R.able_checkIn = #{able_checkIn},
 		</if>
 		<if test="able_checkOut != '' and able_checkOut != null">
-			R.able_checkOut = #{able_checkOut}
+			R.able_checkOut = #{able_checkOut},
 		</if>
 		<if test="room_status != '' and room_status != null">
-			R.room_status = #{room_status}
+			R.room_status = #{room_status},
 		</if>
 		<if test="title != '' and title != null">
-			R.title = #{title}
+			R.title = #{title},
 		</if>
 		<if test="min_number != '' and min_number != null">
-			R.min_number = #{min_number}
+			R.min_number = #{min_number},
 		</if>
 		<if test="max_number != '' and max_number != null">
-			R.max_number = #{max_number}
+			R.max_number = #{max_number},
 		</if>
 		<if test="bed_count != '' and bed_count != null">
-			R.bed_count = #{bed_count}
+			R.bed_count = #{bed_count},
 		</if>
 		<if test="bath_count != '' and bath_count != null">
-			R.bath_count = #{bath_count}
+			R.bath_count = #{bath_count},
 		</if>
 		<if test="party_check != '' and party_check != null">
-			R.party_check = #{party_check}
+			R.party_check = #{party_check},
 		</if>
 		<if test="kitchen != '' and kitchen != null">
-			R.kitchen = #{kitchen}
+			R.kitchen = #{kitchen},
 		</if>
 		<if test="wifi != '' and wifi != null">
-			R.wifi = #{wifi}
+			R.wifi = #{wifi},
 		</if>
 		<if test="parking != '' and parking != null">
-			R.parking = #{parking}
+			R.parking = #{parking},
 		</if>
 		<if test="tv != '' and tv != null">
-			R.tv = #{tv}
+			R.tv = #{tv},
 		</if>
 		<if test="refrigerator != '' and refrigerator != null">
-			R.refrigerator = #{refrigerator}
+			R.refrigerator = #{refrigerator},
 		</if>
 		<if test="hairdryer != '' and hairdryer != null">
-			R.hairdryer = #{hairdryer}
+			R.hairdryer = #{hairdryer},
 		</if>
 		<if test="washer != '' and washer != null">
-			R.washer = #{washer}
+			R.washer = #{washer},
 		</if>
 		<if test="pet != '' and pet != null">
-			R.pet = #{pet}
+			R.pet = #{pet},
 		</if>
 		<if test="pickup != '' and pickup != null">
-			R.pickup = #{pickup}
+			R.pickup = #{pickup},
 		</if>
 		<if test="dryer != '' and dryer != null">
-			R.dryer = #{dryer}
+			R.dryer = #{dryer},
 		</if>
 		<if test="elevator != '' and elevator != null">
-			R.elevator = #{elevator}
+			R.elevator = #{elevator},
 		</if>
 		<if test="barbecue != '' and barbecue != null">
-			R.barbecue = #{barbecue}
+			R.barbecue = #{barbecue},
 		</if>
 		<if test="pool != '' and pool != null">
-			R.pool = #{pool}
+			R.pool = #{pool},
 		</if>
 		<if test="aircon != '' and aircon != null">
-			R.aircon = #{aircon}
+			R.aircon = #{aircon},
 		</if>
 		<if test="heater != '' and heater != null">
-			R.heater = #{heater}
+			R.heater = #{heater},
 		</if>
 		<if test="smoking != '' and smoking != null">
-			R.smoking = #{smoking}
+			R.smoking = #{smoking},
 		</if>
 		<if test="content != '' and content != null">
-			R.content = #{content}
+			R.content = #{content},
 		</if>
 		<if test="bed_type != '' and bed_type != null">
-			R.bed_type = #{bed_type}
+			R.bed_type = #{bed_type},
+		</if>
+		<if test="del_yn != '' and del_yn != null">
+			R.del_yn = #{del_yn}
 		</if>
 	</set>
     where 

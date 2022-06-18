@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 
 import com.myspring.Onaju.admin.adminBoard.dao.AdminBoardDAO;
 import com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireReplyVO;
-import com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireVO;
 import com.myspring.Onaju.admin.adminBoard.vo.AdminNoticeVO;
 import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 
@@ -92,6 +91,11 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 	@Override
 	public int updateReplyCheck(AdminEnquireReplyVO replyVO) {
 		return adminBoardDAO.updateReplyCheck(replyVO);
+	}
+
+	@Override
+	public int deleteNoticeImg(String img_code) {
+		return adminBoardDAO.selectDeleteNoticeImg(img_code);
 	}
 
 

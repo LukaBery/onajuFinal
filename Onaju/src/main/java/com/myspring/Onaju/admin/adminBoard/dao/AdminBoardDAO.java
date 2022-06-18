@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireReplyVO;
-import com.myspring.Onaju.admin.adminBoard.vo.AdminEnquireVO;
 import com.myspring.Onaju.admin.adminBoard.vo.AdminNoticeVO;
 import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 
@@ -17,6 +16,7 @@ public interface AdminBoardDAO {
 
 	public int insertNotice(AdminNoticeVO noticeVO);
 	public int insertImgFile(Map<String, Object> imgFile);
+	public int selectDeleteNoticeImg(String img_code);
 	public List<Map<String, Object>> selectSearchNotice(Map<String, Object> searchMap);
 	
 	//==========================1대1 게시판==========================

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 import com.myspring.Onaju.admin.adminCommon.paging.PageVO;
@@ -57,12 +58,31 @@ public class AdminOrderControllerImpl implements AdminOrderController {
 	
 	@Override
 	@RequestMapping(value = "/admin/orderModify.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView orderModify(String order_code, com.myspring.Onaju.admin.adminCommon.paging.Criteria cri)
+	public ModelAndView orderModify(@RequestParam("order_code") String order_code, @ModelAttribute("cri") Criteria cri)
 			throws Exception {
 		ModelAndView mav = new ModelAndView();
 		AdminOrderVO orderVO = adminOrderService.orderDetail(order_code);
 		mav.addObject("orderVO", orderVO );
 		return mav;
+	}
+	@Override
+	@RequestMapping(value = "/admin/orderUpdate.do", method = RequestMethod.POST)
+	public String orderUpdate(AdminOrderVO orderVO, Criteria cri, RedirectAttributes rttr) {
+		int update_order = adminOrderService.orderUpdate(orderVO);
+		
+		if(update_order == 1) {
+			rttr.addAttribute("order_code", orderVO.getOrder_code());
+		}
+		
+		rttr.addAttribute("pageNum", cri.getPageNum());
+		rttr.addAttribute("amount", cri.getAmount());
+		rttr.addAttribute("join_startDate", cri.getJoin_startDate());
+		rttr.addAttribute("join_endDate", cri.getJoin_endDate());
+		rttr.addAttribute("pay_state2", cri.getPay_state2());
+		rttr.addAttribute("u_name2", cri.getU_name2());
+		rttr.addAttribute("u_id2", cri.getU_id2());
+		rttr.addAttribute("order_code2", cri.getOrder_code2());
+		return "redirect:/admin/orderDetail.do";
 	}
 	
 	
