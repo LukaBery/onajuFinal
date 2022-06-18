@@ -1,4 +1,4 @@
-package com.mySpring.Onaju;
+package com.myspring.Onaju;
 
 import static org.junit.Assert.assertEquals;
 
