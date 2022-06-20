@@ -124,6 +124,11 @@ public class HostControllerImpl extends BaseController implements HostController
 				mav.setViewName("/member/loginForm");
 			}
 		}
+		else {
+			String message = "일치하는 회원 정보가 없습니다.";
+			mav.addObject("message", message);
+			mav.setViewName("/member/loginForm");
+		}
 		return mav;
 	}
 

@@ -98,12 +98,17 @@
 			where h_id=#{h_id}
     	]]>
 	</select>		
-	<delete id="deleteHost" parameterType="String">
-	    <![CDATA[
-	      delete from h_host
-	      where h_id=#{h_id}
+	<update id="deleteHost" parameterType="String">
+	
+	      update  h_host
 	      
-    	]]>
-	</delete>
+	      
+    <set>
+    del_yn ='Y'
+    
+    
+    </set>
+    where  h_id=#{h_id}
+	</update>
 	
 </mapper>
