@@ -26,6 +26,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
+import com.myspring.Onaju.admin.adminCommon.paging.PageVO;
 import com.myspring.Onaju.board.review.service.ReviewService;
 import com.myspring.Onaju.board.review.vo.ReviewVO;
 import com.myspring.Onaju.common.base.BaseController;
@@ -196,34 +198,19 @@ public class HostGoodsControllerImpl extends BaseController implements HostGoods
 	/* 사업장 목록 */
 	
 	@Override
-	@RequestMapping(value="/hostInfoList.do" , method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView hostInfoList(HostInfoVO hostInfo, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	@RequestMapping(value="/hostInfoList.do" , method = RequestMethod.GET )
+	public ModelAndView hostInfoList(@ModelAttribute("cri") Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		
-		
-		String viewName = (String) request.getAttribute("viewName");
-		System.out.println("컨트롤러 viewName : " + viewName);
 		HttpSession session = request.getSession();
-		ModelAndView mav = new ModelAndView(viewName);
-		HostVO hostVO = (HostVO) session.getAttribute("hostInfo");
-		System.out.println("hostVO의 VO : " + hostVO);
-		String _h_id = hostVO.getH_id();
-		hostInfo.setH_id(_h_id);
-		
-		int total = hostGoodsService.hostInfoListTotal(hostInfo);
-		System.out.println("리스트 total : " + total);
-		int totalPage = (int) Math.ceil((double)total/10);
-		int viewPage = hostInfoVO.getViewPage();
-		int startNO = (viewPage - 1) * 10 + 1;
-		int endNO = startNO + (10 - 1);
-		
-		hostInfo.setStartNO(startNO);
-		hostInfo.setEndNO(endNO);
-		
-		List<HostInfoVO> hostInfoList=hostGoodsService.hostInfoFormlist(hostInfo);
-		mav.addObject("total", total);
-		mav.addObject("totalPage", totalPage);
+		HostVO hostVO = (HostVO)session.getAttribute("hostInfo");
+		String h_id = hostVO.getH_id();
+		ModelAndView mav = new ModelAndView();
+		cri.setH_id2(h_id);
+		int total = hostGoodsService.hostInfoListTotal(cri);
+		List<Map<String, Object>> hostInfoList=hostGoodsService.hostInfoFormlist(cri);
 		mav.addObject("hostInfoList", hostInfoList);
-
+		mav.addObject("pageMaker", new PageVO(cri, total));
+		mav.setViewName("/host/goods/hostInfoList");
 		return mav;
 	}
 	

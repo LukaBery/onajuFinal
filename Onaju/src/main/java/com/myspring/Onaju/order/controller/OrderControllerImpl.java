@@ -92,7 +92,8 @@ private CartVO cartVO;
 			 if(action!=null && action.equals("/order/orderEachGoods.do")){
 				 CartVO _cart = (CartVO) session.getAttribute("orderVO");
 				mav.addObject("orderVO", _cart);
-				 
+				String room_code =  _cart.getRoom_code();
+				receiverMap.put("room_code", room_code);
 				session.removeAttribute("orderVO");
 				session.removeAttribute("action");
 			 }else {

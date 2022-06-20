@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+
+	<definition name="/host/noticeList" extends="hostLayout">
+		<put-attribute name="title" value="호스트 공지사항" />
+		<put-attribute name="body" value="/WEB-INF/views/host/board/hostNotice.jsp" />
+	</definition>
+	<definition name="/host/noticeDetail" extends="hostLayout">
+		<put-attribute name="title" value="호스트 공지사항" />
+		<put-attribute name="body" value="/WEB-INF/views/host/board/hostNoticeDetail.jsp" />
+	</definition>
+	
+</tiles-definitions>

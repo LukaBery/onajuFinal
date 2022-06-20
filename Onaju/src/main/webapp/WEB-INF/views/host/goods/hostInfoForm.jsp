@@ -304,7 +304,7 @@ section.host_notice {
 	
 <!-- 바디 시작 -->
 	<section class="host_notice">
-				<form name="addNewhostInfo" action="${contextPath}/host/goods/addHostInfo.do" method="post">
+				<form name="addNewhostInfo" action="${contextPath}/host/insertHostInfo.do" method="post">
 					<div class="host-title">
 						<div class="host_contai">
 							<h3>사업자 정보 등록</h3>
@@ -353,7 +353,14 @@ section.host_notice {
 										<td class="notice_title" colspan="2"><input type="text" name="h_accountNum" id="h_accountNum">
 										</td>
 										<td class="notice_title" >
-											<input type="button" class="search_button" value="계좌번호 확인" onclick="f()">
+											<select name="bank_type">
+												<option value="">은행 선택</option>
+												<option value="농협">농협</option>
+												<option value="하나">하나</option>
+												<option value="우리">우리</option>
+												<option value="국민">국민</option>
+												<option value="신한">신한</option>
+											</select>
 										</td>
 									</tr>
 								</thead>
@@ -498,7 +505,6 @@ function getCurrentPosBtn() {
 		}
 		
 		var h_sellerNum = $("#sellerNum").val();
-		console.log(h_sellerNum); //삭제 해도 됨
 		
 		var data = {
 			    "b_no": [h_sellerNum] // 사업자번호 "xxxxxxx" 로 조회 시,

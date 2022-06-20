@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 import com.myspring.Onaju.host.goods.vo.HostInfoVO;
 
 
@@ -28,7 +29,7 @@ public interface HostGoodsController {
 
 	/* 사업장 관련 */
 	public ResponseEntity  addHostInfo(@ModelAttribute("hostInfoVO") HostInfoVO h_hostInfoVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
-	public ModelAndView hostInfoList(HostInfoVO hostInfo, HttpServletRequest request, HttpServletResponse response) throws Exception ;
+	public ModelAndView hostInfoList(@ModelAttribute("cri") Criteria cri, HttpServletRequest request, HttpServletResponse response) throws Exception ;
 	public ModelAndView modifyHostDetail(@RequestParam("h_code") int h_code, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public ResponseEntity modifyHostInfo( @RequestParam("h_code") String h_code, 
             HttpServletRequest request, HttpServletResponse response)  throws Exception;

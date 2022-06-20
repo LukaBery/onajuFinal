@@ -146,6 +146,12 @@ request.setCharacterEncoding("UTF-8");
  				<li class="ohnaju-li"><a href="${contextPath }/host/money/hostSalesAllList.do">매출 내역</a></li>
  				
  			</ul>
+ 		</li>
+ 		<li class="ohnaju-li"><a href="#" class="ohnaju-fifth-btn"><i style="color:#edbc40"  class="fa-solid fa-children"></i>&emsp;공지사항</a>
+ 			<ul class="ohnaju-fifth-show">
+ 				<li class="ohnaju-li"><a href="${contextPath }/host/noticeList.do">공지사항</a></li>
+ 				
+ 			</ul>
  		</li> 	
  		<%-- <li class="ohnaju-li"><a href="#" class="ohnaju-sixth-btn"><i style="color:#edbc40" class="fa-solid fa-building-user"></i>&emsp;고객 관리</a>
  			<ul class="ohnaju-sixth-show">

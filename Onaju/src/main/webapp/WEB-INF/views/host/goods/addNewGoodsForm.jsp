@@ -447,7 +447,7 @@ ul{list-style:none;}
 										</td>
 									</tr>
 									<tr>
-										<th class="th-date">사업장 일련번호</th>
+										<th class="th-date">가맹점 상품 번호</th>
 										<td class="td-date-writer" colspan="">
 											<select class="roomSelect" id="h_code" name="h_code" onchange="hostFn()">
 												<option class="roomOption"  value="">선택</option>

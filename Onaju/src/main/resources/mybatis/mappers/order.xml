@@ -121,7 +121,7 @@ where u_id =  #{u_id};
 update u_order
 <set>
 <![CDATA[
-pay_state = '환불 완료'
+pay_state = '환불 예정'
 ]]>
 </set>
 where order_code =  #{order_code};

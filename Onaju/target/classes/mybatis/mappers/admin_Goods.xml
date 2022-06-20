@@ -420,4 +420,12 @@
 	<update id="selectOneRoomDelete">
 		update h_room set del_yn = 'Y' where room_code = #{room_code}
 	</update>
+	
+	<select id="selectRetireRoom">
+	select * from h_room where del_yn = 'Y'
+	</select>
+	
+	<delete id="deleteRetireRoom">
+		delete from h_room where room_code = #{room_code}
+	</delete>
 </mapper>

@@ -35,6 +35,38 @@ request.setCharacterEncoding("UTF-8");
    /* 아임포트 결재API */
 	function iamport() {
 		//가맹점 식별코드
+				var _order_name = document.getElementById("order_name");
+				var _order_phone = document.getElementById("order_phone");
+				var _order_email1 = document.getElementById("order_email1");
+				var _order_email2 = document.getElementById("order_email2");
+
+		
+				if (_order_name.value == "") { 
+					alert("주문자 성함을 적어주세요");
+					_order_name.focus(); 
+					return false;
+				}
+				;
+				if (_order_phone.value == "") { 
+					alert("전화번호를 입력해주세요");
+					_order_phone.focus(); 
+					return false;
+				}
+				;
+				if (_order_email1.value == "") { 
+					alert("이메일을 입력해주세요");
+					_order_email1.focus(); 
+					return false;
+				}
+				;
+				if (_order_email2.value == "") { 
+					alert("이메일 주소를 선택해주세요");
+					_order_email2.focus(); 
+					return false;
+				}
+				;
+		
+		
 		IMP.init('imp97909068');
 		IMP.request_pay({
 			pg : 'html5_inicis',
@@ -123,9 +155,8 @@ request.setCharacterEncoding("UTF-8");
 		});
 	}
    
-   /* 이메일 선택자 클릭시 value값 넣는 함수 */
 	function change_email() {
-		var u_email2 = document.getElementById("u_email2");
+		var u_email2 = document.getElementById("order_email2");
 		var email_sel = document.getElementById("email_sel");
 
 		//지금 골라진 옵션의 순서와 값 구하기
@@ -134,12 +165,15 @@ request.setCharacterEncoding("UTF-8");
 
 		u_email2.value = val;
 	}
+ 
    
   /*  뒤로가기 버튼 */
 	function goBack(){
 		window.history.back();
 	}
 	
+  
+  
 </script>
 <script type="text/javascript"
 	src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
@@ -176,14 +210,14 @@ request.setCharacterEncoding("UTF-8");
 					</div>
 				
 					<input type="text" value=""  style="width: 70%; display:none;	" disabled>
-					<button id="btbt1">수정</button>
+				
 					<br>
 					<br>
 					<br>
 
 					<div id="rr">게스트</div>
 					<input type="text" value="${ order.people_count}"class="order_input_top" disabled>
-					<button id="btbt1">수정</button>
+				
 					<br>
 					<br>
 					<br>

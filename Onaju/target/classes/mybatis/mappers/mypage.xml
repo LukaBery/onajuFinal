@@ -201,15 +201,13 @@
     	]]>
 	</select>	
 	
-	<update id="deleteMember" parameterType="String">
-	      update u_member
-	      <set>
-	      del_yn = 'Y'
-	      
-	      </set>
+	<delete id="deleteMember" parameterType="String">
+	    <![CDATA[
+	      delete from u_member
 	      where u_id=#{u_id}
 	      
-	</update>
+    	]]>
+	</delete>
 	
 		
 		

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 import com.myspring.Onaju.host.goods.dao.HostGoodsDAO;
 import com.myspring.Onaju.host.goods.vo.HostGoodsVO;
 import com.myspring.Onaju.host.goods.vo.HostImageFileVO;
@@ -59,10 +60,14 @@ public class HostGoodsServiceImpl implements HostGoodsService{
 		goodsDAO.insertNewHostInfo(hostInfoVO);
 	}	
 	@Override
-	public int hostInfoListTotal(HostInfoVO hostInfo) throws Exception {	
-		return goodsDAO.selectAllhostInfoListTotal(hostInfo);
+	public int hostInfoListTotal(Criteria cri) throws Exception {	
+		return goodsDAO.selectAllhostInfoListTotal(cri);
 	}
 	
+	@Override
+	public List<Map<String, Object>> hostInfoFormlist(Criteria cri) throws Exception{
+		return goodsDAO.hostInfoFormlist(cri);
+	}
 	@Override
 	public List<HostInfoVO> hostInfoFormlist(HostInfoVO hostInfoVO) throws Exception{
 		return goodsDAO.hostInfoFormlist(hostInfoVO);

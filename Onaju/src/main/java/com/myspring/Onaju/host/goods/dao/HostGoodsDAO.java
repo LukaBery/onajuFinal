@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.springframework.dao.DataAccessException;
 
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 import com.myspring.Onaju.host.goods.vo.HostGoodsVO;
 import com.myspring.Onaju.host.goods.vo.HostImageFileVO;
 import com.myspring.Onaju.host.goods.vo.HostInfoVO;
@@ -24,7 +25,8 @@ public interface HostGoodsDAO {
 	/* 사업자등록 */
 	public List<HostInfoVO> hostLogin(String h_id) throws DataAccessException;
 	public void insertNewHostInfo(HostInfoVO hostInfoVO) throws DataAccessException;
-	public int selectAllhostInfoListTotal(HostInfoVO hostInfo) throws DataAccessException;
+	public int selectAllhostInfoListTotal(Criteria cri) throws DataAccessException;
+	public List<Map<String, Object>> hostInfoFormlist(Criteria cri) throws DataAccessException;
 	public List<HostInfoVO> hostInfoFormlist(HostInfoVO hostInfoVO) throws DataAccessException;
 	public HostInfoVO hostInfoDetail(int h_code) throws DataAccessException;
 	public void updateHostInfo(Map hostInfoMap) throws DataAccessException;

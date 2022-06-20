@@ -85,39 +85,31 @@ public class HostControllerImpl extends BaseController implements HostController
 	@Override
 	@RequestMapping(value = "/h_login.do", method = RequestMethod.POST)
 	public ModelAndView h_login(@RequestParam Map<String, String> loginMap, HttpServletRequest request,HttpServletResponse response) throws Exception {
-
+		
+		HttpSession session = request.getSession();
 		String _pw = loginMap.get("h_pw");
 
 		ModelAndView mav = new ModelAndView();
 		hostVO = hostService.h_login(loginMap);
-		/* 占쎈릊占쎌깈占쎌넅占쎈쭆 DB �뜮袁⑨옙甕곕뜇�깈 */
+	
 
 		if (hostVO != null && hostVO.getH_id() != null) {
-			/* DB�뿉 ���옣�맂 �븫�샇�솕 鍮꾨�踰덊샇 */
+			
 			String h_pw_com = hostVO.getH_pw();
-			/* DB�뿉 ���옣�맂 SALT媛� */
 			String salt = hostVO.getSalt();
-			/* salt媛믪쓣 媛�吏�怨� �궗�슜�옄媛� �엯�젰�븳 鍮꾨�踰덊샇 �븫�샇�솕 */
 			String h_pw_enc = SHA256Util.getEncrypt(_pw, salt);
 	
 			if (h_pw_com.equals(h_pw_enc)) {
-				
-				HttpSession session = request.getSession();
+						
 				session = request.getSession();
 				session.setAttribute("isLogOn", "host");
 				session.setAttribute("hostInfo", hostVO);
 				
-				String h_id = hostVO.getH_id();
-				System.out.println("h_id: "+h_id);
-				 
+				String h_id = hostVO.getH_id();				 
 				
 				List<HostInfoVO> hostInfoVO =  hostGoodsService.h_login(h_id); // �씠�젙�븘 異붽�
-				 System.out.println("loginMap : " + loginMap);
-				 session.setAttribute("h_hostInfo",hostInfoVO); // �씠�젙�븘 異붽�
-				 System.out.println("h_hostInfo : " + hostInfoVO);
-				 
+				session.setAttribute("h_hostInfo",hostInfoVO); // �씠�젙�븘 異붽� 
 				String action = (String) session.getAttribute("action");
-				System.out.println("action:" + action);
 				if (action != null && action.equals("#")) {
 					System.out.println("액션 진입");
 					mav.setViewName("forward:" + action);
@@ -128,7 +120,6 @@ public class HostControllerImpl extends BaseController implements HostController
 				}
 			} else {
 				String message = "일치하는 회원 정보가 없습니다.";
-
 				mav.addObject("message", message);
 				mav.setViewName("/member/loginForm");
 			}

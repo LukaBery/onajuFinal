@@ -36,6 +36,7 @@ public class AdminHostControllerImpl implements AdminHostController {
 	private AdminHostVO adminHostVO ;
 	@Autowired
 	private AdminHostInfoVO adminHostInfoVO;
+
 	
 	//==========================================호스트 관련 메서드==========================================
 	@Override
@@ -128,7 +129,8 @@ public class AdminHostControllerImpl implements AdminHostController {
 		ModelAndView mav = new ModelAndView();
 		
 		int update_del_yn = adminHostService.deleteHost(h_id);
-		if(update_del_yn == 1) {
+		
+		if(update_del_yn == 3) {
 			String message = "해지 처리가 완료되었습니다.";
 			mav.addObject("hostVO", adminHostService.hostDetail(h_id));
 			mav.addObject("message", message);
@@ -221,7 +223,7 @@ public class AdminHostControllerImpl implements AdminHostController {
 	public ModelAndView deleteHostInfo(@RequestParam String h_code, @ModelAttribute("cri") Criteria cri) throws Exception{
 		ModelAndView mav = new ModelAndView();
 		int update_del_yn = adminHostService.deleteHostInfo(h_code);
-		if(update_del_yn == 1) {
+		if(update_del_yn == 2) {
 			String message = "해지 처리가 완료 되었습니다.";
 			mav.addObject("adminHostInfoVO", adminHostService.hostInfoDetail(h_code));
 			mav.addObject("message", message);

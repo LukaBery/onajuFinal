@@ -187,6 +187,9 @@
 			<if test="deputy_department != '' and deputy_department != null">
 				deputy_department = #{deputy_department},
 			</if>
+			<if test="del_yn != '' and del_yn != null">
+				del_yn = #{del_yn},
+			</if>
 		</set>
 		where h_id = #{h_id}
 	</update>
@@ -311,7 +314,22 @@
 		 		where I.h_code = #{h_code}					        
 	</select>
 	<update id="selectDeleteHost">
-		update h_host set del_yn = 'Y' where h_id = #{h_id}
+		update
+			h_host H
+		inner join
+			h_host_info I
+		on
+			H.h_id = I.h_id
+		inner join
+			h_room R
+		on
+			I.h_code = R.h_code
+		set 
+			H.del_yn = 'Y',
+			I.del_yn = 'Y',
+			R.del_yn = 'Y'
+		where 
+			H.h_id = #{h_id}
 	</update>
 	
 	<update id="selectUpdateHostInfo">
@@ -393,7 +411,34 @@
 	</update>
 	
 	<update id="selectDeleteHostInfo">
-	update h_host_info set del_yn = 'Y' where h_code = #{h_code} 
+	update 
+		h_host_info I
+	inner join 
+		h_room R
+	on 
+		I.h_code = R.h_code
+	set 
+		I.del_yn = 'Y' 
+		R.del_yn = 'Y' 
+	where 
+		h_code = #{h_code} 
 	</update>
+	
+	
+	<select id="selectRetireHost" resultMap="hostResult">
+	select * from h_host where del_yn = 'Y'
+	</select>
+	
+	<select id="selectRetireHostInfo">
+	select * from h_host_info where del_yn = 'Y'
+	</select>
+	
+	<delete id="deleteRetireHost">
+	delete from h_host where h_id = #{h_id}
+	</delete>
+	
+	<delete id="deleteRetireHostInfo">
+	delete from h_host_info where h_code = #{h_code}
+	</delete>
 	
 </mapper>

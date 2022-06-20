@@ -362,7 +362,7 @@ function moveModifyProfile(){
 									<c:when test="${item.pay_state eq '환불 완료' }">
 										<div style="width: 23%; height: 50%; float: right;">
 											<a class="draggFalse" id="btn_mypage_0"
-												href="${contextPath }/order/requestRefund.do?order_code=${item.order_code}">
+											>
 												환불 완료 </a>
 										</div>
 									</c:when>

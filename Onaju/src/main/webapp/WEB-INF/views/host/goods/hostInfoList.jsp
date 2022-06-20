@@ -11,6 +11,9 @@
 <head>
 <meta charset="UTF-8">
 <title>등록 객실 목록</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <style>
 @charset "utf-8";
 
@@ -341,7 +344,7 @@ div#page_control  a:hover {
 								</c:when>
 								<c:when test="${!empty hostInfoList}">
 									<c:forEach var="list" items="${hostInfoList}">
-										<tr>
+										<tr class="move" value='<c:out value="${list.h_code }" />'>
 											<td>${list.h_code}</td>
 											<td>${list.hostInfo_name}</td>
 											<td><a
@@ -354,48 +357,67 @@ div#page_control  a:hover {
 							</c:choose>
 						</tbody>
 					</table>
-					<div id="page_wrap">
-						<div id="page_control">
-							
-							<c:forEach var="i" begin="1" end="${totalPage }">
-								<a href="${contextPath }/host/goods/hostInfoList.do?viewPage=${i}">${i }</a>
-							</c:forEach>
-						</div>	
-						
-						<%-- 
-						 <ul id="page_control">
-							<li><a class="no_border"
-								href="${contextPath}/host/goods/adminGooodsMain.do?chapter=${section+1}&pageNum=${section*10-1}">Prev</a></li>
-							<c:set var="page_num" value="0" />
-							<c:forEach var="section" begin="1" end="10" step="1">
-								<c:choose>
-									<c:when test="${section==1 }">
-										<li><a class="page_contrl_active"
-											href="${contextPath}/host/goods/adminGoodsMain.do?chapter=${section-1}&pageNum=${(section-1)*10 +1 }">${section+page_num*10 }</a></li>
-									</c:when>
-									<c:otherwise>
-										<li><a
-											href="${contextPath}/host/goods/adminGoodsMain.do?chapter=${section-1}&pageNum=${(section-1)*10 +1 }">${section+page_num*10 }</a></li>
-									</c:otherwise>
-								</c:choose>
-							</c:forEach>
-							<li><a class="no_border"
-								href="${contextPath}/host/goods/adminGooodsMain.do?chapter=${section+1}&pageNum=${section*10+1}">Next</a></li>
-						</ul>
-						
-						 --%>
-						
-						
-						
-					</div>
-					<div>
-						<button type="button" class="noticeBtn2 btn-dark2" onclick="location.href='${contextPath}/host/goods/hostInfoForm.do'">신규 등록</button>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- 바디 섹션 -->
+<section>
+	<div class="pull-right">
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev }">
+				<li class="paginate_button previous"><a href="${pageMaker.startPage - 1 }">Previous</a></li>
+			</c:if>
+			
+			<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+				<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active' : '' }"><a href="${num }">${num }</a></li>
+			</c:forEach>
+			
+			<c:if test="${pageMaker.next }">
+				<li class="paginate_button next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
+			</c:if>
+		</ul>
+		<form id="actionForm" action="${contextPath }/host/goods/hostInfoList.do" method="get">
+			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
+			<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
+			<input type="hidden" name="h_id2" value='<c:out value="${pageMaker.cri.h_id2 }"/>'>
+		</form>
+	</div>
+</section>
+<br>
+<br>
+<div>
+	<button type="button" class="noticeBtn2 btn-dark2" onclick="location.href='${contextPath}/host/goods/hostInfoForm.do'">신규 등록</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<script type="text/javascript">
+$(document).ready(function(){
+	var actionForm = $("#actionForm");
+$(".move").on("click",function(e){
+	alert("zzzz");
+	e.preventDefault();
+	actionForm.append("<input type='hidden' name='h_code' value='"+$(this).attr("value")+"'>");
+	actionForm.attr("action", "${contextPath}/host/goods/modifyHostDetail.do");
+	actionForm.submit();
+});
+});
+
+var searchVO = $("#searchVO");
+
+$(".searchButton").on("click", function(e){
+	alert("클릭");
+	searchVO.find("input[name='pageNum']").val("1");
+	
+	searchVO.submit();
+});
+var actionForm = $("#actionForm");
+
+$(".paginate_button a").on("click", function(e){
+	e.preventDefault();
+	console.log('click');
+	
+	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	actionForm.submit();
+});
+</script>
 
 </body>
 </html>

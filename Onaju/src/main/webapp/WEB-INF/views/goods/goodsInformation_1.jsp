@@ -868,6 +868,11 @@ function addCart(){
 								${goods.room_fee } /&nbsp;<span class="days_1" ></span> 박</p>
 								<input type="hidden" name= "checkDate" id="checkDate"/>
 								<input type="hidden" name="room_fee" value="${goods.room_fee }" >
+																<input type="hidden" name= "content" value="${goods.content}">
+																<input type="hidden" name= "checkDate" id="checkDate"/>
+																<input type="hidden" name= "checkDate" id="checkDate"/>
+																<input type="hidden" name= "checkDate" id="checkDate"/>
+								
 						</div>	<div style="width:9%;height:100px;float:right;"></div>
 						<a href="#" onClick="addCart()" id="addCart_btn">
 						<img style="width:30px; height:27px; margin-bottom:5px;display:block;"src="${contextPath }/resources/image/icons/cart_white.png">

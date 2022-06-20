@@ -299,13 +299,34 @@
 	  delete from h_host_info
 	  where h_code=#{h_code}
 	</delete>
-	<select id="selectAllHostInfoListTotal" resultType="java.lang.Integer" parameterType="hostInfoVO">
+	<select id="selectAllHostInfoListTotal" resultType="java.lang.Integer" parameterType="map">
 	
-		SELECT count(*) total FROM h_host_info where h_code > 0 and h_id=#{h_id}
+		SELECT count(*) total FROM h_host_info where h_id=#{h_id2}
 	
 	</select>
 	
-  <select id="selectHostInfoList" resultMap="hostInfo" parameterType="hostInfoVO">
+  <select id="selectHostInfoList" resultType="map" parameterType="map">
+	   
+	    <![CDATA[
+		 select * 
+		 from (
+		 select (@ROWNUM := @ROWNUM + 1) rn, c.* 
+		 from (
+		 select * 
+		 from h_host_info 
+		 where h_code > 0
+		 ]]>
+		 <if test="h_id2 != '' and h_id2 != null">
+		 and h_id = #{h_id2}
+		 </if>
+		 <![CDATA[
+		 order by creDate desc
+		 )c,(select @ROWNUM := 0)s)b  
+		 where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount}
+		 ]]>  	
+    	
+	</select>
+	<select id="selectHostInfoListVO" resultMap="hostInfo" parameterType="hostInfoVO">
 	   
 	    <![CDATA[
 		 select * from 

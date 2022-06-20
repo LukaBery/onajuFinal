@@ -1,9 +1,9 @@
 package com.myspring.Onaju.host.goods.service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 import com.myspring.Onaju.host.goods.vo.HostGoodsVO;
 import com.myspring.Onaju.host.goods.vo.HostImageFileVO;
 import com.myspring.Onaju.host.goods.vo.HostInfoVO;
@@ -21,7 +21,8 @@ public interface HostGoodsService {
 	public HostInfoVO hostInfoDetail(int room_code) throws Exception;
 	public void modifyHostInfo(Map hostInfoMap) throws Exception;
 	public void deleteHostInfo(int h_code) throws Exception;
-	public int hostInfoListTotal(HostInfoVO hostInfo) throws Exception;
+	public int hostInfoListTotal(Criteria cri) throws Exception;
+	public List<Map<String, Object>> hostInfoFormlist(Criteria cri) throws Exception;
 	public List<HostInfoVO> hostInfoFormlist(HostInfoVO hostInfoVO) throws Exception;
 	public Map hostInfoChange(int h_code) throws Exception;
 	public int  addNewGoods(Map newGoodsMap) throws Exception;

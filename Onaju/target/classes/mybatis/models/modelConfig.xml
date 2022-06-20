@@ -32,6 +32,7 @@
 		
 		<typeAlias type="com.myspring.Onaju.board.review.vo.ReviewVO" alias="reviewVO" />
 
+		<typeAlias type="com.myspring.Onaju.host.hostInfo.vo.HostInfoVO" alias="h_hostInfoVO" />
 		
 	</typeAliases>
 </configuration>

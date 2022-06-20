@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 import com.myspring.Onaju.host.goods.vo.HostGoodsVO;
 import com.myspring.Onaju.host.goods.vo.HostImageFileVO;
 import com.myspring.Onaju.host.goods.vo.HostInfoVO;
@@ -65,16 +66,20 @@ public class HostGoodsDAOImpl implements HostGoodsDAO{
 	}
 	
 	@Override
-	public int selectAllhostInfoListTotal(HostInfoVO hostInfo) throws DataAccessException {
-		return sqlSession.selectOne("mapper.hostGoods.selectAllHostInfoListTotal", hostInfo);
+	public int selectAllhostInfoListTotal(Criteria cri) throws DataAccessException {
+		return sqlSession.selectOne("mapper.hostGoods.selectAllHostInfoListTotal", cri);
 	}
 	
 	@Override
-	public List<HostInfoVO> hostInfoFormlist(HostInfoVO hostInfoVO) throws DataAccessException {
-		List<HostInfoVO>  hostInfoFormlist = (List)sqlSession.selectList("mapper.hostGoods.selectHostInfoList",hostInfoVO);
+	public List<Map<String, Object>> hostInfoFormlist(Criteria cri) throws DataAccessException {
+		List<Map<String, Object>>  hostInfoFormlist = sqlSession.selectList("mapper.hostGoods.selectHostInfoList",cri);
 		return hostInfoFormlist;
 	}
-	
+	@Override
+	public List<HostInfoVO> hostInfoFormlist(HostInfoVO hostInfoVO) throws DataAccessException {
+		List<HostInfoVO>  hostInfoFormlist = sqlSession.selectList("mapper.hostGoods.selectHostInfoListVO",hostInfoVO);
+		return hostInfoFormlist;
+	}
 	@Override
 	public HostInfoVO hostInfoDetail(int h_code) throws DataAccessException {
 		HostInfoVO hostInfoVO = new HostInfoVO();
