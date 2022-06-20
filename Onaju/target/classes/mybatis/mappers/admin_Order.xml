@@ -118,8 +118,8 @@
 		 <if test="u_name2 != '' and u_name2 != null">
 		 and O.order_name like concat('%',#{u_name2},'%')
 		 </if>
-		 <if test="pay_state != '' and pay_state != null">
-		 and O.pay_state = #{pay_state}
+		 <if test="pay_state2 != '' and pay_state2 != null">
+		 and O.pay_state = #{pay_state2}
 		 </if>
 		 <if test="order_code2 != '' and order_code2 != null">
 		 and O.order_code like concat('%',#{order_code2},'%') 
@@ -227,8 +227,8 @@
 		 <if test="u_name2 != '' and u_name2 != null">
 		 and order_name like concat('%',#{u_name2},'%')
 		 </if>
-		 <if test="pay_state != '' and pay_state != null">
-		 and pay_state = #{pay_state}
+		 <if test="pay_state2 != '' and pay_state2 != null">
+		 and pay_state = #{pay_state2}
 		 </if>
 		 <if test="order_code2 != '' and order_code2 != null">
 		 and order_code like concat('%',#{order_code2},'%') 
@@ -286,10 +286,29 @@
 		update u_order
 		<set>
 			
-			 	pay_state = 'refund_fin'
+			 	pay_state = '환불 완료'
 			
 		</set>
 		where order_code = #{order_code}
+	</update>
+	
+	<update id="selectOrderUpdate">
+	update u_order
+	<set>
+	<if test="order_name != '' and order_name != null">
+	order_name = #{order_name},
+	</if>
+	<if test="order_phone != '' and order_phone != null">
+	order_phone = #{order_phone},
+	</if>
+	<if test="order_email1 != '' and order_email1 != null">
+	order_email1 = #{order_email1},
+	</if>
+	<if test="order_email2 != '' and order_email2 != null">
+	order_email2 = #{order_email2},
+	</if>
+	</set>
+	where order_code = #{order_code}
 	</update>
 
 </mapper>

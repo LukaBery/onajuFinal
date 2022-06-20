@@ -20,6 +20,11 @@
     <put-attribute name="body" value="/WEB-INF/views/admin/adminBoard/noticeDetail.jsp" />
   </definition>
   
+  <definition name="/admin/noticeModify" extends="adminLayout">
+    <put-attribute name="title" value="Tiles tutorial homepage" />  
+    <put-attribute name="body" value="/WEB-INF/views/admin/adminBoard/noticeModify.jsp" />
+  </definition>
+  
   <definition name="/admin/noticeForm" extends="adminLayout">
     <put-attribute name="title" value="Tiles tutorial homepage" />  
     <put-attribute name="body" value="/WEB-INF/views/admin/adminBoard/noticeForm.jsp" />

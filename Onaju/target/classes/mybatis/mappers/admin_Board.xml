@@ -72,7 +72,7 @@
 				N.writeDate, 
 				I.img_code, 
 				I.Org_File_Name, 
-				I.Save_file_Name, 
+				I.Save_File_Name, 
 				I.File_Size 
 		from a_noticeboard N 
 		left outer join a_notice_img I 
@@ -215,4 +215,7 @@
 		where
 			enquire_NO = #{enquire_NO}
 	</update>
+	<delete id="selectDeleteNoticeImg">
+		delete from a_notice_img where img_code = #{img_code}
+	</delete>
 </mapper>
