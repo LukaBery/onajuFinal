@@ -553,7 +553,7 @@ border-top: 2px solid #CCCCCC;
 						<li><p id="hb_main_p">${item.bigTitle }</p><p id="hb_main_p_1">${item.h_name }</p>
 						<a id="hb_a_main_profile_1"href="#"><img id="hb_main_profile_image_1"
 							src="${contextPath}/resources/image/dog_profile.PNG"></a>
-							<a id="hb_main_text03" href="#">보러가기</a>
+							<a id="hb_main_text03" href="${contextPath}/board/boardArticle.do?cmnNum=${item.cmnNum }&room_code=${item.room_code }">보러가기</a>
 						<a id="hb_a_main"
 							href="${contextPath}/board/boardArticle.do?cmnNum=${item.cmnNum }&room_code=${item.room_code }"><img id="hb_mainpage_image"
 								src="${contextPath}/host/community/download2.do?room_code=${item.room_code}&fileName=${item.cmn_image}"

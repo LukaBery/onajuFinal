@@ -943,9 +943,9 @@ function addCart(){
 								style="width: 100%; height: 100%; display: inline-block; padding: 10px;border: 1px solid #CCCCCC;
     border-radius: 20px;">
 								<div class="goodsInfo-profile">
-									<a id="hb_a_main_profile_2" href="#"> <i style="width: 60px; height: 60px; border-radius: 70%;float: left; border:1px solid #CCCCCC;"><img
+									<a id="hb_a_main_profile_2" href="#"> <i style="width: 60px; height: 60px; border-radius: 70%;float: left; "><img
 										style="width: 60px; height: 60px; border-radius: 70%; overflow: hidden; float: left;"
-										src="${contextPath}/profileShow.do?u_id=${item.u_id}&fileName=${item.u_imageName}"onerror="hide(event);"></i>
+										src="${contextPath}/profileShow.do?u_id=${item.u_id}&fileName=${item.u_imageName}"onerror="this.onerror=null; this.src='${contextPath}/resources/image/noImage.svg';"></i>
 
 										<i id="hb_review_user">${ item.u_name }</i> 
 										<fmt:setLocale value="en_US" scope="session"/>

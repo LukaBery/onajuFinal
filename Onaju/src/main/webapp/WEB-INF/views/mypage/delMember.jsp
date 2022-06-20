@@ -27,6 +27,8 @@ request.setCharacterEncoding("UTF-8");
 </c:if>
 <script type="text/javascript">
 function fn_delete_member() {
+	$("#u_id").attr("disabled",false);
+
 
 	document.frm_del_member.submit(); 
 }	
@@ -49,7 +51,7 @@ function fn_delete_member() {
 				<div class="order_divider"></div>
 
 	<span class="inputWrap_order"> <input type="text" name="u_id"
-					id="u_id" value="${memberInfo.u_id }" tabindex="1" placeholder="아이디">
+					id="u_id" value="${memberInfo.u_id }" tabindex="1" placeholder="아이디" disabled>
 				</span> <span class="inputWrap_order"> <input type="password"
 					 id="u_pw" tabindex="1" placeholder="비밀번호"name="u_pw" >
 					
