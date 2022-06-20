@@ -116,8 +116,12 @@ public class HostGoodsServiceImpl implements HostGoodsService{
 		goodsDAO.insertGoodsImageFile(imageFileList);
 	}	
 	@Override
-	public List<HostGoodsVO> selectGoodsList(String _h_id) throws Exception{
-		return goodsDAO.selectGoodsList(_h_id);
+	public List<HostGoodsVO> selectGoodsList(Criteria cri) throws Exception{
+		return goodsDAO.selectGoodsList(cri);
+	}
+	@Override
+	public int selectGoodsListTotal(Criteria cri) throws Exception {	
+		return goodsDAO.selectGoodsListTotal(cri);
 	}
 	@Override
 	public Map hostGoodsDetail(int room_code) throws Exception {

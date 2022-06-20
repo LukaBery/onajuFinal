@@ -36,7 +36,7 @@ public interface HostGoodsDAO {
 	public HostInfoVO hostInfoChange(int h_code) throws DataAccessException;
 	public int insertNewGoods(Map newGoodsMap) throws DataAccessException;
 	public void insertGoodsImageFile(List fileList)  throws DataAccessException;
-	public List<HostGoodsVO> selectGoodsList(String h_id) throws DataAccessException;
+	public List<HostGoodsVO> selectGoodsList(Criteria cri) throws DataAccessException;	public int selectGoodsListTotal(Criteria cri) throws DataAccessException;
 	public HostGoodsVO selectHostGoodsDetail(int room_code) throws DataAccessException;
 	public List selectHostGoodsImageFileList(int room_code) throws DataAccessException;
 	public void updateHostGoodsInfo(Map goodsMap) throws DataAccessException;

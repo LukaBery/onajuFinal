@@ -117,10 +117,15 @@ public class HostGoodsDAOImpl implements HostGoodsDAO{
 		}
 	}
 	@Override
-	public List<HostGoodsVO> selectGoodsList(String h_id) throws DataAccessException {
-		List<HostGoodsVO> hostGoodsList = (List) sqlSession.selectList("mapper.hostGoods.selectGoodsList", h_id);return hostGoodsList;
+	public List<HostGoodsVO> selectGoodsList(Criteria cri) throws DataAccessException {
+		List<HostGoodsVO> hostGoodsList = (List) sqlSession.selectList("mapper.hostGoods.selectGoodsList", cri);return hostGoodsList;
 	}
 	
+
+	@Override
+	public int selectGoodsListTotal(Criteria cri) throws DataAccessException {
+		return sqlSession.selectOne("mapper.hostGoods.selectGoodsListTotal", cri);
+	}
 	@Override
 	public HostGoodsVO selectHostGoodsDetail(int room_code) throws DataAccessException{
 		HostGoodsVO hostgoodsBean = new HostGoodsVO();

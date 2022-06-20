@@ -24,6 +24,7 @@ request.setCharacterEncoding("UTF-8");
 .footer {
   background-color: #414141;
   width: 100%;
+  height:200px;
   text-align: left;
   font-family: sans-serif;
   font-size: 14px;

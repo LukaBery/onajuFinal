@@ -42,7 +42,7 @@ public interface HostGoodsController {
 	public ModelAndView addNewGoods(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	public void addNewGoodsImage(MultipartHttpServletRequest multipartRequest, HttpServletResponse response) throws Exception;
 	
-	public ModelAndView hostGoodsList( HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView hostGoodsList(@ModelAttribute("cri") Criteria cri, HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ModelAndView modiHostGoodsForm(@RequestParam("room_code") int room_code, HttpServletRequest request, HttpServletResponse response)  throws Exception;
 	public ResponseEntity modiHostGoodsInfo( @RequestParam("room_code") String room_code, 
 			HttpServletRequest request, HttpServletResponse response)  throws Exception;

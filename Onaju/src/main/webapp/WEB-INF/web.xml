@@ -18,12 +18,7 @@
         <filter-class>
             org.springframework.web.filter.CharacterEncodingFilter
     </filter-class>
-    <jsp-config>
-  <jsp-property-group>
-    <url-pattern>*.jsp</url-pattern>
-    <page-encoding>UTF-8</page-encoding>
-  </jsp-property-group>
-</jsp-config>
+
     <init-param>
             <param-name>encoding</param-name>
             <param-value>UTF-8</param-value>

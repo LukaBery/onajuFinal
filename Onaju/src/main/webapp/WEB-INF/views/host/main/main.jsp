@@ -92,7 +92,7 @@ var barChartData = {
 .mainBox1 {
 	display: inline-block;
 	width: 45%;
-	height:200px;
+	height:230px;
 	border: 1px solid #ccc;
 	border-radius: 10px;
 	margin: 40px 0px 40px 42px;
@@ -111,7 +111,7 @@ var barChartData = {
 }
 .mainBoxText{
 	display: inline-block;
-	margin: 0 0 20px 0;
+	margin: 0 0 10px 0;
 	color: #403e3f;
 	font-size: 12px;
 	font-family: 'roboto', sans-serif;
@@ -208,7 +208,7 @@ var barChartData = {
 								</tr>
 							</c:when> 
 							<c:when test="${!empty hostReservationList}">
-								<c:forEach var="list" items="${hostReservationList}">
+								<c:forEach var="list" items="${hostReservationList}" begin="0" end="4">
 									<tr>
 										<td>${list.order_code}</td>
 										<td>${list.hostInfo_name}</td>

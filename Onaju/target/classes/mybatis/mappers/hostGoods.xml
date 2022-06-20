@@ -337,13 +337,33 @@
     	
 	</select>
 	
-	<select id="selectGoodsList" resultMap="goodsResult"  parameterType="String"  >
-	    <![CDATA[
-	    		select R.h_code, H.hostInfo_name, R.room_code, R.title, R.room_fee, R.room_type, R.room_number, R.room_status
+	<select id="selectGoodsList"  resultType="map" parameterType="map" >
+	      <![CDATA[
+ select * 
+		 from (
+		 select (@ROWNUM := @ROWNUM + 1) rn, c.* 
+		 from (
+			select R.h_code, H.hostInfo_name, R.room_code, R.title, R.room_fee, R.room_type, R.room_number, R.room_status
 				from h_host_info H inner join h_room R
 				on H.h_code = R.h_code
-				where H.h_id = #{h_id}
-		]]>
+				 	]]>
+				
+				
+				
+				where H.h_id = #{h_id2}
+         
+         
+          <![CDATA[
+         
+         
+          )c,(select @ROWNUM := 0)s)b  
+		 where rn > (#{pageNum}-1) * #{amount} and rn <= #{pageNum} * #{amount}
+		 	]]>
+	</select>
+	<select id="selectGoodsListTotal" resultType="java.lang.Integer" parameterType="map">
+	
+		SELECT count(*) total FROM h_room where h_id=#{h_id2}
+	
 	</select>
 	
 	<select id="selectHostGoodsDetail" resultMap="goodsResult"   parameterType="String"  >

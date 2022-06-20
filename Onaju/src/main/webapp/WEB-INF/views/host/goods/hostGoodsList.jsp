@@ -12,6 +12,10 @@
 <head>
 <meta charset="UTF-8">
 <title>등록 객실 목록</title>
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 <style>
 @charset "utf-8";
 table {
@@ -262,6 +266,40 @@ section.host_notice {
     
 }
 
+/* 페이징 추가 css */
+
+#page_wrap {
+	margin: 10px auto 50px; 
+	padding: 0px;
+	width: 100%;
+	font-size: 11px;
+}
+
+div#page_control {
+	padding: 0px;
+	font-size: 11px;
+	padding: 0px 5px;
+	float: left;
+	color: #7f9b75;
+}
+
+
+div#page_control a {
+	padding: 2px 5px;
+	border: 1px solid rgb(204, 204, 204);
+	border-radius: 3px;
+	border-image: none;
+	display: inline-block;
+	color: #7f9b75;
+}
+
+
+div#page_control  a:hover {
+	border: 1px solid #edbc40;
+	border-image: none;
+	color: #edbc40;
+}
+
 </style>
 </head>
 
@@ -326,7 +364,35 @@ section.host_notice {
 									</c:when>
 								</c:choose>
 							</tbody>
+							
+							
+							
+						
+	
+					
 						</table>
+						<div style="width:100%; height:80px;">
+						<div class="pull-right">
+		<ul class="pagination">
+			<c:if test="${pageMaker.prev }">
+				<li class="paginate_button previous"><a href="${pageMaker.startPage - 1 }">Previous</a></li>
+			</c:if>
+			
+			<c:forEach var="num" begin="${pageMaker.startPage }" end="${pageMaker.endPage }">
+				<li class="paginate_button ${pageMaker.cri.pageNum == num ? 'active' : '' }"><a href="${num }">${num }</a></li>
+			</c:forEach>
+			
+			<c:if test="${pageMaker.next }">
+				<li class="paginate_button next"><a href="${pageMaker.endPage + 1 }">Next</a></li>
+			</c:if>
+		</ul>
+		<form id="actionForm" action="${contextPath }/host/goods/hostGoodsList.do" method="get">
+			<input type="hidden" name="pageNum" value="${pageMaker.cri.pageNum }" />
+			<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
+			<input type="hidden" name="h_id2" value='<c:out value="${pageMaker.cri.h_id2 }"/>'>
+		</form>
+	</div>
+	</div>
 							<div>
 								<button type="button" class="noticeBtn2 btn-dark2" onclick="location.href='${contextPath}/host/goods/addNewGoodsForm.do'">신규 등록</button>
 								
@@ -336,6 +402,28 @@ section.host_notice {
 				</div>
 	</section>
 	<!-- 바디 섹션 -->
+<script>
 
+
+var searchVO = $("#searchVO");
+
+$(".searchButton").on("click", function(e){
+	alert("클릭");
+	searchVO.find("input[name='pageNum']").val("1");
+	
+	searchVO.submit();
+});
+var actionForm = $("#actionForm");
+
+$(".paginate_button a").on("click", function(e){
+	e.preventDefault();
+	console.log('click');
+	
+	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	actionForm.submit();
+});
+
+
+</script>
 </body>
 </html>

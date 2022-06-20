@@ -451,17 +451,19 @@ public class HostGoodsControllerImpl extends BaseController implements HostGoods
 	/* 목록 */
 	@Override
 	@RequestMapping(value="/hostGoodsList.do" , method = { RequestMethod.POST, RequestMethod.GET })
-	public ModelAndView hostGoodsList(HttpServletRequest request, HttpServletResponse response)  throws Exception {
+	public ModelAndView hostGoodsList(@ModelAttribute("cri") Criteria cri, HttpServletRequest request, HttpServletResponse response)  throws Exception {
 		
 		String viewName = (String) request.getAttribute("viewName");
-		System.out.println("컨트롤러 viewName : " + viewName);
+		
 		HttpSession session = request.getSession();
 		ModelAndView mav = new ModelAndView(viewName);
 		HostVO hostVO = (HostVO) session.getAttribute("hostInfo");
-		System.out.println("hostVO의 VO : " + hostVO);
-		String _h_id = hostVO.getH_id();
+		String h_id = hostVO.getH_id();
+		cri.setH_id2(h_id);
+		int total = hostGoodsService.selectGoodsListTotal(cri);
 		
-		List<HostGoodsVO> hostGoodsList=hostGoodsService.selectGoodsList(_h_id);
+		List<HostGoodsVO> hostGoodsList=hostGoodsService.selectGoodsList(cri);
+		mav.addObject("pageMaker", new PageVO(cri, total));
 		mav.addObject("hostGoodsList", hostGoodsList);
 
 		return mav;

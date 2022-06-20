@@ -58,7 +58,9 @@ public class HostGoodsVO {
 	private String latitude;
 	private boolean like_state;
 	private String like_id;
-	
+	private int viewPage = 1;
+	private int startNO = 1; // 페이징 초기값(1번부터 불러오겠다)
+	private int endNO = 10; //페이징 초기값(10번까지 불러오겠다)
 	
 	public HostGoodsVO() {
 		System.out.println("HostGoodsVO 생성자 호출");
@@ -72,6 +74,36 @@ public class HostGoodsVO {
 
 	public String getLongitude() {
 		return longitude;
+	}
+
+
+	public int getViewPage() {
+		return viewPage;
+	}
+
+
+	public void setViewPage(int viewPage) {
+		this.viewPage = viewPage;
+	}
+
+
+	public int getStartNO() {
+		return startNO;
+	}
+
+
+	public void setStartNO(int startNO) {
+		this.startNO = startNO;
+	}
+
+
+	public int getEndNO() {
+		return endNO;
+	}
+
+
+	public void setEndNO(int endNO) {
+		this.endNO = endNO;
 	}
 
 

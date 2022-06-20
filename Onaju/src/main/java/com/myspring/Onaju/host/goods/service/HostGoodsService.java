@@ -27,7 +27,8 @@ public interface HostGoodsService {
 	public Map hostInfoChange(int h_code) throws Exception;
 	public int  addNewGoods(Map newGoodsMap) throws Exception;
 	public void addNewGoodsImage(List imageFileList) throws Exception;
-	public List<HostGoodsVO> selectGoodsList(String _h_id) throws Exception;
+	public List<HostGoodsVO> selectGoodsList(Criteria cri) throws Exception;
+	public int selectGoodsListTotal(Criteria cri) throws Exception ;
 	public Map hostGoodsDetail(int room_code) throws Exception;
 	public List hostGoodsImageFile(int room_code) throws Exception;
 	public void modiHostGoodsInfo(Map goodsMap) throws Exception;
