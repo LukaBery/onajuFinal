@@ -244,14 +244,19 @@ function moveModifyProfile(){
 <body>
 	<section class="hb_section_total">
 	
-	    <div class="hb_nav_box1">
+	
+	
+	<c:choose>
+	<c:when test="${memberInfo != null }">
+	<div class="hb_nav_box1">
 		<!-- <상위 네비게이션>-->
-		  <div class="hb_nav_section_1 margin_left_0">
+		<div class="hb_nav_section_1 margin_left_0">
+
 			<div class="hb_nav_btn" style="border: 2px solid #CCCCCC;">
-				<a class="hb_nav_btn_a hb_nav_shadow"  href="${contextPath}/mypage/mypageMain.do">이용내역조회</a>
+				<a class="hb_nav_btn_a" href="${contextPath}/mypage/mypageMain.do">이용내역조회</a>
 			</div>
-			<div class="hb_nav_btn">
-				<a class="hb_nav_btn_a" href="${contextPath}/mypage/myCart.do">장바구니</a>
+			<div class="hb_nav_btn"  >
+				<a class="hb_nav_btn_a hb_nav_shadow" href="${contextPath}/mypage/myCart.do">장바구니</a>
 			</div>
 			<div class="hb_nav_btn">
 				<a class="hb_nav_btn_a" href="${contextPath}/mypage/Mypage3.do">회원정보수정</a>
@@ -264,11 +269,21 @@ function moveModifyProfile(){
 			<div class="hb_nav_btn">
 				<a class="hb_nav_btn_a" href="${contextPath}/mypage/delMember.do">회원 탈퇴</a>
 			</div>
-		  </div>
-		</div>
 
-		<section class="hb_section_mypagemain">
+		</div>
 		
+		</div>
+</c:when>
+<c:otherwise>
+</c:otherwise>
+
+
+
+
+
+</c:choose>
+		<section class="hb_section_mypagemain">
+		<c:if test="${memberInfo != null }">
 			<div class="mypage_member_profile_box">
 				<div class="mypage_profile_center_line">
 					<a class="mypage_profile_image_a">
@@ -305,7 +320,7 @@ function moveModifyProfile(){
 					</div>
 				</div>
 			</div>
-
+</c:if>
 <c:if test="${not empty myOrderList_fu}">
 				<div class="hb_section_title">
 					<h1 id="h1_left_title">여행</h1>
@@ -371,7 +386,7 @@ function moveModifyProfile(){
 
 			</c:if>
 
-
+<c:if test="${memberInfo != null }">
 			<div class="hb_section_title">
 				<h1 id="h1_left_title">최근 이용 내역</h1>
 			</div>
@@ -458,8 +473,8 @@ function moveModifyProfile(){
 </form>
 
 
-
-
+</c:if>
+<c:if test="${memberInfo != null }">
 <div style="display:flex;width:924px; justify-content:flex-start;flex-wrap:wrap;">
 
 			<c:choose>
@@ -601,7 +616,55 @@ function moveModifyProfile(){
 			</c:choose>
 
 </div>
+</c:if>
+<c:if test="${not empty nonmemberOrder }">
+	<div class="hb_section_title">
+					<h1 style="color: #5C5C5C; font-weight: 600; text-align: center; font-size: 30px;">
+						주문 정보</h1>
+				</div>
+			
+					<c:forEach var="item" items="${nonmemberOrder}" varStatus="status">
+					<c:set var="i" value="${i +1 }" />
+						<form name="cartPay_${i}" id="cartPay_${i}" class="mypage_card_box"
+							action="${contextPath}/order/orderCartGoods.do" method="post">
 
+							<div class="mypage_card">
+								<fmt:setLocale value="en_US" scope="session" />
+								<fmt:parseDate var="checkIn" value="${ item.checkIn_date }" pattern="EEE MMM dd HH:mm:ss z yyyy" />
+								<fmt:formatDate var="checkIn_date" value="${checkIn}" pattern="yyyy년 MM월 dd일" />
+								<fmt:parseDate var="checkOut" value="${ item.checkOut_date }" pattern="EEE MMM dd HH:mm:ss z yyyy" />
+								<fmt:formatDate var="checkOut_date" value="${checkOut}" pattern="yyyy년 MM월 dd일" />
+									<input type="hidden" name="total" value="${ item.total }"> 
+									<input type="hidden" name="people_count" value="${ item.people_count }"> 
+									<input type="hidden" name="room_fee" value="${ item.room_fee }"> 
+									<input type="hidden" name="room_code" value="${ item.room_code }">
+								    <input type="hidden" name="checkIn_date" value="${ item.checkIn_date }"> 
+									<input type="hidden" name="checkOut_date" value="${ item.checkOut_date }"> 
+									<input type="hidden" name="h_code" value="${ item.h_code }"> <img
+									src="${contextPath}/thumbnails.do?room_code=${item.room_code}&fileName=${item.room_imageName}"
+									class="mypage_card_image"
+									onClick="location.href='${contextPath}/host/goods/goodsDetail.do?room_code=${ item.room_code}'" >
+								<div class="mypage_card_title"
+									onClick="location.href='${contextPath}/host/goods/goodsDetail.do?room_code=${ item.room_code}'" >
+									${ item.title }</div>
+									
+								<div
+									style="width: 50%; height: 25%; float: left; text-align: left; padding-left: 10px; margin-top: 5px; font-size: 14px; font-weight: 540;">
+									호스트: ${ item.h_name }</div>
+								<div
+									style="width: 77%; height: 25%; float: left; text-align: left; padding-left: 10px; margin-top: 5px; font-size: 14px; font-weight: 540;">
+									${checkIn_date } ~ ${checkOut_date }</div>
+
+							</div>
+							<div style="width: 2%; height: 100px; float: left;"></div>
+
+
+						</form>
+					</c:forEach>
+
+				
+				
+</c:if>
 <div style="width:100%;height:2px;border-top:2px solid #CCCCCC;margin:20px 0px;"></div>
 <c:choose>
  <c:when test="${not empty myOrderList }">	

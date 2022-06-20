@@ -4,7 +4,7 @@ import org.springframework.stereotype.Component;
 
 @Component("adminHostInfoVO")
 public class AdminHostInfoVO {
-	private int h_code;
+	private String h_code;
 	private String h_id;
 	private String h_name;
 	private String h_birth_y;
@@ -47,11 +47,11 @@ public class AdminHostInfoVO {
 		this.del_yn = del_yn;
 	}
 
-	public int getH_code() {
+	public String getH_code() {
 		return h_code;
 	}
 
-	public void setH_code(int h_code) {
+	public void setH_code(String h_code) {
 		this.h_code = h_code;
 	}
 

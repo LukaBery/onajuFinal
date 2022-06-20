@@ -19,9 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -53,7 +55,7 @@ public class AdminBoardControllerImpl implements AdminBoardController {
 	String adminUploadPath;
 	
 	@Override
-	@RequestMapping(value = "/admin/noticeList.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/admin/noticeList.do", method = RequestMethod.GET)
 	public ModelAndView adminNoticeList(Criteria cri) throws Exception {		
 		ModelAndView mav = new ModelAndView();
 		
@@ -75,7 +77,7 @@ public class AdminBoardControllerImpl implements AdminBoardController {
 	}
 
 	@Override
-	@RequestMapping(value = "/admin/noticeForm.do", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/admin/noticeForm.do", method = RequestMethod.GET)
 	public ModelAndView adminNoticeForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav =new ModelAndView(); 
 		String viewName = (String)request.getAttribute("viewName"); 
@@ -104,8 +106,10 @@ public class AdminBoardControllerImpl implements AdminBoardController {
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("a_id", a_id);
 			map.put("notice_code", notice_code);
-			Map<String, Object> imgFile = parseFileInfo(map, file);
-			adminBoardService.insertImgFile(imgFile);
+			if(!file.isEmpty()) {
+				Map<String, Object> imgFile = parseFileInfo(map, file);
+				adminBoardService.insertImgFile(imgFile);
+			}
 		}
 		logger.debug("==========시작==========");
 		logger.debug("파일이름 : "+ file.getName());
@@ -203,7 +207,7 @@ public class AdminBoardControllerImpl implements AdminBoardController {
 
 	@Override
 	@RequestMapping(value = "/admin/enquireDetail.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public ModelAndView enquireBoardDetail(@RequestParam("enquire_NO")String enquire_NO, @ModelAttribute("cri") Criteria cri) throws Exception {
+	public ModelAndView enquireBoardDetail(@RequestParam("enquire_NO") String enquire_NO, @ModelAttribute("cri") Criteria cri) throws Exception {
 		
 		adminBoardService.updateHit(enquire_NO);
 		
@@ -224,6 +228,7 @@ public class AdminBoardControllerImpl implements AdminBoardController {
 		return insertReply == 1 ? new ResponseEntity<>("success", HttpStatus.OK) : new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
+	@Override
 	@RequestMapping(value = "/admin/enquireReplyList.do", method = {RequestMethod.GET, RequestMethod.POST} )
 	public ResponseEntity<List<Map<String, Object>>> ajaxcommentList(AdminEnquireReplyVO replyVO){
 		List<Map<String, Object>> replysList = adminBoardService.enquireReplyDetail(replyVO);
@@ -246,4 +251,97 @@ public class AdminBoardControllerImpl implements AdminBoardController {
 			return new ResponseEntity<String>("failed",HttpStatus.OK);
 		}
 	}
+	
+	@Override
+	@RequestMapping(value = "/admin/updateNotice.do", method = RequestMethod.POST)
+	public ModelAndView updateNotice(@RequestParam Map<String, Object> noticeMap, MultipartFile file, @ModelAttribute Criteria cri) throws Exception {
+		
+		ModelAndView mav = new ModelAndView("redirect:/admin/noticeList.do");
+		
+		String Save_File_Name = (String)noticeMap.get("Save_File_Name");
+		
+		Map<String, Object> imgFile = new HashMap<String, Object>();
+		String noticeCode = (String)noticeMap.get("notice_code");
+		String img_code = (String)noticeMap.get("img_code");
+		String creID = (String)noticeMap.get("a_id");
+		String orgFileName = file.getOriginalFilename();
+		String orgFileExtension = orgFileName.substring(orgFileName.lastIndexOf("."));
+		String saveFileName = UUID.randomUUID().toString().replace("-", "") + orgFileExtension;
+		Long saveFileSize = file.getSize();
+		
+		imgFile.put("notice_code", noticeCode);
+		imgFile.put("Org_File_Name", orgFileName);
+		imgFile.put("File_Size", saveFileSize);
+		
+		if(!Save_File_Name.isEmpty()) {
+			File filePath = new File(adminUploadPath +"\\"+Save_File_Name);
+			if(filePath.exists()) {
+				filePath.delete();
+				File target = new File(adminUploadPath);	
+				target = new File(adminUploadPath, saveFileName);
+				file.transferTo(target);
+				
+				imgFile.put("img_code", img_code);
+				imgFile.put("Save_File_Name", saveFileName);
+				
+				adminBoardService.updateImgFile(imgFile);
+				adminBoardService.updateNotice(noticeMap);
+			}
+		}else {
+			File target = new File(adminUploadPath);	
+			target = new File(adminUploadPath, saveFileName);
+			file.transferTo(target);
+			
+			imgFile.put("creID", creID);
+			imgFile.put("Save_File_Name", saveFileName);
+			
+			adminBoardService.insertImgFile(imgFile);
+			adminBoardService.updateNotice(noticeMap);	
+		}	
+		return mav;
+	}
+	
+	@Override
+	@RequestMapping(value = "/admin/deleteNotice.do", method = RequestMethod.POST)
+	public ModelAndView deleteNotice(@RequestParam String notice_code, @ModelAttribute("cri") Criteria cri) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		
+		int update_post_check = adminBoardService.deleteNotice(notice_code);
+		if(update_post_check == 1) {
+			String message = "게시물이 중지 되었습니다.";
+			Map<String, Object> noticeMap = adminBoardService.noticeDetail(notice_code);
+			mav.addObject("noticeMap", noticeMap);
+			mav.addObject("message", message);
+		}else {
+			String message = "게시물 중지 작업이 실패 하였습니다.";
+			Map<String, Object> noticeMap = adminBoardService.noticeDetail(notice_code);
+			mav.addObject("noticeMap", noticeMap);
+			mav.addObject("message", message);
+		}
+		mav.setViewName("/admin/noticeDetail");
+		
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value = "/admin/replyDelete.do" , method = {RequestMethod.GET, RequestMethod.POST})
+	public ResponseEntity<Map<String, Object>> replydelete(@RequestParam Map<String, Object> reMap) {
+		Map<String,Object> data = new HashMap<String, Object>();
+		String re_NO = (String)reMap.get("re_NO");
+		String enquire_NO = (String)reMap.get("enquire_NO");
+		int delete_re_NO = adminBoardService.deleteReply(re_NO);
+		if(delete_re_NO == 1) {
+			String message = "success";	
+			data.put("message", message);
+			data.put("enquire_NO", enquire_NO);
+		}else {
+			String message = "failed";
+			data.put("message", message);
+			data.put("enquire_NO", enquire_NO);
+		}
+	
+		return new ResponseEntity<Map<String, Object>>(data, HttpStatus.OK);
+	}
+	
+	
 }

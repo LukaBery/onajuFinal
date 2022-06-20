@@ -43,11 +43,11 @@
 		 and writeDate <= #{join_endDate}
 		 ]]>
 		 </if>
-		 <if test="notice_title != '' and notice_title != null">
-		 and notice_title like concat('%',#{notice_title},'%')
+		 <if test="notice_title2 != '' and notice_title2 != null">
+		 and notice_title like concat('%',#{notice_title2},'%')
 		 </if>
-		 <if test="notice_type != '' and notice_type != null">
-		 and notice_type = #{notice_type}
+		 <if test="notice_type2 != '' and notice_type2 != null">
+		 and notice_type = #{notice_type2}
 		 </if>
 		 <![CDATA[
 		 order by writeDate desc
@@ -111,11 +111,11 @@
 		 and writeDate <= #{join_endDate}
 		 ]]>
 		 </if>
-		 <if test="notice_title != '' and notice_title != null">
-		 and notice_title like concat('%',#{notice_title},'%')
+		 <if test="notice_title2 != '' and notice_title2 != null">
+		 and notice_title like concat('%',#{notice_title2},'%')
 		 </if>
-		 <if test="notice_type != '' and notice_type != null">
-		 and notice_type = #{notice_type}
+		 <if test="notice_type2 != '' and notice_type2 != null">
+		 and notice_type = #{notice_type2}
 		 </if>
 		
 	</select>
@@ -195,6 +195,7 @@
 	</insert>
 	<select id="selectEnquireReplyDetail" resultType="hashmap" parameterType="adminEnquireReplyVO">
 		select
+			re_NO,
 			enquire_NO,
 			re_contents,
 			date_format(creDate,'%Y-%m-%d %H:%i:%s') as creDate,
@@ -217,5 +218,60 @@
 	</update>
 	<delete id="selectDeleteNoticeImg">
 		delete from a_notice_img where img_code = #{img_code}
+	</delete>
+	
+	<update id="selectUpdateNotice">
+		update 
+			a_noticeboard
+			<set>
+				<if test="notice_title != '' and notice_title != null">
+					notice_title = #{notice_title},
+				</if>
+				<if test="notice_content != '' and notice_content != null">
+					notice_content = #{notice_content},
+				</if>
+				<if test="notice_type != '' and notice_type != null">
+					notice_type = #{notice_type},
+				</if>
+				<if test="notice_startDate != '' and notice_startDate != null">
+					notice_startDate = #{notice_startDate},
+				</if>
+				<if test="notice_endDate != '' and notice_endDate != null">
+					notice_endDate = #{notice_endDate},
+				</if>
+				<if test="post_check != '' and post_check != null">
+					post_check = #{post_check},
+				</if>
+				<if test="post_chennel != '' and post_chennel != null">
+					post_chennel = #{post_chennel},
+				</if>
+				<if test="topView_check != '' and topView_check != null">
+					topView_check = #{topView_check},
+				</if>
+			</set>
+			where notice_code = #{notice_code}
+	</update>
+	<update id="selectUpdateImgFile">
+		update 
+			a_notice_img
+			<set>
+				<if test="Org_File_Name != '' and Org_File_Name != null">
+					Org_File_Name = #{Org_File_Name},
+				</if>
+				<if test="Save_File_Name != '' and Save_File_Name != null">
+					Save_File_Name = #{Save_File_Name},
+				</if>
+				<if test="File_Size != '' and File_Size != null">
+					File_Size = #{File_Size},
+				</if>
+			</set>
+			where img_code = #{img_code}
+	</update>
+	
+	<update id="selectDeleteNotice">
+		update a_noticeboard set post_check='N' where notice_code = #{notice_code}
+	</update>
+	<delete id="selectDeleteReply">
+		delete from a_enquire_reply where re_NO = #{re_NO}
 	</delete>
 </mapper>

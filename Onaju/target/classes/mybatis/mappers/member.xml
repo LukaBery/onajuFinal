@@ -52,7 +52,7 @@
 		<!-- 로그인 -->
 	<select id="login" resultType="memberVO"  parameterType="java.util.Map"  >
 	    <![CDATA[
-				select * from u_member  where u_id=#{u_id} 
+				select * from u_member  where del_yn = 'N'  and u_id=#{u_id}
 		]]>
 	</select>
 	
@@ -160,7 +160,15 @@
 	<delete id="deleteRetireMember" parameterType="memberVO">
 		delete from u_member where u_id = #{u_id}
 	</delete>
-
+	<update id="deleteMember" parameterType="String">
+	      update u_member
+	      <set>
+	      del_yn = 'Y'
+	      
+	      </set>
+	      where u_id=#{u_id}
+	      
+	</update>
 
 		
 

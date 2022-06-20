@@ -31,8 +31,8 @@ public class AdminOrderServiceImpl implements AdminOrderService {
 	}
 
 	@Override
-	public int orderCancel(String order_code) {
-		return adminOrderDAO.selectOrderCancel(order_code);
+	public int orderDelete(String order_code) {
+		return adminOrderDAO.selectOrderDelete(order_code);
 	}
 
 	@Override

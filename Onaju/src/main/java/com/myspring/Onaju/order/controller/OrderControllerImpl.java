@@ -1,7 +1,9 @@
 package com.myspring.Onaju.order.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -208,7 +210,8 @@ System.out.println("리스트 추가완료");
 		String action = (String)session.getAttribute("action");
 		MemberVO memberVO=(MemberVO)session.getAttribute("memberInfo");
 		MemberVO nonmemberVO=(MemberVO)session.getAttribute("nonmemberInfo");
-	
+		  String sMember = (String) session.getAttribute("sMember");
+
 		if(isLogOn == "" || isLogOn == null) {
 			mav.setViewName("redirect:/member/loginForm.do");
 			
@@ -220,6 +223,8 @@ System.out.println("리스트 추가완료");
 			receiverMap.put("u_id", u_id);
 		
 		
+		}else {
+			orderVO.setU_id("nonmember");
 		}
 	
 			SimpleDateFormat dt = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy", Locale.ENGLISH); 
@@ -228,6 +233,9 @@ System.out.println("리스트 추가완료");
 			orderVO.setOrder_phone(receiverMap.get("order_phone"));
 			orderVO.setOrder_email1(receiverMap.get("order_email1"));
 			orderVO.setOrder_email2(receiverMap.get("order_email2"));
+			orderVO.setRoom_imageName(receiverMap.get("room_imageName"));
+			orderVO.setTitle(receiverMap.get("title"));
+
 			System.out.println("오더리스트 이프문 진입");
 			orderVO.setRoom_code(receiverMap.get("room_code"));
 			orderVO.setH_code(receiverMap.get("h_code"));
@@ -256,8 +264,22 @@ System.out.println("리스트 추가완료");
 			System.out.println("애드 멤버 메서드 진입");
 	    orderService.addNewOrder(orderVO);
 		System.out.println("애드 메서드 끝 ");
-		
+		if(cart_code != null) {
 		cartService.removeCartGoods(cart_code);
+		}
+		
+		if(nonmemberVO != null || sMember != null) {
+			List<CartVO> nonmemberOrder = (ArrayList<CartVO>) session.getAttribute("nonMemberCart");
+			if(nonmemberOrder != null) {
+				session.setAttribute("nonmemberOrder", nonmemberOrder);
+
+			}else {
+				List<OrderVO> nonOrder = new ArrayList();
+				nonOrder.add(orderVO);
+				session.setAttribute("nonmemberOrder", nonOrder);
+				
+			}
+		}
 		MemberVO _memberVO = memberService.login(receiverMap);
 		session.removeAttribute("memberInfo");
 		session.setAttribute("memberInfo", _memberVO);

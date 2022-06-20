@@ -193,10 +193,10 @@
 				<div class="mem-item2-chil-5"><div>${orderVO.total }</div></div>
 			</div>
 			<div class="mem-item2-chil">
-				<div class="mem-item2-chil-4"><div>주문 상태</div></div>
+				<div class="mem-item2-chil-4"><div>이용 상태</div></div>
+				<div class="mem-item2-chil-5"><div>${orderVO.use_state }</div></div>
+				<div class="mem-item2-chil-4"><div>숙소 예약 정보</div></div>
 				<div class="mem-item2-chil-5"><div>${orderVO.reservation_state }</div></div>
-				<div class="mem-item2-chil-4"><div>숙소 이용 정보</div></div>
-				<div class="mem-item2-chil-5"><div>이용전</div></div>
 			</div>
 		</div>
 		
@@ -324,42 +324,6 @@ $('.a1').click(function(){
 })
 
 
-
-</script>
-<script type="text/javascript">
-
-$(document).ready(function(){
-	var operForm = $("#operForm");
-	$(".a2").on("click",function(e){
-		
-		e.preventDefault();
-		var operation = $(this).data("oper");
-		operForm.attr("action", "${contextPath}/admin/orderDetail.do").attr("method","get");
-		
-		var pageNumTag = $("input[name='pageNum']").clone();
-		var amountTag = $("input[name='amount']").clone();
-		var join_startDateTag = $("input[name='join_startDat']").clone();
-		var join_endDateTag = $("input[name='join_endDate']").clone();
-		var u_id2Tag = $("input[name='u_id2']").clone();
-		var pay_state2Tag = $("input[name='pay_state2']").clone();
-		var u_name2Tag = $("input[name='u_name2']").clone();
-		var order_code2Tag = $("input[name='order_code2']").clone();
-		
-		operForm.empty();
-		
-		operForm.append(pageNumTag);
-		operForm.append(amountTag);
-		operForm.append(join_startDateTag);
-		operForm.append(join_endDateTag);
-		operForm.append(u_id2Tag);
-		operForm.append(pay_state2Tag);
-		operForm.append(u_name2Tag);
-		operForm.append(order_code2Tag);
-
-		alert("리스트로");
-		operForm.submit();
-	});
-});
 
 </script>
 

@@ -38,7 +38,7 @@ public class AdminGoodsDAOImpl implements AdminGoodsDAO {
 
 	@Override
 	public int selectRoomDelete(String room_code) {
-		return sqlSession.delete("mapper.admin.goods,selectOneRoomDelete", room_code);
+		return sqlSession.update("mapper.admin.goods.selectOneRoomDelete", room_code);
 	}
 
 }

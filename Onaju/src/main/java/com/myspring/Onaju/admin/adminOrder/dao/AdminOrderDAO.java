@@ -11,7 +11,7 @@ public interface AdminOrderDAO {
 	public List<Map<String, Object>> selectAllOrderList(String u_id);
 	public int selectOrderListTotal(Criteria cri);
 	public AdminOrderVO selectOrderDetail(String order_code);
-	public int selectOrderCancel(String order_code);
 	public int selectOrderUpdate(AdminOrderVO orderVO);
+	public int selectOrderDelete(String order_code);
 
 }

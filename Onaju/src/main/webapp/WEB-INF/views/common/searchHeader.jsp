@@ -244,7 +244,12 @@ color:black;
 					<ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4 ">
 						<li class="nav-item dropdown"><a style="padding: 0px 0px;"
 							class="nav-link" id="navbarDropdown" href="#"
-							role="button" data-bs-toggle="dropdown" aria-expanded="false"> <c:choose>
+							role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							
+							
+							
+							
+							 <c:choose>
 									<c:when test="${not empty isLogOn and not empty memberInfo }">
 										<img src="${contextPath}/profileShow.do?u_id=${memberInfo.u_id}&fileName=${memberInfo.u_imageName}" onerror="this.onerror=null; this.src='${contextPath}/resources/image/noImage.svg';"
 										style="border-radius:70%; border:1px solid #CCCCCC;width:30px;height:30px;float: left;margin: 3px 5px 3px 6px;">
@@ -303,15 +308,29 @@ color:black;
 									
 									<c:when test="${not empty isLogOn and not empty userInfo}">
 					
-										<li><a class="dropdown-item"
-											href="${contextPath}/mypage/mypageMain.do">마이페이지</a></li>
+									<li><a class="dropdown-item"
+											href="${contextPath}/member/joinForm.do">회원가입</a></li>
+										
 										<li><a class="dropdown-item"
 											href="${contextPath}/mypage/myCart.do">장바구니</a></li>
 										<li><hr class="dropdown-divider" /></li>
-										<li><a class="dropdown-item"
-											href="${contextPath}/host/h_joinForm.do">호스트가입</a></li>
-									<li><a class="dropdown-item"
-											 href="https://kauth.kakao.com/oauth/logout?client_id=2520c8e17541628f34b1475ac21d1840&logout_redirect_uri=http://localhost:8080/Onaju/member/kakaoLogout">로그아웃</a></li>
+										<c:choose>
+											<c:when test="${userInfo.s_type == 'k'}">
+												<li><a class="dropdown-item"
+													 href="https://kauth.kakao.com/oauth/logout?client_id=2520c8e17541628f34b1475ac21d1840&logout_redirect_uri=http://localhost:8080/Onaju/member/kakaoLogout">로그아웃
+													</a>
+												</li>
+											</c:when>
+											<c:when test="${userInfo.s_type == 'n'}">
+												<li>
+												
+												<!-- 	<input type="button" class="search_button" id="requestBtn" value="로그아웃" onclick="Logout()"> -->
+													<a class="dropdown-item" onclick="Logout()"
+													 href="${contextPath}/member/naverLogout">로그아웃
+													</a> 
+												</li>
+											</c:when>
+										</c:choose>
 										<li><a class="dropdown-item"
 											href="${contextPath}/cs/noticeBoard.do">고객센터</a></li>
 										
@@ -353,6 +372,7 @@ color:black;
 
 
 								</c:choose>
+
 
 
 

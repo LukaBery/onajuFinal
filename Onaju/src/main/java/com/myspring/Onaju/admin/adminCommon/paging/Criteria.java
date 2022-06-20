@@ -24,11 +24,13 @@ public class Criteria {
 	private String r_del_yn;
 	private String order_code2;
 	private String pay_state2;
-	private String notice_title;
-	private String notice_type;
+	private String notice_title2;
+	private String notice_type2;
 	private String title;
 	private String reply_yn;
-	
+	private String a_del_yn;
+	private String a_id2;
+	private String a_name2;
 	
 	public int getPageNum() {
 		return pageNum;
@@ -140,17 +142,17 @@ public class Criteria {
 	public void setPay_state2(String pay_state2) {
 		this.pay_state2 = pay_state2;
 	}
-	public String getNotice_title() {
-		return notice_title;
+	public String getNotice_title2() {
+		return notice_title2;
 	}
-	public void setNotice_title(String notice_title) {
-		this.notice_title = notice_title;
+	public void setNotice_title2(String notice_title2) {
+		this.notice_title2 = notice_title2;
 	}
-	public String getNotice_type() {
-		return notice_type;
+	public String getNotice_type2() {
+		return notice_type2;
 	}
-	public void setNotice_type(String notice_type) {
-		this.notice_type = notice_type;
+	public void setNotice_type2(String notice_type2) {
+		this.notice_type2 = notice_type2;
 	}
 	public String getTitle() {
 		return title;
@@ -163,6 +165,24 @@ public class Criteria {
 	}
 	public void setReply_yn(String reply_yn) {
 		this.reply_yn = reply_yn;
+	}
+	public String getA_del_yn() {
+		return a_del_yn;
+	}
+	public void setA_del_yn(String a_del_yn) {
+		this.a_del_yn = a_del_yn;
+	}
+	public String getA_id2() {
+		return a_id2;
+	}
+	public void setA_id2(String a_id2) {
+		this.a_id2 = a_id2;
+	}
+	public String getA_name2() {
+		return a_name2;
+	}
+	public void setA_name2(String a_name2) {
+		this.a_name2 = a_name2;
 	}
 	
 	

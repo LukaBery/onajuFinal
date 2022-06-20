@@ -13,4 +13,5 @@ public interface AdminMemberService {
 	public MemberVO memberDetail(String u_id) throws Exception;
 	public int memberUpdate(MemberVO vo) throws Exception;
 	public List<Map<String, Object>> searchMember(Map<String, Object> searchMap);
+	public int deleteMember(String u_id);
 }

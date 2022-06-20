@@ -116,13 +116,8 @@
 				<div><h3>${noticeMap.notice_title }</h3></div>
 			</div>
 			<div class="notice-box2">
-				<div><div>작성자 : ${noticeMap.a_id }</div></div>
-				<fmt:setLocale value="en_US" scope="session" />
-								<fmt:parseDate var="writeDate_" value="${ noticeMap.writeDate }"
-									pattern="yyyy-MM-dd hh:mm:ss.SSS" />
-								<fmt:formatDate var="writeDate" value="${writeDate_}"
-									pattern="yyyy년 MM월 dd일" />
-				<div><div>작성일 : ${writeDate}</div></div>
+				<div><div>작성자 : ${noticeMap.a_id }</div></div>								
+				<div><div>작성일 : ${ noticeMap.writeDate }</div></div>
 			</div>			
 		</div>
 		<div class="notice-box3">

@@ -13,5 +13,5 @@ public interface AdminGoodsController {
 	public ModelAndView roomDetail(@RequestParam("room_code")String room_code, @ModelAttribute("cri") Criteria cri) throws Exception;
 	public ModelAndView roomModify(@RequestParam("room_code")String room_code, @ModelAttribute("cri") Criteria cri) throws Exception;
 	public String roomUpdate(AdminHostRoomVO roomVO, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr);
-	public String roomDelete(String room_code, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr);
+	public ModelAndView roomDelete(String room_code, @ModelAttribute("cri") Criteria cri);
 }

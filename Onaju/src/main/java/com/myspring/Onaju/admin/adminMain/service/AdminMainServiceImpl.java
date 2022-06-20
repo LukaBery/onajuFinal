@@ -32,4 +32,14 @@ public class AdminMainServiceImpl implements AdminMainService {
 		return adminMainDAO.selectAdminOverlappedID(id);
 	}
 
+	@Override
+	public int resultLoginId(String a_id) {
+		return adminMainDAO.resultLoginId(a_id);
+	}
+
+	@Override
+	public int resultLoginPw(Map<String, String> loginMap) {
+		return adminMainDAO.resultLoginPw(loginMap);
+	}
+
 }

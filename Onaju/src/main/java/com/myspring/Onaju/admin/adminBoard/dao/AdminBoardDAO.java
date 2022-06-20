@@ -13,11 +13,13 @@ public interface AdminBoardDAO {
 	public Map<String, Object> selectNoticeDetail(String notice_code);
 	public String selectImgFile(Map<String, Object> imgInfoMap);
 	public int selectAllNoticeListTotal(Criteria cri);
-
+	public void selectUpdateImgFile(Map<String, Object> imgFile);
+	public void selectUpdateNotice(Map<String, Object> noticeMap);
 	public int insertNotice(AdminNoticeVO noticeVO);
 	public int insertImgFile(Map<String, Object> imgFile);
 	public int selectDeleteNoticeImg(String img_code);
 	public List<Map<String, Object>> selectSearchNotice(Map<String, Object> searchMap);
+	public int selectDeleteNotice(String notice_code);
 	
 	//==========================1대1 게시판==========================
 	public List<Map<String, Object>> selectAllEnquireList(Criteria cri);
@@ -30,4 +32,6 @@ public interface AdminBoardDAO {
 	public int insertEnquireReply(AdminEnquireReplyVO replyVO);
 	public List<Map<String, Object>> selectEnquireReplyDetail(AdminEnquireReplyVO replyVO);
 	public int updateReplyCheck(AdminEnquireReplyVO replyVO);
+	public int updateReply(AdminEnquireReplyVO replyVO);
+	public int deleteReply(String re_NO);
 }

@@ -48,6 +48,9 @@
 	display: flex;
 	justify-content: space-between;
 }
+.reply_box_chil div{
+	display: flex;
+}
 </style>
 </head>
 <body>
@@ -118,12 +121,15 @@ function getReplyList(){
 			
 			if(data.length > 0){
 				for(i=0; i<data.length; i++){
+					html += "<form id='replyVO"+data[i].re_NO+"'>";
 					html += "<div class='reply_box'>";
-					html += "<div class='reply_box_chil'><div><strong>"+data[i].a_id+"</strong></div>";
+					html += "<div class='reply_box_chil'><div><strong>"+data[i].a_id+"</strong><div><button type='button' id='upreplyForm' value='"+data[i].re_NO+"'>수정</button></div><div><button type='button' id='delreply' onclick='deleteRe("+data[i].re_NO+")'>삭제</button></div></div>";
 					html += "<div>"+ data[i].creDate + "</div></div><br>";
-					html += "<div>"+ data[i].re_contents;
+					html += "<div id='re_contents'>"+ data[i].re_contents;
+					html += "<input type='hidden' name='re_NO' value='"+data[i].re_NO+"' />";
 					html += "</div>";
 					html += "</div>";
+					html += "</form>";
 				}
 			} else {
 				html += "<div>";
@@ -141,6 +147,74 @@ function getReplyList(){
 		
 	});
 }
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#upreplyForm").click(function(){
+		$("#replyModifyForm").show();
+		$("#re_contents").hide();
+	})
+})
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var operForm = $("#operForm");
+$("#upreply").on("click",function(e){
+	alert("수정수정");
+	e.preventDefault();
+	operForm.append("<input type='hidden' name='room_code' value='"+$(this).attr("value")+"'>");
+	operForm.attr("action", "${contextPath}/admin/replyModify.do");
+	operForm.submit();
+	});
+});
+</script>
+<script type="text/javascript">
+function deleteRe(obj){
+	var enquire_NO = ${enquireDetail[0].enquire_NO};
+	var re_NO = obj;
+	alert("삭제삭제");
+	$.ajax({
+		url:"${contextPath}/admin/replyDelete.do",
+		type:"get",
+		data: {re_NO,enquire_NO},
+		dataType: "text",
+		success: function(data){
+			if(message = "success"){
+				alert("댓글 삭제");
+				location.href="${contextPath}/admin/enquireDetail.do?enquire_NO=${enquireDetail[0].enquire_NO}&pageNum=${cri.pageNum}&amount=${cri.amount}&join_startDat=${cri.join_startDate}&join_endDate=${cri.join_endDate}&reply_yn=${cri.reply_yn}&title=${cri.title}";	
+			}else{
+				alert("삭제 실패");
+				location.href="${contextPath}/admin/enquireDetail.do?enquire_NO=${enquireDetail[0].enquire_NO}&pageNum=${cri.pageNum}&amount=${cri.amount}&join_startDat=${cri.join_startDate}&join_endDate=${cri.join_endDate}&reply_yn=${cri.reply_yn}&title=${cri.title}";
+			}
+			
+		},
+		error: function(request,status,error){
+			alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+		}
+	});
+};
+
+
+
+/* $(document).ready(function(){
+$("#delreply").on("click",function(e){
+	var re_NO = $(this).val();
+	alert("삭제삭제");
+	$.ajax({
+		url:"${contextPath}/admin/replyDelete.do",
+		type:"post",
+		data:re_NO,
+		success: function(data){
+			alert("댓글 삭제");
+			location.href="${contextPath}/admin/enquireDetail.do";
+		},
+		error: function(data){
+			alert("통신 실패");
+		}
+	})
+	
+	});
+}); */
 </script>
 </body>
 </html>

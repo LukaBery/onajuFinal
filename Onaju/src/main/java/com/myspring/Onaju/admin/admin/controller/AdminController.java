@@ -1,11 +1,11 @@
 package com.myspring.Onaju.admin.admin.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Map;
 
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myspring.Onaju.admin.admin.vo.AdminVO;
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 
 /* 
  * 5조 오나주 개발 프로젝트(그린컴퓨터아트학원)
@@ -17,11 +17,13 @@ import com.myspring.Onaju.admin.admin.vo.AdminVO;
 public interface AdminController {
 	
 	// 관리자 리스트 조회
-	public ModelAndView adminsList(AdminVO vo, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView adminsList(Criteria cri);
 	
 	// 관리자 상세 정보 조회
-	public ModelAndView adminDetail(String a_id, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView adminDetail(String a_id, @ModelAttribute("cri") Criteria cri) throws Exception;
 	
 	// 관리자 상세 정보 수정
-	public ModelAndView adminModifyForm(String a_id,HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView adminModifyForm(String a_id, @ModelAttribute("cri") Criteria cri) throws Exception;
+	
+	public ModelAndView updateAdmin(Map<String, Object> adminMap, @ModelAttribute("cri") Criteria cri);
 }

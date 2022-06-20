@@ -258,7 +258,7 @@
 				<td>${hostInfo.h_name }</td>   
 				<td>${hostInfo.h_sellerNum}</td>   
 				<td>${hostInfo.roadAddress }</td>   
-				<td>${hostInfo.del_yn}</td> 
+				<td>${hostInfo.del_yn }</td> 
 			</tr>
     	</c:forEach>
      </c:when>

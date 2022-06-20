@@ -63,7 +63,7 @@
 							h_service_01,
 							h_service_02,
 							salt
- from h_host  where h_id=#{h_id} 
+ from h_host  where del_yn = 'N' and h_id=#{h_id} 
 		]]>
 	</select>
 	<!-- 아이디 찾기 -->

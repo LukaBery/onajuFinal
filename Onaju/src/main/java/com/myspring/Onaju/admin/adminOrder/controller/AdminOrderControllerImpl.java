@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -46,14 +45,6 @@ public class AdminOrderControllerImpl implements AdminOrderController {
 		mav.addObject("orderVO", orderVO );
 		return mav;
 	}
-	@Override
-	@ResponseBody
-	@RequestMapping(value = "/admin/orderCancel.do", method = RequestMethod.POST )
-	public int orderCancel(String order_code) {
-
-		int data = adminOrderService.orderCancel(order_code);
-		return data;
-	}
 	
 	
 	@Override
@@ -83,6 +74,25 @@ public class AdminOrderControllerImpl implements AdminOrderController {
 		rttr.addAttribute("u_id2", cri.getU_id2());
 		rttr.addAttribute("order_code2", cri.getOrder_code2());
 		return "redirect:/admin/orderDetail.do";
+	}
+	@Override
+	@RequestMapping(value = "/admin/orderDelete.do", method = RequestMethod.POST)
+	public ModelAndView orderDelete(String order_code, @ModelAttribute("cri") Criteria cri) {
+		ModelAndView mav = new ModelAndView();
+		
+		int update_del_yn = adminOrderService.orderDelete(order_code);
+		
+		if(update_del_yn == 1) {
+			String message = "해지 처리가 완료 되었습니다.";
+			mav.addObject("orderVO", adminOrderService.orderDetail(order_code));
+			mav.addObject("message", message);
+		}else {
+			String message = "해치 처리가 실패하였습니다.";
+			mav.addObject("orderVO", adminOrderService.orderDetail(order_code));
+			mav.addObject("message", message);
+		}
+		mav.setViewName("/admin/orderDetail");
+		return mav;
 	}
 	
 	

@@ -1,10 +1,9 @@
 package com.myspring.Onaju.admin.admin.dao;
 
 import java.util.List;
+import java.util.Map;
 
-import org.springframework.dao.DataAccessException;
-
-import com.myspring.Onaju.admin.admin.vo.AdminVO;
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
 
 /* 
  * 5조 오나주 개발 프로젝트(그린컴퓨터아트학원)
@@ -15,9 +14,11 @@ import com.myspring.Onaju.admin.admin.vo.AdminVO;
 
 public interface AdminDAO {
 	// 관리자 목록 리스트
-	public List<AdminVO> selectAllAdminList(AdminVO vo) throws DataAccessException;
+	public List<Map<String, Object>> selectAllAdminList(Criteria cri);
 	// 관리자 직원 수
-	public int selectAllAdminListTotal(AdminVO vo) throws DataAccessException;
+	public int selectAllAdminListTotal(Criteria cri);
 	// 관리자 직원 삭제
-	public AdminVO selectAdminDetail(String a_id) throws DataAccessException;
+	public Map<String, Object> selectAdminDetail(String a_id);
+	
+	public int selectUpdateAdmin(Map<String, Object> adminMap);
 }

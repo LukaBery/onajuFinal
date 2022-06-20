@@ -21,6 +21,7 @@ import com.myspring.Onaju.cart.service.CartService;
 import com.myspring.Onaju.cart.vo.CartVO;
 import com.myspring.Onaju.common.base.BaseController;
 import com.myspring.Onaju.member.vo.MemberVO;
+import com.myspring.Onaju.s_member.S_memberVO;
 
 
 
@@ -123,11 +124,12 @@ public class CartControllerImpl extends BaseController implements CartController
 
 		MemberVO memberInfo = (MemberVO) session.getAttribute("memberInfo");
 		MemberVO nonmemberInfo = (MemberVO) session.getAttribute("nonmemberInfo");
+		  String sMember = (String) session.getAttribute("sMember");
 
 		if (memberInfo != null) {
 			cartVO.setU_id(memberInfo.getU_id());
 			cartService.addCart(cartVO);
-		} else if (nonmemberInfo != null) {
+		} else if (nonmemberInfo != null || sMember != null) {
 			List<CartVO> myCartList = (ArrayList<CartVO>) session.getAttribute("nonMemberCart");
 			if(myCartList == null ) { 
 				List<CartVO> myCart = new ArrayList<CartVO>(); 
@@ -138,21 +140,11 @@ public class CartControllerImpl extends BaseController implements CartController
 				myCartList.add(cartVO);
 				session.setAttribute("nonMemberCart", myCartList);
 			}
-			
-			System.out.println("비회원 주문 성공");
 
-		} else {
-			System.out.println("안들어가짐; 주문 성공");
-
-		}
-		
-		
-		
+		} 
 		
 		String room_code = cartVO.getRoom_code();
-		System.out.println("코드드드드드드"+room_code);
 		mav.addObject("room_code", room_code);
-		
 		mav.addObject("cartVO", cartVO);
 		mav.setViewName("redirect:/host/goods/goodsDetail.do");
 		return mav;

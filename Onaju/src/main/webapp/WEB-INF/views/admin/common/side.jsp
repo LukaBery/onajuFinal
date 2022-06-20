@@ -116,25 +116,21 @@
  				<ul class="ohnaju-first-show">
  					<li class="ohnaju-li"><div><a href="${contextPath }/admin/hostList.do">사업주 관리</a></div></li>
  					<li class="ohnaju-li"><div><a href="${contextPath }/admin/hostInfoList.do">사업장 관리</a></div></li>
- 					<li class="ohnaju-li"><div><a href="${contextPath }/host.hostCalculate.do">매출/정산 관리</a></div></li>
  			   </ul>
  		</li>
  		<li class="ohnaju-li"><div><a href="#" class="ohnaju-second-btn"><i style="color:#80FFCC" class="fa-solid fa-folder-closed"></i>&emsp;상품 관리</a></div>
  			<ul class="ohnaju-second-show">
  				<li class="ohnaju-li"><div><a href="${contextPath }/admin/goodsList.do">상품 등록 관리</a></div></li>
- 				<li class="ohnaju-li"><div><a href="${contextPath }/goods.goodsModify.do">수정 관리</a></div></li>
  			</ul>
  		</li>
  		<li class="ohnaju-li"><div><a href="#" class="ohnaju-third-btn"><i style="color:#FF550D" class="fa-solid fa-cart-shopping"></i>&emsp;주문 관리</a></div>
  			<ul class="ohnaju-third-show">
  				<li class="ohnaju-li"><div><a href="${contextPath }/admin/orderList.do">주문 상품 관리</a></div></li>
- 				<li class="ohnaju-li"><div><a href="${contextPath }/order.orderModify.do">주문 수정 관리</a></div></li>
  			</ul>
  		</li>
  		<li class="ohnaju-li"><div><a href="#"  class="ohnaju-fourth-btn"><i style="color:#80EAFF"  class="fa-solid fa-chart-simple"></i>&emsp;정산/통계 관리</a></div>
  			<ul class="ohnaju-fourth-show">
  				<li class="ohnaju-li"><div><a href="${contextPath }/calculate.calculatePage.do">전체 매출</a></div></li>
- 				<li class="ohnaju-li"><div><a href="#">수정 관리</a></div></li>
  			</ul>
  		</li>
  		<li class="ohnaju-li"><div><a href="#" class="ohnaju-fifth-btn"><i style="color:#4D4D4D" class="fa-solid fa-paste"></i>&emsp;게시판 관리</a></div>
@@ -143,16 +139,9 @@
  				<li class="ohnaju-li"><div><a href="${contextPath }/admin/enquireBoard.do">1:1 질문 관리</a></div></li>
  			</ul>
  		</li>
- 		<li class="ohnaju-li"><div><a href="#" class="ohnaju-sixth-btn"><i style="color:#999900" class="fa-solid fa-palette"></i>&emsp;디자인 관리</a></div>
- 			<ul class="ohnaju-sixth-show">
- 				<li class="ohnaju-li"><div><a href="${contextPath }/advert.adList.do"> 배너 관리</a></div></li>
- 				<li class="ohnaju-li"><div><a href="${contextPath}/advert.popupList.do">팝업 관리</a></div></li>
- 			</ul>
- 		</li>
  		<li class="ohnaju-li"><div><a href="#" class="ohnaju-seventh-btn"><i style="color:#B266FF" class="fa-solid fa-people-roof"></i>&emsp;직원 관리</a></div>
  			<ul class="ohnaju-seventh-show">
  				<li class="ohnaju-li"><div><a href="${contextPath }/admin/adminList.do">직원 관리</a></div></li>
- 				<li class="ohnaju-li"><div><a href="#">수정 관리</a></div></li>
  			</ul>
  		</li>  		
  	</ul>

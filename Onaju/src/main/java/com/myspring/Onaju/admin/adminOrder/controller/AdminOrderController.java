@@ -12,6 +12,6 @@ public interface AdminOrderController {
 	public ModelAndView ordersList(Criteria cri) throws Exception;
 	public ModelAndView orderDetail(@RequestParam("order_code")String order_code, @ModelAttribute("cri") Criteria cri) throws Exception;
 	public ModelAndView orderModify(@RequestParam("order_code")String order_code, @ModelAttribute("cri") Criteria cri) throws Exception;
-	public int orderCancel(String order_code);
 	public String orderUpdate(AdminOrderVO orderVO, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr);
+	public ModelAndView orderDelete(String order_code, @ModelAttribute Criteria cri);
 }

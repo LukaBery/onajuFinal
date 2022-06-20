@@ -273,7 +273,7 @@
 				<div class="mem-item2-chil-1"><div>가맹점 룸 등록일자</div></div>
 				<div class="mem-item2-chil-2"><div>${roomDetail.creDate }</div></div>
 				<div class="mem-item2-chil-1"><div>가맹점 룸 상태</div></div>
-				<div class="mem-item2-chil-2"><div>${roomDetail.del_yn }</div></div>
+				<div class="mem-item2-chil-2"><div>${roomDetail.del_yn eq 'N' ? '등록완료' : '등록해지' }</div></div>
 			</div>
 			<div class="mem-item1">
 				<div><h3>룸 디테일 정보</h3></div>
@@ -366,8 +366,9 @@
 			
 		</div>
 		<div class="mem-item5">
-			<div><a class="a1" href='<c:out value="${roomDetail.room_code }" />'>수정하기</a></div>
 			<div><button class="a2" type="submit" id="goodsList" data-oper="list">돌아가기</button></div>
+			<div><a class="a1" href='<c:out value="${roomDetail.room_code }" />'>수정하기</a></div>
+			<div><button class="a3" id="goodsdelete" value='<c:out value="${roomDetail.room_code }" />'>해지하기</button></div>
 		</div>	
 	</section>
 	<form id="operForm" action="${contextPath }/admin/goodsList.do" method="get">
@@ -391,30 +392,7 @@ $(document).ready(function(){
 		e.preventDefault();
 		var operation = $(this).data("oper");
 		operForm.attr("action", "${contextPath}/admin/goodsList.do").attr("method","get");
-		
-		var pageNumTag = $("input[name='pageNum']").clone();
-		var amountTag = $("input[name='amount']").clone();
-		var join_startDateTag = $("input[name='join_startDat']").clone();
-		var join_endDateTag = $("input[name='join_endDate']").clone();
-		var h_id2Tag = $("input[name='h_id2']").clone();
-		var r_del_ynTag = $("input[name='r_del_yn']").clone();
-		var h_name2Tag = $("input[name='h_name2']").clone();
-		var h_sellerNum2Tag = $("input[name='h_sellerNum2']").clone();
-		var hostInfo_name2Tag = $("input[name='hostInfo_name2']").clone();
-		var roadAddress2Tag = $("input[name='roadAddress2']").clone();
-		
-		operForm.empty();
-		
-		operForm.append(pageNumTag);
-		operForm.append(amountTag);
-		operForm.append(join_startDateTag);
-		operForm.append(join_endDateTag);
-		operForm.append(r_del_ynTag);
-		operForm.append(h_name2Tag);
-		operForm.append(h_id2Tag);
-		operForm.append(h_sellerNum2Tag);
-		operForm.append(hostInfo_name2Tag);
-		operForm.append(roadAddress2Tag);
+
 		alert("리스트로");
 		operForm.submit();
 	});
@@ -424,41 +402,14 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 $(document).ready(function(){
-	var formObj = $("form");
+	var operForm = $("#operForm");
 	
-	$("#deleteHost").on("click", function(e){
+	$("#goodsdelete").on("click", function(e){
 		e.preventDefault();
-		var operation = $(this).data("oper");
-		alert(operation);
-		if(operation == 'remove'){
-			formObj.attr("action","${contextPath}/admin/goodsDetail.do").attr("method","get");
-			
-			var pageNumTag = $("input[name='pageNum']").clone();
-			var amountTag = $("input[name='amount']").clone();
-			var join_startDateTag = $("input[name='join_startDat']").clone();
-			var join_endDateTag = $("input[name='join_endDate']").clone();
-			var h_id2Tag = $("input[name='h_id2']").clone();
-			var h_del_ynTag = $("input[name='h_del_yn']").clone();
-			var h_name2Tag = $("input[name='h_name2']").clone();
-			var h_sellerNum2Tag = $("input[name='h_sellerNum2']").clone();
-			var hostInfo_name2Tag = $("input[name='hostInfo_name2']").clone();
-			var roadAddress2Tag = $("input[name='roadAddress2']").clone();
-			
-			formObj.empty();
-			
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(join_startDateTag);
-			formObj.append(join_endDateTag);
-			formObj.append(h_id2Tag);
-			formObj.append(h_del_ynTag);
-			formObj.append(h_name2Tag);
-			formObj.append(h_sellerNum2Tag);
-			operForm.append(hostInfo_name2Tag);
-			operForm.append(roadAddress2Tag);
-			
-		}
-		formObj.submit();
+		operForm.append("<input type='hidden' name='room_code' value='"+$(this).attr("value")+"'>");
+		operForm.attr("action","${contextPath}/admin/goodsDelete.do").attr("method","post");
+
+		operForm.submit();
 	});
 });
 </script>

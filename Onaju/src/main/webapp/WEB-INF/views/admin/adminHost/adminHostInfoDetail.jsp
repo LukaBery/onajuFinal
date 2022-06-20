@@ -195,8 +195,9 @@
 		</div>
 				
 		<div class="mem-item5">
-			<div><a class="a1" href='<c:out value="${adminHostInfoVO.h_code }" />'>수정하기</a></div>
 			<div><button class="a2" type="submit" id="hostInfoList" data-oper="list">돌아가기</button></div>
+			<div><a class="a1" href='<c:out value="${adminHostInfoVO.h_code }" />'>수정하기</a></div>
+			<div><button id="hostInfoDelete" value='<c:out value="${adminHostInfoVO.h_code }" />' >등록해지</button></div>
 		</div>	
 	</section>
 	<form id="operForm" action="${contextPath }/admin/hostInfoList.do" method="get">
@@ -217,36 +218,10 @@
 $(document).ready(function(){
 	var operForm = $("#operForm");
 	$(".a2").on("click",function(e){
-		
 		e.preventDefault();
 		var operation = $(this).data("oper");
 		operForm.attr("action", "${contextPath}/admin/hostInfoList.do").attr("method","get");
 		
-		var pageNumTag = $("input[name='pageNum']").clone();
-		var amountTag = $("input[name='amount']").clone();
-		var join_startDateTag = $("input[name='join_startDat']").clone();
-		var join_endDateTag = $("input[name='join_endDate']").clone();
-		var h_id2Tag = $("input[name='h_id2']").clone();
-		var h_del_ynTag = $("input[name='h_del_yn']").clone();
-		var h_name2Tag = $("input[name='h_name2']").clone();
-		var h_sellerNum2Tag = $("input[name='h_sellerNum2']").clone();
-		var hostInfo_name2Tag = $("input[name='hostInfo_name2']").clone();
-		var info_del_ynTag = $("input[name='info_del_yn']").clone();
-		var roadAddress2Tag = $("input[name='roadAddress2']").clone();
-		
-		operForm.empty();
-		
-		operForm.append(pageNumTag);
-		operForm.append(amountTag);
-		operForm.append(join_startDateTag);
-		operForm.append(join_endDateTag);
-		operForm.append(h_del_ynTag);
-		operForm.append(h_name2Tag);
-		operForm.append(h_id2Tag);
-		operForm.append(h_sellerNum2Tag);
-		operForm.append(hostInfo_name2Tag);
-		operForm.append(info_del_ynTag);
-		operForm.append(roadAddress2Tag);
 		alert("리스트로2");
 		operForm.submit();
 	});
@@ -259,7 +234,19 @@ $(".a1").on("click",function(e){
 	alert("수정수정");
 	e.preventDefault();
 	operForm.append("<input type='hidden' name='h_code' value='"+$(this).attr("href")+"'>");
-	operForm.attr("action", "${contextPath}/admin/hostInfoModify.do");
+	operForm.attr("action", "${contextPath}/admin/hostInfoModify.do").attr("method","post");
+	operForm.submit();
+	});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var operForm = $("#operForm");
+$("#hostInfoDelete").on("click",function(e){
+	alert("삭제삭제");
+	e.preventDefault();
+	operForm.append("<input type='hidden' name='h_code' value='"+$(this).attr("value")+"'>");
+	operForm.attr("action", "${contextPath}/admin/hostInfoDelete.do").attr("method","post");
 	operForm.submit();
 	});
 });

@@ -168,17 +168,10 @@
 			</div>
 			<div class="mem-item2-chil">
 				<div class="mem-item2-chil-1"><div>사업주 상태</div></div>
-				<c:choose>
-					<c:when test="${hostVO.del_yn == 'n' || hostVO.del_yn == 'n' }">
-						<div class="mem-item2-chil-2"><div>탈퇴</div></div>
-					</c:when>
-					<c:when test="${hostVO.del_yn == 'y' || hostVO.del_yn == 'Y' }">
-						<div class="mem-item2-chil-2"><div>가입완료</div></div>
-					</c:when>
-					<c:otherwise>
-						<div class="mem-item2-chil-2"><div>미입력</div></div>
-					</c:otherwise>
-				</c:choose>
+			
+						<div class="mem-item2-chil-2"><div>${hostVO.del_yn eq 'N' ? '등록완료': '등록해지'}</div></div>
+	
+				
 				<div class="mem-item2-chil-1"><div>사업주 성별</div></div>
 				<c:choose>
 					<c:when test="${hostVO.h_gender == 'm' || hostVO.h_gender == 'M' }">
@@ -219,7 +212,7 @@
 		
 		<div class="mem-item5">
 			<div><a class="a1" href='<c:out value="${hostVO.h_id }" />'>수정하기</a></div>
-			<div><button type="submit" id="deleteHost" data-oper="remove">탈퇴하기</button></div>
+			<div><button id="deleteHost" value="${hostVO.h_id }" >탈퇴하기</button></div>
 			<div><button class="a2" type="submit" id="hostList" data-oper="list">돌아가기</button></div>
 		</div>	
 	</section>
@@ -234,27 +227,7 @@
 		<input type="hidden" name="h_id2" value='<c:out value="${cri.h_id2 }" />'>
 		<input type="hidden" name="h_name2" value='<c:out value="${cri.h_name2 }" />'>
 	</form>
-<script type="text/javascript">
-$(document).ready(function fn_deleteHost(){
-	$("#deleteHost").click(function(){
-	var _id = document.getElementById("h_id").value;
-	$.ajax({		
-		url: '${contextPath}/admin/deleteHost.do',
-		data: {"h_id" : _id},
-		dataType : 'text',
-		type:'get',
-		async : false,
-		success: function(data){
-				alert("탈퇴 처리를 완료하였습니다.");
-				location.href="${contextPath}/admin/hostList.do";	
-		},
-		error:function(data){
-			alert("탈퇴 처리가 완료되지 않았습니다.");
-		}
-	})
-	})
-})
-</script>
+
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -264,26 +237,6 @@ $(document).ready(function(){
 		e.preventDefault();
 		var operation = $(this).data("oper");
 		operForm.attr("action", "${contextPath}/admin/hostList.do").attr("method","get");
-		
-		var pageNumTag = $("input[name='pageNum']").clone();
-		var amountTag = $("input[name='amount']").clone();
-		var join_startDateTag = $("input[name='join_startDat']").clone();
-		var join_endDateTag = $("input[name='join_endDate']").clone();
-		var h_id2Tag = $("input[name='h_id2']").clone();
-		var h_del_ynTag = $("input[name='h_del_yn']").clone();
-		var h_name2Tag = $("input[name='h_name2']").clone();
-		var h_sellerNum2Tag = $("input[name='h_sellerNum2']").clone();
-		
-		operForm.empty();
-		
-		operForm.append(pageNumTag);
-		operForm.append(amountTag);
-		operForm.append(join_startDateTag);
-		operForm.append(join_endDateTag);
-		operForm.append(h_del_ynTag);
-		operForm.append(h_name2Tag);
-		operForm.append(h_id2Tag);
-		operForm.append(h_sellerNum2Tag);
 		alert("리스트로");
 		operForm.submit();
 	});
@@ -293,36 +246,14 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 $(document).ready(function(){
-	var formObj = $("form");
-	
+	var operForm = $("#operForm");
 	$("#deleteHost").on("click", function(e){
 		e.preventDefault();
-		var operation = $(this).data("oper");
-		alert(operation);
-		if(operation == 'remove'){
-			formObj.attr("action","${contextPath}/admin/hostDetail.do").attr("method","get");
-			
-			var pageNumTag = $("input[name='pageNum']").clone();
-			var amountTag = $("input[name='amount']").clone();
-			var join_startDateTag = $("input[name='join_startDat']").clone();
-			var join_endDateTag = $("input[name='join_endDate']").clone();
-			var h_id2Tag = $("input[name='h_id2']").clone();
-			var h_del_ynTag = $("input[name='h_del_yn']").clone();
-			var h_name2Tag = $("input[name='h_name2']").clone();
-			var h_sellerNum2Tag = $("input[name='h_sellerNum2']").clone();
-			
-			formObj.empty();
-			
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(join_startDateTag);
-			formObj.append(join_endDateTag);
-			formObj.append(h_id2Tag);
-			formObj.append(h_del_ynTag);
-			formObj.append(h_name2Tag);
-			formObj.append(h_sellerNum2Tag);
-		}
-		formObj.submit();
+
+		operForm.append("<input type='hidden' name='h_id' value='"+$(this).attr("value")+"'>");
+		operForm.attr("action","${contextPath}/admin/hostDelete.do").attr("method","post");
+		alert("삭제삭제");
+		operForm.submit();
 	});
 });
 </script>
@@ -330,7 +261,7 @@ $(document).ready(function(){
 <script type="text/javascript">
 $(document).ready(function(){
 	var operForm = $("#operForm");
-$(".a1").on("click",function(e){
+	$(".a1").on("click",function(e){
 	alert("수정수정");
 	e.preventDefault();
 	operForm.append("<input type='hidden' name='h_id' value='"+$(this).attr("href")+"'>");

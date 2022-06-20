@@ -16,4 +16,6 @@ import com.myspring.Onaju.admin.admin.vo.AdminVO;
 public interface AdminMainDAO {
 	public AdminVO adminLogin(Map<String, String> loginMap) throws DataAccessException;
 	public String selectAdminOverlappedID(String id) throws DataAccessException;
+	public int resultLoginId(String a_id);
+	public int resultLoginPw(Map<String, String> loginMap);
 }

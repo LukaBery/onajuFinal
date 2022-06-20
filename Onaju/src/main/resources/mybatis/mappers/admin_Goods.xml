@@ -173,7 +173,7 @@
 		 and H.h_name like concat('%',#{h_name2},'%')
 		 </if>
 		 <if test="r_del_yn != '' and r_del_yn != null">
-		 and I.del_yn = #{r_del_yn}
+		 and R.del_yn = #{r_del_yn}
 		 </if>
 		 <if test="h_sellerNum2 != '' and h_sellerNum2 != null">
 		 and I.h_sellerNum like concat ('%',#{h_sellerNum2},'%')
@@ -416,5 +416,8 @@
 	</set>
     where 
    			R.room_code = #{room_code}
+	</update>
+	<update id="selectOneRoomDelete">
+		update h_room set del_yn = 'Y' where room_code = #{room_code}
 	</update>
 </mapper>

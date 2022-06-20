@@ -219,8 +219,8 @@
 			<col style="width:12%">
 			<col style="width:15%">
 			<col style="width:12%">
-			<col style="width:14%">
-			<col style="width:7%">
+			<col style="width:13%">
+			<col style="width:8%">
 		</colgroup>
 		<thead>
   			<tr>
@@ -258,7 +258,7 @@
 						<td>${host.h_email1}@${host.h_email2}</td>   
 						<td>${host.h_sellerNum}</td>   
 						<td>${host.roadAddress }</td>   
-						<td>${host.del_yn}</td>    
+						<td>${host.del_yn eq 'N' ? '가입완료':'회원탈퇴'}</td>    
 					</tr>
     			</c:forEach>
     		 </c:when>

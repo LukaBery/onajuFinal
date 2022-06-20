@@ -225,8 +225,10 @@
 	<delete id="deleteRetireMember" parameterType="schMemVO">
 		delete from u_member where u_id = #{u_id}
 	</delete> -->
-	<delete id="selectMemberDelete" parameterType="String">
-		delete from u_member where u_id = #{u_id}
-	</delete>
+	
+	
+	<update id="selectMemberDelete">
+		update u_member set del_yn = 'Y' where u_id = #{u_id}
+	</update>
 	
 </mapper>

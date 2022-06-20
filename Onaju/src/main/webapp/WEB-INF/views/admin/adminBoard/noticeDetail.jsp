@@ -140,7 +140,7 @@
 		<div class="noticeBoard-row-2">
 			<div><button class="a3" type="submit" id="noticeList" data-oper="list">돌아가기</button></div>
 			<div><a class="a1" href='<c:out value="${noticeMap.notice_code }" />'>수정하기</a></div>
-			<div><input class="a2" type="" value="삭제하기"></div>
+			<div><button class="a2" id="deleteNotice" value="${noticeMap.notice_code }">게시삭제</button></div>
 		</div>
 		<div></div>
 	</div>
@@ -150,70 +150,31 @@
 		<input type="hidden" name="amount" value="${cri.amount }" />
 		<input type="hidden" name="join_startDate" value='<c:out value="${cri.join_startDate }" />'>
 		<input type="hidden" name="join_endDate" value='<c:out value="${cri.join_endDate }"/>' >
-		<input type="hidden" name="notice_type" value='<c:out value="${cri.notice_type }"/>'>
-		<input type="hidden" name="notice_title" value='<c:out value="${cri.notice_title }"/>'>
+		<input type="hidden" name="notice_type2" value='<c:out value="${cri.notice_type2 }"/>'>
+		<input type="hidden" name="notice_title2" value='<c:out value="${cri.notice_title2 }"/>'>
 	</form>
 <script type="text/javascript">
 $(document).ready(function(){
 	var operForm = $("#operForm");
-	$(".a3").on("click",function(e){
-		
+	$(".a3").on("click",function(e){		
 		e.preventDefault();
-		var operation = $(this).data("oper");
 		operForm.attr("action", "${contextPath}/admin/noticeList.do").attr("method","get");
-		
-		var pageNumTag = $("input[name='pageNum']").clone();
-		var amountTag = $("input[name='amount']").clone();
-		var join_startDateTag = $("input[name='join_startDat']").clone();
-		var join_endDateTag = $("input[name='join_endDate']").clone();
-		var notice_typeTag = $("input[name='notice_type']").clone();
-		var notice_titleTag = $("input[name='notice_title']").clone();
-		
-		operForm.empty();
-		
-		operForm.append(pageNumTag);
-		operForm.append(amountTag);
-		operForm.append(join_startDateTag);
-		operForm.append(join_endDateTag);
-		operForm.append(notice_typeTag);
-		operForm.append(notice_titleTag);
-	
 		alert("리스트로");
 		operForm.submit();
 	});
 });
-
 </script>
 
 <script type="text/javascript">
 $(document).ready(function(){
-	var formObj = $("form");
+	var operForm = $("#operForm");
 	
-	$("#deleteHost").on("click", function(e){
+	$("#deleteNotice").on("click", function(e){
 		e.preventDefault();
-		var operation = $(this).data("oper");
-		alert(operation);
-		if(operation == 'remove'){
-			formObj.attr("action","${contextPath}/admin/noticeList.do").attr("method","get");
+		operForm.append("<input type='hidden' name='notice_code' value='"+$(this).attr("value")+"'>");
+		operForm.attr("action","${contextPath}/admin/deleteNotice.do").attr("method","post");
 			
-			var pageNumTag = $("input[name='pageNum']").clone();
-			var amountTag = $("input[name='amount']").clone();
-			var join_startDateTag = $("input[name='join_startDat']").clone();
-			var join_endDateTag = $("input[name='join_endDate']").clone();
-			var notice_typeTag = $("input[name='notice_type']").clone();
-			var notice_titleTag = $("input[name='notice_title']").clone();
-			
-			formObj.empty();
-			
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(join_startDateTag);
-			formObj.append(join_endDateTag);
-			formObj.append(notice_typeTag);
-			formObj.append(notice_titleTag);
-			
-		}
-		formObj.submit();
+		operForm.submit();
 	});
 });
 </script>

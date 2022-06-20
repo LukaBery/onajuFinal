@@ -41,7 +41,7 @@ public class AdminHostDAOImpl implements AdminHostDAO{
 
 	@Override
 	public int selectDeleteHost(String h_id) {
-		return sqlSession.delete("mapper.admin.host.selectDeleteHost", h_id);
+		return sqlSession.update("mapper.admin.host.selectDeleteHost", h_id);
 	}
 
 	
@@ -68,7 +68,7 @@ public class AdminHostDAOImpl implements AdminHostDAO{
 
 	@Override
 	public int selectDeleteHostInfo(String h_code) {
-		return sqlSession.delete("mapper.admin.host.selectDeleteHostInfo", h_code);
+		return sqlSession.update("mapper.admin.host.selectDeleteHostInfo", h_code);
 	}
 	
 	

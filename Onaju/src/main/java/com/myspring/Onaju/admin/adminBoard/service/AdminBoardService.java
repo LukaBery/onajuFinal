@@ -13,6 +13,9 @@ public interface AdminBoardService {
 	public String getImgFile(Map<String, Object> imgInfoMap) throws Exception;
 	public int noticeListTotal(Criteria cri);
 	public int deleteNoticeImg(String img_code);
+	public void updateImgFile(Map<String,Object> imgFile);
+	public void updateNotice(Map<String, Object> noticeMap);
+	public int deleteNotice(String noticeMap);
 	
 	public int insertNotice(AdminNoticeVO noticeVO) throws Exception;
 	public int insertImgFile(Map<String, Object> imgFile) throws Exception;
@@ -27,4 +30,6 @@ public interface AdminBoardService {
 	public int insertEnquireReply(AdminEnquireReplyVO replyVO);
 	public List<Map<String, Object>> enquireReplyDetail(AdminEnquireReplyVO replyVO);
 	public int updateReplyCheck(AdminEnquireReplyVO replyVO);
+	public int updateReply(AdminEnquireReplyVO replyVO);
+	public int deleteReply(String re_NO);
 }

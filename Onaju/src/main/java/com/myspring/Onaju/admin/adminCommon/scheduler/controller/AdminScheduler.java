@@ -38,8 +38,6 @@ public class AdminScheduler {
 					String u_id = schMemVO.getU_id();
 					scheduleService.deleteMemberScheduler(u_id);
 				}
-			}else {
-				System.out.println(membersList.size());
 			}
 			
 		}catch(Exception e) {

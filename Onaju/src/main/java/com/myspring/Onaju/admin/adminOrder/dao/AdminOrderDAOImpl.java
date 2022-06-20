@@ -29,11 +29,6 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 	public AdminOrderVO selectOrderDetail(String order_code) {
 		return sqlSession.selectOne("mapper.admin.order.selectOrderDetail", order_code);
 	}
-
-	@Override
-	public int selectOrderCancel(String order_code) {
-		return sqlSession.update("mapper.admin.order.selectOrderCancel", order_code);	
-	}
 	
 	@Override
 	public int selectOrderListTotal(Criteria cri) {
@@ -42,6 +37,10 @@ public class AdminOrderDAOImpl implements AdminOrderDAO {
 	@Override
 	public int selectOrderUpdate(AdminOrderVO orderVO) {
 		return sqlSession.update("mapper.admin.order.selectOrderUpdate", orderVO);
+	}
+	@Override
+	public int selectOrderDelete(String order_code) {
+		return sqlSession.update("mapper.admin.order.selectOrderDelete", order_code);
 	}
 
 	

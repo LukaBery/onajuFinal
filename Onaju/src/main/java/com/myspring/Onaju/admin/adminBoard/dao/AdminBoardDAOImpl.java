@@ -53,7 +53,20 @@ public class AdminBoardDAOImpl implements AdminBoardDAO {
 		return sqlSession.selectList("mapper.admin.board.selectSearchNotice", searchMap);
 	}
 	
-	
+	@Override
+	public void selectUpdateImgFile(Map<String, Object> imgFile) {
+		sqlSession.update("mapper.admin.board.selectUpdateImgFile", imgFile);
+	}
+
+	@Override
+	public void selectUpdateNotice(Map<String, Object> noticeMap) {
+		sqlSession.update("mapper.admin.board.selectUpdateNotice", noticeMap);
+		
+	}
+	@Override
+	public int selectDeleteNotice(String notice_code) {
+		return sqlSession.update("mapper.admin.board.selectDeleteNotice", notice_code);
+	}
 
 	//==========================1대1 게시판==========================
 	@Override
@@ -99,9 +112,15 @@ public class AdminBoardDAOImpl implements AdminBoardDAO {
 		return sqlSession.delete("mapper.admin.board.selectDeleteNoticeImg", img_code);
 	}
 
-	
+	@Override
+	public int updateReply(AdminEnquireReplyVO replyVO) {
+		return sqlSession.update("mapper.admin.board.selectUpdateReply", replyVO);
+	}
 
-	
+	@Override
+	public int deleteReply(String re_NO) {
+		return sqlSession.delete("mapper.admin.board.selectDeleteReply", re_NO);
+	}
 
   
 }

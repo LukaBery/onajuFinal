@@ -123,17 +123,22 @@ public class AdminHostControllerImpl implements AdminHostController {
 
 	
 	@Override
-	@RequestMapping(value = "/admin/deleteHost.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String deleteHost(@RequestParam("h_id") String h_id, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) {
-		int delete_host = adminHostService.deleteHost(h_id);
+	@RequestMapping(value = "/admin/hostDelete.do", method = RequestMethod.POST)
+	public ModelAndView deletHost(@RequestParam String h_id, @ModelAttribute("cri") Criteria cri) throws Exception{
+		ModelAndView mav = new ModelAndView();
 		
-		if(delete_host == 1) {
-			rttr.addFlashAttribute("result", "success");
+		int update_del_yn = adminHostService.deleteHost(h_id);
+		if(update_del_yn == 1) {
+			String message = "해지 처리가 완료되었습니다.";
+			mav.addObject("hostVO", adminHostService.hostDetail(h_id));
+			mav.addObject("message", message);
+		}else {
+			String message = "해지 처리가 실패하였습니다.";
+			mav.addObject("hostVO", adminHostService.hostDetail(h_id));
+			mav.addObject("message", message);	
 		}
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		
-		return "redirect:/admin/hostList.do";
+		mav.setViewName("/admin/hostDetail");
+		return mav;
 	}
 	
 	//==========================================사업장 관련 메서드==========================================
@@ -188,49 +193,45 @@ public class AdminHostControllerImpl implements AdminHostController {
 
 	@Override
 	@RequestMapping(value = "/admin/hostInfoUpdate.do", method = RequestMethod.POST)
-	public String updateHostInfo(AdminHostInfoVO hostInfoVO, Criteria cri, RedirectAttributes rttr) {
+	public ModelAndView updateHostInfo(AdminHostInfoVO hostInfoVO, @ModelAttribute("cri") Criteria cri) {
+		
+		ModelAndView mav = new ModelAndView();
+		String h_code = hostInfoVO.getH_code();
+		
 		int update_hostInfo = adminHostService.updateHostInfo(hostInfoVO);
 		
 		//update 할 테이블이 2개 이기때문에 숫자 2 반환
 		if(update_hostInfo == 2) {
-			rttr.addAttribute("h_code", hostInfoVO.getH_code());
+			String message = "수정 처리가 완료되었습니다.";
+			mav.addObject("adminHostInfoVO", adminHostService.hostInfoDetail(h_code));
+			mav.addObject("message", message);
+			
+		}else {
+			String message = "수정 처리가 실패하였습니다.";
+			mav.addObject("adminHostInfoVO", adminHostService.hostInfoDetail(h_code));
+			mav.addObject("message", message);
 		}
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		rttr.addAttribute("h_sellerNum2", cri.getH_sellerNum2());
-		rttr.addAttribute("hostInfo_name2", cri.getHostInfo_name2());
-		rttr.addAttribute("info_del_yn", cri.getInfo_del_yn());
-		rttr.addAttribute("h_id2", cri.getH_id2());
-		rttr.addAttribute("h_name2", cri.getH_name2());
-		rttr.addAttribute("roadAddress2", cri.getRoadAddress2());
-		rttr.addAttribute("join_startDate", cri.getJoin_startDate());
-		rttr.addAttribute("join_endDate", cri.getJoin_endDate());
-		
-		return "redirect:/admin/hostInfoDetail.do";
+		mav.setViewName("/admin/hostInfoDetail");
+		return mav;
 	}
 
-
+	
 	@Override
 	@RequestMapping(value = "/admin/hostInfoDelete.do", method = RequestMethod.POST)
-	public String deleteHostInfo(String h_code, Criteria cri, RedirectAttributes rttr) {
-		int delete_hostInfo = adminHostService.deleteHostInfo(h_code);
-		
-		if(delete_hostInfo == 1) {
-			
+	public ModelAndView deleteHostInfo(@RequestParam String h_code, @ModelAttribute("cri") Criteria cri) throws Exception{
+		ModelAndView mav = new ModelAndView();
+		int update_del_yn = adminHostService.deleteHostInfo(h_code);
+		if(update_del_yn == 1) {
+			String message = "해지 처리가 완료 되었습니다.";
+			mav.addObject("adminHostInfoVO", adminHostService.hostInfoDetail(h_code));
+			mav.addObject("message", message);
+		}else {
+			String message = "해지 처리가 실패하였습니다.";
+			mav.addObject("adminHostInfoVO", adminHostService.hostInfoDetail(h_code));
+			mav.addObject("message", message);
 		}
-		
-		rttr.addAttribute("pageNum", cri.getPageNum());
-		rttr.addAttribute("amount", cri.getAmount());
-		rttr.addAttribute("h_sellerNum2", cri.getH_sellerNum2());
-		rttr.addAttribute("hostInfo_name2", cri.getHostInfo_name2());
-		rttr.addAttribute("info_del_yn", cri.getInfo_del_yn());
-		rttr.addAttribute("h_id2", cri.getH_id2());
-		rttr.addAttribute("h_name2", cri.getH_name2());
-		rttr.addAttribute("roadAddress2", cri.getRoadAddress2());
-		rttr.addAttribute("join_startDate", cri.getJoin_startDate());
-		rttr.addAttribute("join_endDate", cri.getJoin_endDate());
-		
-		return "redirect:/admin/hostInfoList.do";
+		mav.setViewName("/admin/hostInfoDetail");
+		return mav;
 	}
 	
 	

@@ -10,6 +10,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
 import com.myspring.Onaju.member.vo.MemberVO;
+import com.myspring.Onaju.s_member.S_memberVO;
 
 public class LoginInterceptor extends  HandlerInterceptorAdapter{
 	 @Override
@@ -26,7 +27,7 @@ public class LoginInterceptor extends  HandlerInterceptorAdapter{
 			  String isLogOn = (String) session.getAttribute("isLogOn");
 			  MemberVO memberVO = (MemberVO) session.getAttribute("memberInfo");
 			  MemberVO nonmemberVO = (MemberVO) session.getAttribute("nonmemberInfo");
-			   
+			  S_memberVO smember = (S_memberVO) session.getAttribute("sMember");
 				if (isLogOn == null) { // 로그인이 안되어 있는 상태임으로 로그인 폼으로 다시 돌려보냄(redirect)
 
 					PrintWriter printwriter = response.getWriter();
@@ -38,7 +39,7 @@ public class LoginInterceptor extends  HandlerInterceptorAdapter{
 					printwriter.close();
 
 					return false; // 더이상 컨트롤러 요청으로 가지 않도록false로 반환함
-				} else if (memberVO == null && nonmemberVO == null) {
+				} else if (memberVO == null && nonmemberVO == null && smember == null) {
 					PrintWriter printwriter = response.getWriter();
 
 					printwriter.print("<script>alert('로그인이 필요한 서비스입니다.');" + "location.href='"

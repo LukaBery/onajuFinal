@@ -345,7 +345,9 @@
 		</div>
 		<div class="mem-item5">
 			<div><a class="a1" href='<c:out value="${memberVO.u_id }" />'>수정하기</a></div>
-			<div><button class="a2" type="submit" id="memberList" data-oper="list">돌아가기</button></div></div>	
+			<div><button class="a2" type="submit" id="memberList" data-oper="list">돌아가기</button></div>	
+			<div><button class="a3" id="deleteMember" value='<c:out value="${memberVO.u_id }" />' >탈퇴</button></div>
+		</div>	
 	</section>
 	<form id="operForm" action="${contextPath }/admin/memberList.do" method="get">
 		<input type="hidden" name="pageNum" value="${cri.pageNum }" />
@@ -360,67 +362,25 @@
 
 $(document).ready(function(){
 	var operForm = $("#operForm");
-	$(".a2").on("click",function(e){
-		
+	$(".a2").on("click",function(e){		
 		e.preventDefault();
 		var operation = $(this).data("oper");
 		operForm.attr("action", "${contextPath}/admin/memberList.do").attr("method","get");
-		
-		var pageNumTag = $("input[name='pageNum']").clone();
-		var amountTag = $("input[name='amount']").clone();
-		var join_startDateTag = $("input[name='join_startDat']").clone();
-		var join_endDateTag = $("input[name='join_endDate']").clone();
-		var u_id2Tag = $("input[name='u_id2']").clone();
-		var u_del_ynTag = $("input[name='u_del_yn']").clone();
-		var u_name2Tag = $("input[name='u_name2']").clone();
-		
-		operForm.empty();
-		
-		operForm.append(pageNumTag);
-		operForm.append(amountTag);
-		operForm.append(join_startDateTag);
-		operForm.append(join_endDateTag);
-		operForm.append(u_del_ynTag);
-		operForm.append(u_name2Tag);
-		operForm.append(u_id2Tag);
 		alert("리스트로");
 		operForm.submit();
 	});
 });
-
 </script>
 
 <script type="text/javascript">
 $(document).ready(function(){
-	var formObj = $("form");
-	
-	$("#deleteMember").on("click", function(e){
-		e.preventDefault();
-		var operation = $(this).data("oper");
-		alert(operation);
-		if(operation == 'remove'){
-			formObj.attr("action","${contextPath}/admin/memberList.do").attr("method","get");
-			
-			var pageNumTag = $("input[name='pageNum']").clone();
-			var amountTag = $("input[name='amount']").clone();
-			var join_startDateTag = $("input[name='join_startDat']").clone();
-			var join_endDateTag = $("input[name='join_endDate']").clone();
-			var u_id2Tag = $("input[name='u_id2']").clone();
-			var u_del_ynTag = $("input[name='u_del_yn']").clone();
-			var u_name2Tag = $("input[name='u_name2']").clone();
-			
-			
-			formObj.empty();
-			
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(join_startDateTag);
-			formObj.append(join_endDateTag);
-			formObj.append(u_id2Tag);
-			formObj.append(u_del_ynTag);
-			formObj.append(u_name2Tag);
-		}
-		formObj.submit();
+	var operForm = $("#operForm");
+$(".a3").on("click",function(e){
+	alert("탈퇴탈퇴");
+	e.preventDefault();
+	operForm.append("<input type='hidden' name='u_id' value='"+$(this).attr("value")+"'>");
+	operForm.attr("action", "${contextPath}/admin/memberDelete.do").attr("method","post");
+	operForm.submit();
 	});
 });
 </script>

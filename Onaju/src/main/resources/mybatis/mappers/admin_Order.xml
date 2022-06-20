@@ -40,6 +40,9 @@
 		<result property="room_number" column="room_number"/>
 		<result property="reservation_state" column="reservation_state"/>
 		<result property="use_state" column="use_state"/>
+		<result property="able_checkIn" column="able_checkIn"/>
+		<result property="able_checkOut" column="able_checkOut"/>
+		<result property="room_type" column="room_type"/>
 	</resultMap>
 	
 	<select id="selectAllOrderList" resultType="map" parameterType="map">
@@ -82,7 +85,9 @@
 				H.h_email2,
 				H.deputy_name,
 				H.deputy_phone,
-				R.room_number 
+				R.room_number,
+				R.able_checkIn,
+				R.able_checkOut
 		 from 
 		 		u_order O
 		 inner join 
@@ -270,7 +275,10 @@
 				H.h_email2,
 				H.deputy_name,
 				H.deputy_phone,
-				R.room_number
+				R.room_number,
+				R.able_checkIn,
+				R.able_checkOut,
+				R.room_type
 		from u_order O 
 		inner join u_member M
 		on O.u_id = M.u_id 
@@ -309,6 +317,9 @@
 	</if>
 	</set>
 	where order_code = #{order_code}
+	</update>
+	<update id="selectOrderDelete">
+		update u_order set pay_state = '결제 취소', use_state = '예약 취소', reservation_state = '예약 취소' where order_code = #{order_code}
 	</update>
 
 </mapper>

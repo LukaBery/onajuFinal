@@ -117,8 +117,8 @@
 </style>
 </head>
 <body>
-	<div>
-		<form name="noticeForm" method="post" action="${contextPath }/admin/insertNotice.do" enctype="multipart/form-data">
+	<section>
+		<form id="noticeMap" method="post" action="${contextPath }/admin/updateNotice.do" enctype="multipart/form-data">
 			<div class="notice-con">
 				<div class="notice-row">
 					<div class="notice-row-col1"><div>제목</div></div>
@@ -181,15 +181,35 @@
 					<div class="notice-row-col2"><div>내용</div></div>
 					<div class="notice-row-col5"><div><textarea name="notice_content" rows="10" cols="65" maxlength="4000" required >${noticeMap.notice_content }</textarea></div></div>
 				</div>
+				<div class="notice-box3">
+					<c:choose>
+						<c:when test="${empty noticeMap.img_code }">
+							<div></div>
+						</c:when>
+						<c:when test="${!empty noticeMap.img_code }">
+							<div><img alt="이미지" src="${contextPath}/admin/imgFile.do?creID=${noticeMap.a_id}&notice_code=${noticeMap.notice_code}" height="400" width="300"></div>
+						</c:when>
+					</c:choose>
+				</div>
 				<div>
 					<div class="notice-row-2">
-						<div><input type="submit" value="등록하기"></div>
+						<div><button id="updateNotice" type="submit" class="a1" data-oper="modify">수정하기</button></div>
 						<div><a href="${contextPath }/admin/noticeList.do">취소</a></div>
 					</div>
 				</div>
 			</div>
+			<input type="hidden" name="Save_File_Name" value="${noticeMap.Save_File_Name }" >
+			<input type="hidden" name="a_id" value=${noticeMap.a_id } />
+			<input type="hidden" name="img_code" value="${noticeMap.img_code }">
+			<input type="hidden" name="notice_code" value="${noticeMap.notice_code }">
+			<input type="hidden" name="pageNum" value="${cri.pageNum }" />
+			<input type="hidden" name="amount" value="${cri.amount }" />
+			<input type="hidden" name="join_startDate" value='<c:out value="${cri.join_startDate }" />'>
+			<input type="hidden" name="join_endDate" value='<c:out value="${cri.join_endDate }"/>' >
+			<input type="hidden" name="notice_type2" value='<c:out value="${cri.notice_type2 }"/>'>
+			<input type="hidden" name="notice_title2" value='<c:out value="${cri.notice_title2 }"/>'>
 		</form>
-	</div>
+	</section>
 <script>
 
 //이미지 유효성 검사
@@ -244,5 +264,20 @@ $(document).ready(function(){
 	});
 });
 </script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var formObj = $("#noticeMap");
+	
+	$("#updateNotice").on("click", function(e){
+		e.preventDefault();
+		var operation = $(this).data("oper");
+		alert(operation);
+
+		
+		formObj.submit();
+	});
+});
+</script>
+
 </body>
 </html>

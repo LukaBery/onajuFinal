@@ -256,10 +256,10 @@
 	<table class="styled-table">
 		<colgroup>
 			<col style="width:5%">
-			<col style="width:5%">
+			<col style="width:8%">
 			<col style="width:10%">
 			<col style="width:10%">
-			<col style="width:20%">
+			<col style="width:17%">
 			<col style="width:15%">
 			<col style="width:20%">
 			<col style="width:15%">
@@ -290,7 +290,7 @@
     			<c:forEach  var="room" items="${roomsList }" varStatus="goodsNum" >
      				<tr style="cursor: pointer;" class="move" value='<c:out value="${room.room_code }" />'>
 						<td width="5%">${room.room_code}</td>
-						<td width="8%">${room.room_status }</td>
+						<td width="8%">${room.del_yn eq 'N' ? '등록완료' : '등록해지'  }</td>
 						<td width="8%">${room.h_id }</td>
 						<td width="8%">${room.h_name }</td>
 						<td  width="8%">${room.hostInfo_name }</td>   

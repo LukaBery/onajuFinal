@@ -386,7 +386,7 @@ $(document).ready(function(){
 			<input type="hidden" name="u_del_yn" value='<c:out value="${cri.u_del_yn }"/>'>
 			<input type="hidden" name="u_name2" value='<c:out value="${cri.u_name2 }"/>'>
 			<input type="hidden" name="u_id2" value='<c:out value="${cri.u_id2 }"/>'>
-		</form>	
+		</form>
 	</section>
 <script type="text/javascript">
 function execDaumPostcode() {
@@ -478,28 +478,6 @@ $(document).ready(function(){
 		e.preventDefault();
 		var operation = $(this).data("oper");
 		alert(operation);
-		if(operation == 'detail'){
-			formObj.attr("action","${contextPath}/admin/memberDetail.do").attr("method","post");
-			
-			var pageNumTag = $("input[name='pageNum']").clone();
-			var amountTag = $("input[name='amount']").clone();
-			var join_startDateTag = $("input[name='join_startDat']").clone();
-			var join_endDateTag = $("input[name='join_endDate']").clone();
-			var u_id2Tag = $("input[name='u_id2']").clone();
-			var u_del_ynTag = $("input[name='u_del_yn']").clone();
-			var u_name2Tag = $("input[name='u_name2']").clone();
-			
-			formObj.empty();
-			
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(join_startDateTag);
-			formObj.append(join_endDateTag);
-			formObj.append(u_id2Tag);
-			formObj.append(u_del_ynTag);
-			formObj.append(u_name2Tag);
-		
-		}
 		
 		$("input[name=roadAddress]").attr("disabled", false);
 		$("input[name=numberAddress]").attr("disabled", false);

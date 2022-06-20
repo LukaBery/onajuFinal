@@ -318,13 +318,12 @@ color:black;
 									
 									<c:when test="${not empty isLogOn and not empty userInfo}">
 					
-										<li><a class="dropdown-item"
-											href="${contextPath}/mypage/mypageMain.do">마이페이지</a></li>
+									<li><a class="dropdown-item"
+											href="${contextPath}/member/joinForm.do">회원가입</a></li>
+										
 										<li><a class="dropdown-item"
 											href="${contextPath}/mypage/myCart.do">장바구니</a></li>
 										<li><hr class="dropdown-divider" /></li>
-										<li><a class="dropdown-item"
-											href="${contextPath}/host/h_joinForm.do">호스트가입</a></li>
 										<c:choose>
 											<c:when test="${userInfo.s_type == 'k'}">
 												<li><a class="dropdown-item"
@@ -393,7 +392,9 @@ color:black;
 
 
 
-							</ul></li>
+							</ul>
+							
+							</li>
 					</ul>
 
 

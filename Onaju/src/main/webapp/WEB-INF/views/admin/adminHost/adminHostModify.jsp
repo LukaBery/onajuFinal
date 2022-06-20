@@ -347,8 +347,8 @@ $(document).ready(function(){
 				<div class="mem-item2-chil-4"><div>이벤트 수신 여부</div></div>
 				<div class="mem-item2-chil-5">
 					<div>										
-						이벤트 수신:<input type="checkbox" size="10" name="h_service_01" id="h_service_01" onchange="checkYn1(this)" />
-						이벤트 수신:<input type="checkbox" size="10" name="h_service_02" id="h_service_02"  onchange="checkYn2(this)"/>							
+						이벤트 수신:<input type="checkbox" size="10" name="h_service_01" id="h_service_01" onchange="checkYn1(this)"  />
+						이벤트 수신:<input type="checkbox" size="10" name="h_service_02" id="h_service_02"  onchange="checkYn2(this)"  />							
 					</div>
 				</div>
 				<div class="mem-item2-chil-4"><div>승인 완료일</div></div>

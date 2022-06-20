@@ -310,9 +310,9 @@
 		 		on I.h_id = H.h_id 
 		 		where I.h_code = #{h_code}					        
 	</select>
-	<delete id="selectDeleteHost" parameterType="String">
-		delete from h_host where h_id = #{h_id}
-	</delete>
+	<update id="selectDeleteHost">
+		update h_host set del_yn = 'Y' where h_id = #{h_id}
+	</update>
 	
 	<update id="selectUpdateHostInfo">
 	update
@@ -382,15 +382,18 @@
 			I.host_type = #{host_type}, 
 		</if>
 		<if test="room_count != '' and room_count != null">
-			I.room_count = #{room_count}
+			I.room_count = #{room_count},
+		</if>
+		<if test="del_yn != '' and del_yn != null">
+			I.del_yn = #{del_yn},
 		</if>
 	</set>
    where 
    			I.h_code = #{h_code}
 	</update>
 	
-	<delete id="selectDeleteHostInfo">
-	delete from h_host_info where h_code = #{h_code} 
-	</delete>
+	<update id="selectDeleteHostInfo">
+	update h_host_info set del_yn = 'Y' where h_code = #{h_code} 
+	</update>
 	
 </mapper>

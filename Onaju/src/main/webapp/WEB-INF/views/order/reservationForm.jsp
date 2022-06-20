@@ -70,6 +70,9 @@ request.setCharacterEncoding("UTF-8");
 				var _order_email1 = $("#order_email1").val().trim();
 				var _order_email2 = $("#order_email2").val().trim();
 				var _cart_code = $("#cart_code").val().trim();
+				var _title = $("#title").val().trim();
+				var _room_imageName = $("#room_imageName").val().trim();
+				var _content = $("#content").val().trim();
 				
 				var form = {
 					"room_code" : _room_code,
@@ -84,13 +87,18 @@ request.setCharacterEncoding("UTF-8");
 					"order_phone" : _order_phone,
 					"order_email1" : _order_email1,
 					"order_email2" : _order_email2,
-					"cart_code" : _cart_code
+					"cart_code" : _cart_code,
+					"title" : _title,
+					"room_imageName" : _room_imageName,
+					"content" : _content
+
 					
 					}
 				
 				$.ajax({
 					url : "${contextPath}/order/payToOrderGoods.do",
-					data : JSON.stringify(form, ['room_code', 'checkIn_date', 'checkOut_date', 'people_count', 'room_fee', 'pay_type', 'total','h_code', 'order_name', 'order_phone','order_email1', 'order_email2', 'cart_code']),
+					data : JSON.stringify(form, ['room_code', 'checkIn_date', 'checkOut_date', 'people_count', 'room_fee', 'pay_type', 'total','h_code', 'order_name', 
+						'order_phone','order_email1', 'order_email2', 'cart_code', 'title', 'room_imageName', 'content']),
 					dataType : "JSON",
 					type : "post",
 					contentType : "application/json; charset=utf-8;",
@@ -249,6 +257,9 @@ request.setCharacterEncoding("UTF-8");
 			<input type="hidden" id="room_code" name="room_code" value="${goods.room_code }">
 				<img id="img2" src="${contextPath}/thumbnails.do?room_code=${goods.room_code}&fileName=${goods.room_imageName}" alt="숙박사진">
 				<p id="te2"class="order_goods_title">${goods.title }</p>
+				<input type="hidden" id="title"name="title" value="${goods.title }">
+				<input type="hidden" id="room_imageName" name="room_imageName" value="${goods.room_imageName}">
+				<input type="hidden" id="content" name="content" value="${goods.content}">
 				<p id="te2"class="order_goods_content">${goods.content }</p>
 				<hr class="order_goods_middle_line">
 				<h3 class="order_title_middel_b" >요금 세부정보</h3>

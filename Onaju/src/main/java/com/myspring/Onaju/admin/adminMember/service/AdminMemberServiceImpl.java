@@ -46,5 +46,10 @@ public class AdminMemberServiceImpl implements AdminMemberService{
 		return adminMemberDAO.selectSearchMember(searchMap);
 	}
 
+	@Override
+	public int deleteMember(String u_id) {
+		return adminMemberDAO.selectMemberDelete(u_id);
+	}
+
 	
 }

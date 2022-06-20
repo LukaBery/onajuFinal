@@ -1,6 +1,7 @@
 package com.myspring.Onaju.admin.adminBoard.controller;
 
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,9 +25,11 @@ public interface AdminBoardController {
 	public ModelAndView insertNotice(AdminNoticeVO noticeVO, MultipartFile file, HttpServletRequest request) throws Exception;
 	public ModelAndView noticeModify(String notice_code, @ModelAttribute("cri") Criteria cri) throws Exception;
 	public ResponseEntity<String> imgDelete(Map<String, Object> deleteMap);
-	
+	public ModelAndView updateNotice(Map<String, Object> noticeMap, MultipartFile file, Criteria cri) throws Exception;
 	public ModelAndView enquireBoardList(Criteria cri) throws Exception;
 	public ModelAndView enquireBoardDetail(@RequestParam("enquire_NO")String enquire_NO, @ModelAttribute("cri") Criteria cri) throws Exception;
-	
+	public ModelAndView deleteNotice(String notice_code, @ModelAttribute("cri") Criteria cri) throws Exception;
 	public ResponseEntity<String> insertEnquireReply(@ModelAttribute("replyVO") AdminEnquireReplyVO replyVO, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ResponseEntity<List<Map<String, Object>>> ajaxcommentList(AdminEnquireReplyVO replyVO);
+	public ResponseEntity<Map<String, Object>> replydelete(Map<String, Object> reMap);
 }

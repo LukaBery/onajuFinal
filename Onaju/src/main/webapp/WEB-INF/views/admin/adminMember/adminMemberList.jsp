@@ -256,7 +256,7 @@
 								<td>${member.u_grade}</td>   
 								<td>${member.u_phone }</td>   
 								<td>${member.roadAddress }</td>   
-								<td>${member.del_yn }</td> 	  
+								<td>${member.del_yn eq 'N'? '가입완료':'회원탈퇴' }</td> 	  
 							</tr>
     				</c:forEach>
 				</c:when>

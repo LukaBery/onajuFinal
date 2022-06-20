@@ -134,36 +134,99 @@
 </head>
 <body>
 	<section class="memDetail_con">
-		<div class="mem-item1"><div><h3>직원정보</h3></div></div>
-		<div class="mem-item2">
-			<div class="mem-item2-chil">
-				<div class="mem-item2-chil-1"><div>아이디</div></div>
-				<div class="mem-item2-chil-2"><div>${adminVO.a_id }</div></div>
-				<div class="mem-item2-chil-1"><div>비밀번호</div></div>
-				<div class="mem-item2-chil-2"><div>****************</div></div>
+		<div class="mem-item1"><div><h3>직원정보 수정</h3></div></div>
+		<form id="adminVO" action="${contextPath }/admin/updateAdmin.do" method="post">
+			<div class="mem-item2">
+				<div class="mem-item2-chil">
+					<div class="mem-item2-chil-1"><div>아이디</div></div>
+					<div class="mem-item2-chil-2"><div><input type="text" name="a_id" value="${adminVO.a_id }" disabled ></div></div>
+					<div class="mem-item2-chil-1"><div>비밀번호</div></div>
+					<div class="mem-item2-chil-2"><div>****************</div></div>
+				</div>
+				<div class="mem-item2-chil">
+					<div class="mem-item2-chil-1"><div>이름</div></div>
+					<div class="mem-item2-chil-2"><div><input type="text" size="20" name="a_name" value="${adminVO.a_name }" /></div></div>
+					<div class="mem-item2-chil-1"><div>생년월일</div></div>
+					<div class="mem-item2-chil-2"><div><input type="date" size="20" name="a_birth" value="${adminVO.a_birth }" /></div></div>
+				</div>
+				<div class="mem-item2-chil">
+					<div class="mem-item2-chil-1"><div>권한</div></div>
+					<div class="mem-item2-chil-2">
+						<div>
+							<select name="del_yn">
+								<option value="">상태</option>
+								<option value="N" <c:out value='${adminVO.del_yn == "N" ? "selected":"" }' />>재직</option>
+								<option value="Y" <c:out value='${adminVO.del_yn == "Y" ? "selected":"" }' />>퇴사</option>
+							</select>
+						</div>
+					</div>
+					<div class="mem-item2-chil-1"><div>전화번호</div></div>
+					<div class="mem-item2-chil-2"><div><input type="text" size="20" name="a_phone" value="${adminVO.a_phone }" /></div></div>
+				</div>
+				<div class="mem-item2-chil">
+					<div class="mem-item2-chil-1"><div>이메일</div></div>
+					<div class="mem-item2-chil-2">
+						<div>
+							<input type="text" size="20" name="a_email1" value="${adminVO.a_email1 }" />
+							<select name="a_email2">
+								<option value="">이메일 선택</option>
+								<option value="@naver.com" <c:out value="${adminVO.a_email2 eq '@naver.com' ? 'selected' : '' }" /> >네이버</option>
+								<option value="@daum.net"  <c:out value="${adminVO.a_email2 eq '@daum.com' ? 'selected' : '' }" />>다음</option>
+								<option value="@gmail.com" <c:out value="${adminVO.a_email2 eq '@gmail.com' ? 'selected' : '' }" />>구글</option>
+							</select>
+						</div>
+					</div>
+					<div class="mem-item2-chil-1"><div>입사일</div></div>
+					<div class="mem-item2-chil-2"><div>${adminVO.joinDate }</div></div>
+				</div>	
 			</div>
-			<div class="mem-item2-chil">
-				<div class="mem-item2-chil-1"><div>이름</div></div>
-				<div class="mem-item2-chil-2"><div><input type="text" size="20" value="${adminVO.a_name }" /></div></div>
-				<div class="mem-item2-chil-1"><div>생년월일</div></div>
-				<div class="mem-item2-chil-2"><div><input type="text" size="20" value="${adminVO.a_birth }" /></div></div>
-			</div>
-			<div class="mem-item2-chil">
-				<div class="mem-item2-chil-1"><div>권한</div></div>
-				<div class="mem-item2-chil-2"><div>${adminVO.a_grade }</div></div>
-				<div class="mem-item2-chil-1"><div>전화번호</div></div>
-				<div class="mem-item2-chil-2"><div><input type="text" size="20" value="${adminVO.a_phone }" /></div></div>
-			</div>
-			<div class="mem-item2-chil">
-				<div class="mem-item2-chil-1"><div>이메일</div></div>
-				<div class="mem-item2-chil-2"><div><input type="text" size="20" value="${adminVO.a_email1 }${adminVO.a_email2 }" /></div></div>
-				<div class="mem-item2-chil-1"><div>입사일</div></div>
-				<div class="mem-item2-chil-2"><div>${adminVO.joinDate }</div></div>
-			</div>	
-		</div>
 
-		<div class="mem-item5"><div><a class="a1" href="#">수정완료</a></div><div><a class="a2" href="${contextPath }/admin/adminDetail.do?a_id=${adminVO.a_id}">돌아가기</a></div></div>	
+			<div class="mem-item5">
+				<div><a class="a1" id="updateAdmin">수정완료</a></div>
+				<div><button class="a2" id="adminDetail" data-oper="detail" value='<c:out value="${adminVO.a_id }" />'>돌아가기</button></div>
+			</div>	
+		
+				<input type="hidden" name="pageNum" value="${cri.pageNum }" />
+				<input type="hidden" name="amount" value="${cri.amount }" />
+				<input type="hidden" name="join_startDate" value='<c:out value="${cri.join_startDate }" />'>
+				<input type="hidden" name="join_endDate" value='<c:out value="${cri.join_endDate }"/>' >
+				<input type="hidden" name="a_del_yn" value='<c:out value="${cri.a_del_yn }"/>'>
+				<input type="hidden" name="a_name2" value='<c:out value="${cri.a_name2 }"/>'>
+				<input type="hidden" name="a_id2" value='<c:out value="${cri.a_id2 }"/>'>
+			</form>
 	</section>
+	<form id="operForm" action="${contextPath }/admin/adminDetail.do" method="get">
+		<input type="hidden" name="pageNum" value="${cri.pageNum }" />
+		<input type="hidden" name="amount" value="${cri.amount }" />
+		<input type="hidden" name="join_startDate" value='<c:out value="${cri.join_startDate }" />'>
+		<input type="hidden" name="join_endDate" value='<c:out value="${cri.join_endDate }"/>' >
+		<input type="hidden" name="a_del_yn" value='<c:out value="${cri.a_del_yn }"/>'>
+		<input type="hidden" name="a_name2" value='<c:out value="${cri.a_name2 }"/>'>
+		<input type="hidden" name="a_id2" value='<c:out value="${cri.a_id2 }"/>'>
+	</form>
+<script type="text/javascript">
+$(document).ready(function(){
+	var formObj = $("#adminVO");
+	$("#updateAdmin").on("click", function(e){
+		e.preventDefault();
+		$("input[name=a_id]").attr("disabled", false);
+		alert("수정수정");
+		formObj.submit();
+	});
+});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	var operForm = $("#operForm");
+	$("#adminDetail").on("click",function(e){		
+		e.preventDefault();
+		operForm.append("<input type='hidden' name='a_id' value='"+$(this).attr("value")+"'>");
+		operForm.attr("action", "${contextPath}/admin/adminDetail.do").attr("method","get");
+		alert("디테일");
+		operForm.submit();
+	});
+});
+</script>
 </body>
 </html>
 

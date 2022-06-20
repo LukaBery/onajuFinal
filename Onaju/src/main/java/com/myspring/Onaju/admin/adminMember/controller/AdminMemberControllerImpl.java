@@ -7,7 +7,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -130,8 +129,23 @@ public class AdminMemberControllerImpl implements AdminMemberController {
 	}
 
 	@Override
-	public ResponseEntity<Map<String, Object>> memberDelete(String u_id, Criteria cri) {
-		/* int delete_Member = adminMemberService.memberDelete(u_id); */
-		return null;
+	@RequestMapping(value = "/admin/memberDelete.do", method = RequestMethod.POST)
+	public ModelAndView memberDelete(@RequestParam String u_id, @ModelAttribute("cri") Criteria cri) throws Exception {
+		int update_del_yn = adminMemberService.deleteMember(u_id);
+		ModelAndView mav = new ModelAndView();
+		if(update_del_yn == 1) {
+			String message = "탈퇴 처리가 완료되었습니다.";
+			mav.addObject("memberVO", adminMemberService.memberDetail(u_id));
+			mav.addObject("ordersList", adminOrderService.ordersList(u_id));
+			mav.addObject("message", message);
+		}else {
+			String message = "탈퇴 처리가 실패하였습니다.";
+			mav.addObject("memberVO", adminMemberService.memberDetail(u_id));
+			mav.addObject("ordersList", adminOrderService.ordersList(u_id));
+			mav.addObject("message", message);
+		}
+		mav.setViewName("/admin/memberDetail");
+		
+		return mav;
 	}
 }

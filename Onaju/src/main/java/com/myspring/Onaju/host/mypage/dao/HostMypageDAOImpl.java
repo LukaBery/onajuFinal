@@ -35,7 +35,7 @@ public class HostMypageDAOImpl implements HostMypageDAO {
 	}
 	
 	public void deleteHost(String h_id) throws DataAccessException {
-		sqlSession.delete("mapper.hostMypage.deleteHost", h_id);
+		sqlSession.update("mapper.hostMypage.deleteHost", h_id);
 	}
 	
 

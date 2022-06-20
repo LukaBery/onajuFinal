@@ -21,7 +21,7 @@ public interface AdminMainController {
 	// 관리자 메인 페이지
 	public ModelAndView adminHome(HttpServletRequest request, HttpServletResponse response) throws Exception; 
 	// 관리자 로그인 폼 이동
-	public String adminLoginForm(HttpServletRequest request, HttpServletResponse response) throws Exception;
+	public ModelAndView adminLoginForm(HttpServletRequest request, HttpServletResponse response, String message) throws Exception;
 	// 관리자 로그인
 	public ModelAndView adminLogin(@RequestParam Map<String, String> loginMap, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	// 관리자 회원 가입

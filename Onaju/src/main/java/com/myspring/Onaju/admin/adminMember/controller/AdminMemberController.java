@@ -17,5 +17,5 @@ public interface AdminMemberController {
 	public ModelAndView memberModifyForm(@RequestParam("u_id")String u_id, @ModelAttribute("cri") Criteria cri) throws Exception;
 	public ModelAndView memberUpdate(MemberVO vo, @ModelAttribute("cri") Criteria cri, RedirectAttributes rttr) throws Exception;
 	public ModelAndView searchMember(@RequestParam Map<String, Object> searchMap, Criteria cri) throws Exception;
-	public ResponseEntity<Map<String, Object>> memberDelete(String u_id, Criteria cri);
+	public ModelAndView memberDelete(String u_id, @ModelAttribute("cri") Criteria cri) throws Exception;
 }

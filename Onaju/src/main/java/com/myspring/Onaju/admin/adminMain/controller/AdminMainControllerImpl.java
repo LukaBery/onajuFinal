@@ -43,9 +43,14 @@ import com.myspring.Onaju.admin.adminMain.service.AdminMainService;
 	 
 	// 관리자 로그인 폼 이동
 	@Override
-	@RequestMapping(value = "/admin/loginForm.do", method = {RequestMethod.GET, RequestMethod.POST})
-	public String adminLoginForm(HttpServletRequest request, HttpServletResponse response) throws Exception {	
-		return "/admin/main/loginForm";
+	@RequestMapping(value = "/admin/loginForm.do", method = RequestMethod.GET)
+	public ModelAndView adminLoginForm(HttpServletRequest request, HttpServletResponse response, String message) throws Exception {	
+		ModelAndView mav = new ModelAndView();
+		if(message == null) {
+			mav.addObject("message", message);
+		}
+		mav.setViewName("/admin/main/loginForm");
+		return mav;
 	}
 
 	// 관리자 로그인
@@ -54,31 +59,25 @@ import com.myspring.Onaju.admin.adminMain.service.AdminMainService;
 	public ModelAndView adminLogin(@RequestParam Map<String, String> loginMap, HttpServletRequest request,
 			HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
-		adminVO = adminMainService.adminLogin(loginMap); //DB에 있는 관리자 정보를 불러옴
-		String a_id = adminVO.getA_id(); //불러온 VO에서 ID만 추출
-		String msg; //세션 시간 설정을 위한 변수
-		if(adminVO != null && a_id != null && adminVO.getA_pw().equals(loginMap.get("a_pw"))){
-			HttpSession session = request.getSession();
-			String action = (String)session.getAttribute("action");
-					
-			if(action != null){
+		HttpSession session = request.getSession();
+		
+		int result_id = adminMainService.resultLoginId(loginMap.get("a_id"));
+		
+		if(result_id == 1) {
+			int result_pw = adminMainService.resultLoginPw(loginMap);
+			if(result_pw == 1) {
+				adminVO = adminMainService.adminLogin(loginMap); //DB에 있는 관리자 정보를 불러옴
 				session.setAttribute("isLogOn", "admin");
 				session.setAttribute("adminInfo", adminVO);
 				session.setMaxInactiveInterval(3000);
-				msg = "1";
-				mav.addObject("msg", msg);
-				mav.setViewName(action);
-			}else{
-				session.setAttribute("isLogOn", "admin");
-				session.setAttribute("adminInfo", adminVO);
-				session.setMaxInactiveInterval(3000);
-				msg = "3";
-				mav.addObject("msg", msg);
-				mav.setViewName("redirect:/admin/main.do");	
+				mav.setViewName("/admin/main");	
+			}else {
+				String message = "비밀번호가 잘못 되었습니다.";
+				mav.addObject("message", message);
+				mav.setViewName("/admin/main/loginForm");
 			}
-				
-		}else{
-			String message="아이디 또는 비밀번호가 잘못됐습니다.";
+		}else {
+			String message = "아이디를 찾을 수 없습니다.";
 			mav.addObject("message", message);
 			mav.setViewName("/admin/main/loginForm");
 		}

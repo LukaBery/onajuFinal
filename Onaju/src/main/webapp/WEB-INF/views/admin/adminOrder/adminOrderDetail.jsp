@@ -192,10 +192,10 @@
 				<div class="mem-item2-chil-5"><div>${orderVO.total }</div></div>
 			</div>
 			<div class="mem-item2-chil">
-				<div class="mem-item2-chil-4"><div>주문 상태</div></div>
+				<div class="mem-item2-chil-4"><div>이용 상태</div></div>
+				<div class="mem-item2-chil-5"><div>${orderVO.use_state }</div></div>
+				<div class="mem-item2-chil-4"><div>숙소 예약 정보</div></div>
 				<div class="mem-item2-chil-5"><div>${orderVO.reservation_state }</div></div>
-				<div class="mem-item2-chil-4"><div>숙소 이용 정보</div></div>
-				<div class="mem-item2-chil-5"><div>이용전</div></div>
 			</div>
 		</div>
 		
@@ -249,7 +249,7 @@
 		<div class="mem-item5">
 			<div><button class="a2" type="submit" id="goodsList" data-oper="list">돌아가기</button></div>
 			<div><button class="a3" value='<c:out value="${orderVO.order_code }" />'>수정하기</button></div>
-			<div><a class="a1">취소하기</a></div>
+			<div><button class="a1" id="orderDelete" value='<c:out value="${orderVO.order_code }" />' >취소하기</button></div>
 			
 		</div>
 		<form id="operForm" action="${contextPath }/admin/orderList.do" method="get">
@@ -297,25 +297,7 @@ geocoder.addressSearch('${orderVO.roadAddress}', function(result, status) {
     } 
 });    
 </script>
-<script type="text/javascript">
-$('.a1').click(function(){
-	var order_code = ${orderVO.order_code};
-	$.ajax({
-		url:'${contextPath}/admin/orderCancel.do',
-		type: 'post',
-		data:{"order_code": order_code},
-		success:function(data = 1){
-			alert("취소 완료");
-		},
-		error:function(data, textstatus){
-			alert("에러 발생");
-		}
-	})
-})
 
-
-
-</script>
 <script type="text/javascript">
 
 $(document).ready(function(){
@@ -335,37 +317,14 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 $(document).ready(function(){
-	var formObj = $("form");
+	var operForm = $("#operForm");
 	
-	$("#deleteHost").on("click", function(e){
+	$("#orderDelete").on("click", function(e){
 		e.preventDefault();
-		var operation = $(this).data("oper");
-		alert(operation);
-		if(operation == 'remove'){
-			formObj.attr("action","${contextPath}/admin/goodsDetail.do").attr("method","get");
-			
-			var pageNumTag = $("input[name='pageNum']").clone();
-			var amountTag = $("input[name='amount']").clone();
-			var join_startDateTag = $("input[name='join_startDat']").clone();
-			var join_endDateTag = $("input[name='join_endDate']").clone();
-			var u_id2Tag = $("input[name='u_id2']").clone();
-			var pay_state2Tag = $("input[name='pay_state2']").clone();
-			var u_name2Tag = $("input[name='u_name2']").clone();
-			var order_code2Tag = $("input[name='order_code2']").clone();
-			
-			formObj.empty();
-			
-			formObj.append(pageNumTag);
-			formObj.append(amountTag);
-			formObj.append(join_startDateTag);
-			formObj.append(join_endDateTag);
-			formObj.append(u_id2Tag);
-			formObj.append(pay_state2Tag);
-			formObj.append(u_name2Tag);
-			formObj.append(order_code2Tag);
-			
-		}
-		formObj.submit();
+		operForm.append("<input type='hidden' name='order_code' value='"+$(this).attr("value")+"'>");
+		operForm.attr("action","${contextPath}/admin/orderDelete.do").attr("method","post");
+		alert("취소취소");
+		operForm.submit();
 	});
 });
 </script>

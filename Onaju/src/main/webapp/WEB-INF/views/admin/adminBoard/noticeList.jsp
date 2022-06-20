@@ -200,16 +200,16 @@
 				<div class="noticeBoard-row-col1"><div>게시유형</div></div>
 				<div class="noticeBoard-row-col2">
 					<div>
-						<select name="notice_type">
+						<select name="notice_type2">
 							<option value="">게시 유형</option>
-							<option value="안내" <c:out value="${pageMaker.cri.notice_type eq '안내'?'selected':'' }" />>안내</option>
-							<option value="공고" <c:out value="${pageMaker.cri.notice_type eq '공고'?'selected':'' }" />>공고</option>
-							<option value="양식" <c:out value="${pageMaker.cri.notice_type eq '양식'?'selected':'' }" />>양식</option>
+							<option value="안내" <c:out value="${pageMaker.cri.notice_type2 eq '안내'?'selected':'' }" />>안내</option>
+							<option value="공고" <c:out value="${pageMaker.cri.notice_type2 eq '공고'?'selected':'' }" />>공고</option>
+							<option value="양식" <c:out value="${pageMaker.cri.notice_type2 eq '양식'?'selected':'' }" />>양식</option>
 						</select>
 					</div>
 				</div>
 				<div class="noticeBoard-row-col1"><div>검색</div></div>
-				<div class="noticeBoard-row-col2"><div><input type="search" name="notice_title" value='<c:out value="${pageMaker.cri.notice_title }" />'></div></div>
+				<div class="noticeBoard-row-col2"><div><input type="search" name="notice_title2" value='<c:out value="${pageMaker.cri.notice_title2 }" />'></div></div>
 			</div>
 			<div class="noticeBoard-row-3">
 				<div><button class="searchButton">조회</button></div>
@@ -292,8 +292,8 @@
 			<input type="hidden" name="amount" value="${pageMaker.cri.amount }" />
 			<input type="hidden" name="join_startDate" value='<c:out value="${pageMaker.cri.join_startDate }" />'>
 			<input type="hidden" name="join_endDate" value='<c:out value="${pageMaker.cri.join_endDate }"/>' >
-			<input type="hidden" name="notice_type" value='<c:out value="${pageMaker.cri.notice_type }"/>'>
-			<input type="hidden" name="notice_title" value='<c:out value="${pageMaker.cri.notice_title }"/>'>
+			<input type="hidden" name="notice_type2" value='<c:out value="${pageMaker.cri.notice_type2 }"/>'>
+			<input type="hidden" name="notice_title2" value='<c:out value="${pageMaker.cri.notice_title2 }"/>'>
 		</form>
 	</div>
 </section>

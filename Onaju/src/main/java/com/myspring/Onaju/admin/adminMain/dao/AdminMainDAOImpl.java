@@ -32,4 +32,14 @@ public class AdminMainDAOImpl implements AdminMainDAO {
 		String result =  sqlSession.selectOne("mapper.admin.selectOverlappedID",id);
 		return result;
 	}
+
+	@Override
+	public int resultLoginId(String a_id) {
+		return sqlSession.selectOne("mapper.admin.selectLoginId", a_id);
+	}
+
+	@Override
+	public int resultLoginPw(Map<String, String> loginMap) {
+		return sqlSession.selectOne("mapper.admin.selectLoginPw", loginMap);
+	}
 }

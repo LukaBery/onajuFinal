@@ -98,6 +98,33 @@ public class AdminBoardServiceImpl implements AdminBoardService {
 		return adminBoardDAO.selectDeleteNoticeImg(img_code);
 	}
 
+	@Override
+	public void updateImgFile(Map<String, Object> imgFile) {
+		adminBoardDAO.selectUpdateImgFile(imgFile);
+		
+	}
+
+	@Override
+	public void updateNotice(Map<String, Object> noticeMap) {
+		adminBoardDAO.selectUpdateNotice(noticeMap);
+		
+	}
+
+	@Override
+	public int deleteNotice(String noticeMap) {
+		return adminBoardDAO.selectDeleteNotice(noticeMap);
+	}
+
+	@Override
+	public int updateReply(AdminEnquireReplyVO replyVO) {
+		return adminBoardDAO.updateReply(replyVO);
+	}
+
+	@Override
+	public int deleteReply(String re_NO) {
+		return adminBoardDAO.deleteReply(re_NO);
+	}
+
 
 
 }

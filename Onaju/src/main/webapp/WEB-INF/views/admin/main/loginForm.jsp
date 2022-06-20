@@ -11,16 +11,15 @@
 <title>로그인 페이지</title>
 <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <c:if test='${not empty message }'>
-<script type="text/javascript">
-window.onload=function()
-{
-  result();
-}
+<script>
+		window.onload = function() {
+			result();
+		}
 
-function result(){
-	alert('${message}');
-}
-</script>
+		function result() {
+			alert("${message}");
+		}
+	</script>
 </c:if>
 <style type="text/css">
 *{
@@ -111,9 +110,6 @@ body, html{
     box-shadow: 0px 0px 0px 0px;
     color: rgba(87, 184,70, 0.8);
 }
-/* .input:focus + .focus-input{
-    animation:  anim-shadow 0.5s ease-in-out forwards;
-} */
 
 
 .symbol-input{
@@ -131,10 +127,7 @@ body, html{
     color: #666666;
     transition: all 0.4s
 }
-/* .input:focus + .focus-input + .symbol-input{
-    color: #57b846;
-    padding-left: 28px;
-} */
+
 
 .login-form-btn-container{
     width: 100%;
@@ -223,7 +216,7 @@ button:hover{
                     <img src="../resources/assets/img/ohnaju.png" alt="IMG">
                 </div>
 
-                <form class="login-form" id="loginForm" method="POST" action="${contextPath }/admin/adminLogin.do">
+                <form class="login_form" id="login-form" name="login_form" action="${contextPath }/admin/adminLogin.do" method="post" >
                     <span class="login-form-title">Login</span>
 					<div id="err" style="color: red;"></div>
                     <div class="wrap-input">
@@ -242,7 +235,7 @@ button:hover{
                     </div>
 
                     <div class="login-form-btn-container">
-                        <button class="login-form-btn" type="submit" form="loginForm">Login</button>
+                        <button class="login-form-btn" type="submit" >Login</button>
                     </div>
 
                   <div class="text-center p-t-1">
@@ -258,43 +251,26 @@ button:hover{
             </div>
         </div>
     </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script type="text/javascript">
-    	var msg = null;
-    	
-    	function login() {
-    		if($('#a_id').val() == "")
-    			{
-    				$('#a_id').parent('div')addClass('has-error');
-    				return false;
-    			}
-    		else if ($('#a_pw').val() == "")
-    			{
-    				$('#a_pw').parent('div')addClass('has-error');
-    				return false;
-    			}
-    		var data = $('#login-form').serialize();
-    		
-    		$ajax({
-    			type:'POST',
-    			url:'${contextPath}/admin/adminLogin.do',
-    			data:data,
-    			dataType:'josn',
-    			
-    			success:function(data)
-    			{
-    				msg = mav.msg
-    				if(msg == 1)
-    					{
-    						window.location.replace("${contextPath}/admin/loginForm.do");
-    					}
-    				else if(msg == 3)
-    					{
-    						$('#err').hide().html("아이디 또는 비밀번호가 일치하지 않습니다.").fadeIn('slow');
-    					}
-    			}
-    		});
-    	}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js">
+    $(document).ready(function(){
+    	$(".login-form-btn").click(function(){
+    		var id = document.getElementById('a_id').value;
+    		var pwd = document.getElementById('a_pw').value;
+    		if (id == '') {
+    			alert("아이디를 입력하세요");
+
+    			return false;
+    		}
+    		if (pwd == '') {
+    			alert("비밀번호를 입력하세요");
+
+    			return false;
+    		}
+    		document.login_form.submit();
+    	});
+    });
+    
     </script>
+    
 </body>
 </html>

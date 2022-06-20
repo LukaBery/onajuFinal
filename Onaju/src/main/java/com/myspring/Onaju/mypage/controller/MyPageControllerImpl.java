@@ -56,12 +56,15 @@ public class MyPageControllerImpl extends BaseController  implements MyPageContr
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
 		String isLogOn=(String)session.getAttribute("isLogOn");
+		memberVO=(MemberVO)session.getAttribute("memberInfo");
+		List<CartVO> nonmemberOrder = (ArrayList<CartVO>) session.getAttribute("nonMemberCart");
+		
+
 		if(isLogOn == null) {
 			String message = "로그인이 필요합니다.";
 			mav.addObject("message", message);
 		}
-		else {
-		memberVO=(MemberVO)session.getAttribute("memberInfo");
+		else if(memberVO != null){
 		String u_id=memberVO.getU_id();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String checkIndate = dateMap.get("beginDate");
@@ -137,6 +140,9 @@ int cnt_1 = (int) Math.ceil(Integer.parseInt(cnt_) / 10) + 1;
 		mav.addObject("section", section);
 		mav.addObject("pageNum", pageNum);
 		}
+		if(nonmemberOrder != null) {
+			mav.addObject("nonmemberOrder", nonmemberOrder);
+		}
 		
 		mav.setViewName("forward:/mypage/mypageMain");
 		
@@ -153,10 +159,10 @@ int cnt_1 = (int) Math.ceil(Integer.parseInt(cnt_) / 10) + 1;
 		
 		String viewName=(String)request.getAttribute("viewName");
 		ModelAndView mav = new ModelAndView(viewName);
-		memberVO=(MemberVO)session.getAttribute("memberInfo");
-		MemberVO nonmemberVO=(MemberVO)session.getAttribute("nonmemberInfo");
+		memberVO = (MemberVO) session.getAttribute("memberInfo");
+		MemberVO nonmemberVO = (MemberVO) session.getAttribute("nonmemberInfo");
+		String sMember = (String) session.getAttribute("sMember");
 		Map<String, Object> _dateMap = new HashMap();
-	
 
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String checkIndate = dateMap.get("beginDate");
@@ -227,7 +233,7 @@ int cnt_1 = (int) Math.ceil(Integer.parseInt(cnt_) / 10) + 1;
 			 mav.addObject("myCartList", myCartList);
 		
 			
-		}else if(nonmemberVO != null) {
+		}else if(nonmemberVO != null || sMember != null) {
 			
 			 List<CartVO> myCartList= (ArrayList<CartVO>) session.getAttribute("nonMemberCart");
 			 mav.addObject("myCartList", myCartList); 

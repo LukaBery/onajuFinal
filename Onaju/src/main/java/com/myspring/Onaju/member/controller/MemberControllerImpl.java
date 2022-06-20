@@ -395,6 +395,8 @@ loginMap.replace("u_pw", aes.encrypt(u_pw));
 	
 		HttpSession session = request.getSession();
 		session = request.getSession();
+		session.setAttribute("sMember", "kakao");
+
 		session.setAttribute("isLogOn", "member");
 		session.setAttribute("userInfo", smember);
 		session.setAttribute("kakaotoken", access_Token);
@@ -432,8 +434,10 @@ loginMap.replace("u_pw", aes.encrypt(u_pw));
 
 		if (access_Token != null && !"".equals(access_Token)) {
 			memberService.kakaoLogout(access_Token);
+			session.removeAttribute("sMember");
 			session.removeAttribute("kakaotoken");
 			session.removeAttribute("userInfo");
+			session.invalidate();
 		} else {
 			System.out.println("access_Token is null");
 			// return "redirect:/";
@@ -471,7 +475,8 @@ loginMap.replace("u_pw", aes.encrypt(u_pw));
 	naver.setS_name(s_name);
     
 	S_memberVO smember= memberService.naverLogin(naver);
-	
+	session.setAttribute("sMember", "kakao");
+
 	session.setAttribute("isLogOn", "member");
 	session.setAttribute("userInfo", smember);
 	
@@ -492,10 +497,12 @@ loginMap.replace("u_pw", aes.encrypt(u_pw));
 	public String naverLogout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 		HttpSession session = request.getSession();
-		
+		session.removeAttribute("sMember");
+
 		session.removeAttribute("access_token");
 		session.removeAttribute("userInfo");
-		
+		session.invalidate();
+
 		return "redirect:/main/main.do";
 	}
 }
