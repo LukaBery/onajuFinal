@@ -253,10 +253,10 @@ function moveModifyProfile(){
 		<div class="hb_nav_section_1 margin_left_0">
 
 			<div class="hb_nav_btn" style="border: 2px solid #CCCCCC;">
-				<a class="hb_nav_btn_a" href="${contextPath}/mypage/mypageMain.do">이용내역조회</a>
+				<a class="hb_nav_btn_a hb_nav_shadow" href="${contextPath}/mypage/mypageMain.do">이용내역조회</a>
 			</div>
 			<div class="hb_nav_btn"  >
-				<a class="hb_nav_btn_a hb_nav_shadow" href="${contextPath}/mypage/myCart.do">장바구니</a>
+				<a class="hb_nav_btn_a " href="${contextPath}/mypage/myCart.do">장바구니</a>
 			</div>
 			<div class="hb_nav_btn">
 				<a class="hb_nav_btn_a" href="${contextPath}/mypage/Mypage3.do">회원정보수정</a>

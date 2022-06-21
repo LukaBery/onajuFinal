@@ -106,7 +106,7 @@ var SetTime = 180;
 		}
 		 
 		var userEmail = $("#u_email1").val().trim() + "@" +$("#u_email2").val().trim();
-		alert(userEmail);
+		
 		if (userEmail == "" || userEmail == null) {
 			flag_dupl_mail = false;
 			alert("이메일 주소를 입력해야 합니다.");
@@ -144,8 +144,7 @@ var SetTime = 180;
 	function fn_checkCode(){
 		var joinCode = $("#joinCode").val();
 		var inputCode = $("#inputCode").val();
-	    alert(inputCode);
-	    alert(joinCode);
+	 
 		if (joinCode != inputCode) {
 			
 			alert("인증번호가 일치하지 않습니다.");

@@ -441,8 +441,6 @@
 <body>
 <section style="width:1100px;height:900px;">
 
-	<div class="wrap wd668">
-			<div class="container">
 				<div class="form_txtInput">
 					<h2 class="sub_tit_txt">비밀번호 변경 결과</h2>
 					<p class="exTxt">고객님의 비밀번호가 성공적으로 변경되었습니다.<br><br><br><br>
@@ -457,8 +455,6 @@
 					</div>
 				
 			
-			</div><!-- content E-->
-	</div> <!-- container E -->
 </section>
 </body>
 </html>

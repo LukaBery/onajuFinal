@@ -448,8 +448,6 @@ border: 1px solid #ccc;
 <body>
 <section style="width:700px;height:900px;">
 
-	<div class="wrap wd668">
-			<div class="container">
 				<div class="form_txtInput">
 					<h2 class="sub_tit_txt">아이디 찾기 결과</h2>
 					<p class="exTxt">고객님의 아이디 찾기가 성공적으로 이루어졌습니다.<br>
@@ -478,8 +476,7 @@ border: 1px solid #ccc;
 					</div>
 					</div>
 				</div> <!-- form_txtInput E -->
-			</div><!-- content E-->
-		</div> <!-- container E -->
+		
 		</section>
 </body>
 </html>

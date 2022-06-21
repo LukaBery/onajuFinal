@@ -137,9 +137,11 @@ function fn_pwdfindform2_check() {
 	margin: 0 0 25px;
 }
 
-.btn_wrap1 {
-	text-align: center;
-	display: inline-block;
+.btn_wrap12 {    text-align: center;
+    display: inline-block;
+    width: 100%;
+    height: 200px;
+    background-color: white;
 
 }
 
@@ -561,7 +563,7 @@ function fn_pwdfindform2_check() {
 							</tbody>
 						</table>
 					</div><!-- join_form E  -->
-					<div class="btn_wrap1">
+					<div class="btn_wrap12">
 						<button type="button" class="btn_wrap" onClick="${contextPath}/main/main.do">취소하기</button>
 
 						<button type="button" class="btn_wrap" onClick="fn_pwdfindform2_check()">변경하기</button>
