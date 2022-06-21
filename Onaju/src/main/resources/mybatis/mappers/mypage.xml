@@ -100,7 +100,7 @@
               
 			         and U.checkOut_date >=  (SELECT DATE_ADD(NOW(), INTERVAL -1 day))
 			     
-            order by checkIn_date desc
+            order by checkIn_date asc
 	 
     
    

@@ -317,6 +317,7 @@ request.setCharacterEncoding("UTF-8");
 				<h1 id="h1_left_title">장바구니</h1>
 			</div>
 			
+						<c:if test="${memberInfo != null }">
 			
 						<form action="${contextPath}/mypage/myCart.do" method="post">
 				<input type="hidden" name="section" value="${section }">
@@ -402,6 +403,7 @@ request.setCharacterEncoding("UTF-8");
 </div>
 
 </form>
+</c:if>
 <div style="display:flex;width:924px; justify-content:flex-start;flex-wrap:wrap;">
 
 

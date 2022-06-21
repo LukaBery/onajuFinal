@@ -506,6 +506,23 @@ height:18px;
 
 }
 
+.hitStyle_slider{
+ color: white;
+    right: 5%;
+    top: 5%;
+    font-weight:500;
+    font-size:17px;
+    position: absolute;
+    text-shadow : 1px 1px 3px black;
+}
+
+.hit_image_slider{
+padding:6px 0px 0px 0px;
+width:25px; 
+height:25px;
+text-shadow : 1px 1px 3px black;
+}
+
 .btn_pageNum_main {
 	width: 30px;
 	color: black;
@@ -557,7 +574,8 @@ border-top: 2px solid #CCCCCC;
 						<a id="hb_a_main"
 							href="${contextPath}/board/boardArticle.do?cmnNum=${item.cmnNum }&room_code=${item.room_code }"><img id="hb_mainpage_image"
 								src="${contextPath}/host/community/download2.do?room_code=${item.room_code}&fileName=${item.cmn_image}"
-								style="width: 100%; height: 100%; border-radius: 10px; float:left;"></a></li>
+								style="width: 100%; height: 100%; border-radius: 10px; float:left;"><i class="hitStyle_slider">
+						<img class="hit_image"src="${contextPath}/resources/image/icons/hit_icon.png"/> ${item.hit}</i></a></li>
 							
 </c:forEach>
 					</ul>
@@ -710,7 +728,7 @@ border-top: 2px solid #CCCCCC;
 	jQuery(document).ready(function() {
 		setInterval(function() {
 			moveRight();
-		}, 4500);
+		}, 5000);
 
 		var slideCount = $('#slider ul li').length;
 		var slideWidth = $('#slider ul li').width();
@@ -762,7 +780,7 @@ border-top: 2px solid #CCCCCC;
 
 		setInterval(function() {
 			moveRight1();
-		}, 4500);
+		}, 5000);
 		var slideCount1 = $('#slider_1 ul li').length;
 		var slideWidth1 = $('#slider_1 ul li').width();
 		var slideHeight1 = $('#slider_1 ul li').height();

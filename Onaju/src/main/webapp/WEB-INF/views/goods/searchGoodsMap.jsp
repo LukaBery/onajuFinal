@@ -550,7 +550,11 @@
   <input id="dryer" class="filter_btn"type="checkbox"name="dryer" style="display:none;"<c:if test="${searchKeyword.dryer == 'on'}">checked</c:if>/>
 					<label for="dryer" class="filter_btn">건조기</label></div>
 					
-	
+	      <input type="hidden" id="search_longitude_map"name="search_longitude" value="${searchKeyword.search_longitude}">
+            <input type="hidden" id="search_latitude_map"name="search_latitude" value="${searchKeyword.search_latitude}">
+            <input type="hidden" id="going"name="going" value="${searchKeyword.going}">
+            <input type="hidden" id="checkin"name="checkin" value="${searchKeyword.checkin}">
+            <input type="hidden" id="checkout"name="checkout" value="${searchKeyword.checkout}">
 	
 	
 	
@@ -570,8 +574,7 @@
          	</div>
             
             
-            <input type="hidden" id="search_longitude_map"name="search_longitude" value="${searchKeyword.search_longitude}">
-            <input type="hidden" id="search_latitude_map"name="search_latitude" value="${searchKeyword.search_latitude}">
+      
             <form>
             	<c:choose>
   					<c:when test="${empty hostgoodsMap}" >
