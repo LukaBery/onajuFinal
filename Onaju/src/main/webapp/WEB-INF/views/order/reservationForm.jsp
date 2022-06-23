@@ -299,7 +299,7 @@ request.setCharacterEncoding("UTF-8");
 				<h3 class="order_title_middel_b" >요금 세부정보</h3>
 				<div class="hb_text_order01">
 					<div id="r2" >숙소</div>
-					<div class="order_goods_price" ><fmt:formatNumber value="${(order.total+0.0)/(4/3+0.0) }" type="currency" currencySymbol="₩ " /></div>
+					<div class="order_goods_price" ><fmt:formatNumber value="${(order.total+0.0)/(20/17+0.0) }" type="currency" currencySymbol="₩ " /></div>
 				</div>
 				<div class="hb_text_order01">
 					<div id="r2" >서비스 수수료</div>

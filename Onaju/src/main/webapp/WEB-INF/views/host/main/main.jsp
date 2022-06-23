@@ -12,74 +12,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript">
-var barChartData = {
-		  labels: [
-		    "1월",
-		    "2월",
-		    "3월",
-		    "4월",
-		    "6월",
-		    "7월",
-		    "8월",
-		    "9월",
-		    "10월",
-		    "11월",
-		    "12월"
-		  ],
-		  datasets: [
-		    {
-		      label: "취소 금액",
-		      backgroundColor: "#486889",
-		      borderColor: "#486889",
-		      borderWidth: 1,
-		      data: [3, 5, 6, 7,3, 5, 6, 7] 
-		    },
-		    {
-		      label: "예약 금액",
-		      backgroundColor: "#edbc40",
-		      borderColor: "#edbc40",
-		      borderWidth: 1,
-		      data: [4, 7, 3, 6, 10,7,4,6]
-		    },
-		    {
-		      label: "정산 금액",
-		      backgroundColor: "#cbdea6",
-		      borderColor: "#cbdea6",
-		      borderWidth: 1,
-		      data: [6,9,7,3,10,7,4,6]
-		    }
-		  ]
-		};
-
-		var chartOptions = {
-		  responsive: true,
-		  legend: {
-		    position: "top"
-		  },
-		  title: {
-		    display: true,
-		    text: "매출 내역"
-		  },
-		  scales: {
-		    yAxes: [{
-		      ticks: {
-		        beginAtZero: true
-		      }
-		    }]
-		  }
-		}
-
-		window.onload = function() {
-		  var ctx = document.getElementById("canvas").getContext("2d");
-		  window.myBar = new Chart(ctx, {
-		    type: "bar",
-		    data: barChartData,
-		    options: chartOptions
-		  });
-		};
-
-</script>
 <style>
 
 .box1_1 {
@@ -92,7 +24,7 @@ var barChartData = {
 .mainBox1 {
 	display: inline-block;
 	width: 45%;
-	height:230px;
+	height:360px;
 	border: 1px solid #ccc;
 	border-radius: 10px;
 	margin: 40px 0px 40px 42px;
@@ -111,9 +43,10 @@ var barChartData = {
 }
 .mainBoxText{
 	display: inline-block;
-	margin: 0 0 10px 0;
+	margin: 0 0 10px 10px;
 	color: #403e3f;
 	font-size: 12px;
+	font-weight:bold;
 	font-family: 'roboto', sans-serif;
 
 }
@@ -159,6 +92,10 @@ var barChartData = {
 	margin: 0 auto;
 	margin-left: 40px;
 }
+#main_btn_a{text-decoration: none; color: black;
+}
+#main_btn_a:visited, main_btn_a:hover, main_btn_a:focus{text-decoration: none; 
+}
 </style>
 </head>
 <body>
@@ -176,7 +113,7 @@ var barChartData = {
 		</c:choose> 
 		</div>
 		<div class="mainBox1">
-			<span class="mainBoxText">예약 미승인 내역</span>
+			<span class="mainBoxText">예약 내역</span>
 			<div>
 				<table class="board-table">
 					<colgroup>
@@ -208,7 +145,7 @@ var barChartData = {
 								</tr>
 							</c:when> 
 							<c:when test="${!empty hostReservationList}">
-								<c:forEach var="list" items="${hostReservationList}" begin="0" end="4">
+								<c:forEach var="list" items="${hostReservationList}" begin="0" end="9">
 									<tr>
 										<td>${list.order_code}</td>
 										<td>${list.hostInfo_name}</td>
@@ -237,20 +174,23 @@ var barChartData = {
 			</div>	
 		</div>
 		<div class="mainBox1">
-			<span class="mainBoxText">공지 내역</span>
+			<span class="mainBoxText">객실 목록</span>
 			<div>
 				<table class="board-table">
 					<colgroup>
-						<col width="*" />
-						<col width="20%" />
+						<col width="15%" />
+						<col width="30%" />
+						<col width="30%" />
 						<col width="20%" />
 						
 					</colgroup>
 					<thead>
 						<tr>
-							<th scope="col" class="">상호명</th>
-							<th scope="col" class="">예약자</th>
-							<th scope="col" class="">예약일</th>	
+							<th scope="col" class="">객싫 번호</th>
+							<th scope="col" class="">객실 명</th>
+							<th scope="col" class="">가격</th>	
+							
+							<th scope="col" class="">상태</th>	
 						</tr>
 					</thead>
 					<tbody>
@@ -265,11 +205,18 @@ var barChartData = {
 								</tr>
 							</c:when> 
 							<c:when test="${!empty hostGoodsList}">
-								<c:forEach var="list" items="${hostGoodsList}">
+								<c:forEach var="list" items="${hostGoodsList}" begin="0" end="9">
 									<tr>
-										<td>${list.room_code}</td>
-										<td>${list.hostInfo_name}</td>
-										<td><a href="${pageContext.request.contextPath}/host/goods/modiHostGoodsForm.do?room_code=${list.room_code}">${list.title }</a></td>
+										<td>${list.room_number}</td>
+										
+										<td><a id="main_btn_a"href="${pageContext.request.contextPath}/host/goods/modiHostGoodsForm.do?room_code=${list.room_code}">${list.hostInfo_name}</a></td>
+										<td>${list.room_fee}</td>
+										<td>
+										<c:choose>
+										<c:when test="${list.room_status =='Y' }"> 예약 가능</c:when>
+										<c:when test="${list.room_status !='Y' }">이용 불가</c:when>
+										</c:choose>
+										</td>
 									</tr>
 								</c:forEach>
 							</c:when>
@@ -278,18 +225,12 @@ var barChartData = {
 				</table>
 			</div>
 			<div class="moreButton">
-				<a href="#"><i style="color:#edbc40" class="fa-solid fa-angles-right"></i>&nbsp;더보기</a>
+				<a href="${contextPath }/host/goods/hostGoodsList.do"><i style="color:#edbc40" class="fa-solid fa-angles-right"></i>&nbsp;더보기</a>
 			</div>	
 			
 		</div>
 		</div>
-		<div class="mainBox2">
-			<div class="chartBox">
-			<div id="container" style="width: 90%;">
- 			 <canvas id="canvas"></canvas>
- 			 </div>
-		</div>
-		</div>
+		
 		
 </section>
 </body>

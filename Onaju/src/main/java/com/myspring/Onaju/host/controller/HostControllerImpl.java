@@ -18,10 +18,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.myspring.Onaju.admin.adminCommon.paging.Criteria;
+import com.myspring.Onaju.admin.adminCommon.paging.PageVO;
 import com.myspring.Onaju.common.aes256.AES256Util;
 import com.myspring.Onaju.common.aes256.SHA256Util;
 import com.myspring.Onaju.common.base.BaseController;
 import com.myspring.Onaju.host.goods.service.HostGoodsService;
+import com.myspring.Onaju.host.goods.vo.HostGoodsVO;
 import com.myspring.Onaju.host.goods.vo.HostInfoVO;
 import com.myspring.Onaju.host.reservation.service.ReservationService;
 import com.myspring.Onaju.host.reservation.vo.ReservationVO;
@@ -59,7 +62,13 @@ public class HostControllerImpl extends BaseController implements HostController
 		session.setAttribute("hostInfo", hostVO);
 		String h_id = hostVO.getH_id();
 		System.out.println("hostVO의 h_id : " + h_id);
-
+		Criteria cri = new Criteria();
+		cri.setH_id2(h_id);
+		int total = hostGoodsService.selectGoodsListTotal(cri);
+		
+		List<HostGoodsVO> hostGoodsList=hostGoodsService.selectGoodsList(cri);
+		mav.addObject("pageMaker", new PageVO(cri, total));
+		mav.addObject("hostGoodsList", hostGoodsList);
 		List<ReservationVO> hostReservationList = reservationService.hostReservationList(h_id);
 		
 		mav.addObject("hostReservationList", hostReservationList);
